@@ -1,0 +1,12 @@
+.idea/
+.git/
+debug/
+release/
+bin/*.dll
+bin/*.lib
+bin/*.pdb
+bin/*.exe
+bin/*.ilk
+bin/lynx/var/*.log
+bin/lynx/tmp/*.*
+bin/lynx/web
