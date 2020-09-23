@@ -27,7 +27,7 @@ class Runtime : public Application
 public:
     explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false), ForceQuit(false)
     {
-        LT::AttachCallback([this](const char* Value, int Level)
+        Debug::AttachCallback([this](const char* Value, int Level)
         {
             this->OnLogCallback(Value, Level);
         });
@@ -37,7 +37,7 @@ public:
         delete Server;
         delete Log;
 
-        LT::DetachCallback();
+        Debug::DetachCallback();
         delete Access;
         delete Error;
         delete Trace;
@@ -56,34 +56,34 @@ public:
         Server = Content->Load<HTTP::Server>("conf.xml", nullptr);
         if (!Server)
         {
-            THAWK_ERROR("an error occurred while loading config");
+            TH_ERROR("an error occurred while loading config");
             return Restate(ApplicationState_Terminated);
         }
 
         auto Router = (HTTP::MapRouter*)Server->GetRouter();
         for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
-            THAWK_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
+            TH_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
-        THAWK_INFO("searching for sites");
+        TH_INFO("searching for sites");
         for (auto& Site : Router->Sites)
         {
-            THAWK_INFO("site \"%s\" info", Site->SiteName.c_str());
+            TH_INFO("site \"%s\" info", Site->SiteName.c_str());
             for (auto It = Site->Hosts.begin(); It != Site->Hosts.end(); It++)
-                THAWK_INFO("site \"%s\" is attached to %s", Site->SiteName.c_str(), It->c_str());
+                TH_INFO("site \"%s\" is attached to %s", Site->SiteName.c_str(), It->c_str());
 
-            THAWK_INFO("configuring routes");
+            TH_INFO("configuring routes");
             Site->Base->Callbacks.Headers = Runtime::OnHeaders;
             if (!AccessLogs.empty())
                 Site->Base->Callbacks.Access = Runtime::OnLogAccess;
 
-            THAWK_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
+            TH_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
             for (auto Entry : Site->Routes)
             {
                 Entry->Callbacks.Headers = Runtime::OnHeaders;
                 if (!AccessLogs.empty())
                     Entry->Callbacks.Access = Runtime::OnLogAccess;
 
-                THAWK_INFO("route %s is alias for %s", Entry->URI.Regex.c_str(), Entry->DocumentRoot.c_str());
+                TH_INFO("route %s is alias for %s", Entry->URI.Regex.c_str(), Entry->DocumentRoot.c_str());
             }
         }
 
@@ -94,9 +94,9 @@ public:
             delete Reference;
         }
 
-        THAWK_INFO("internal queue has %i task workers and %i event workers", (int)Conf->TaskWorkersCount, (int)Conf->EventWorkersCount);
+        TH_INFO("internal queue has %i task workers and %i event workers", (int)Conf->TaskWorkersCount, (int)Conf->EventWorkersCount);
         Server->Listen(Application::Get()->Queue);
-        THAWK_INFO("setting up signals");
+        TH_INFO("setting up signals");
 
         signal(SIGABRT, OnAbort);
         signal(SIGFPE, OnArithmeticError);
@@ -104,28 +104,28 @@ public:
         signal(SIGINT, OnCtrl);
         signal(SIGSEGV, OnInvalidAccess);
         signal(SIGTERM, OnTerminate);
-#ifdef THAWK_UNIX
+#ifdef TH_UNIX
         signal(SIGPIPE, SIG_IGN);
 #endif
-        THAWK_INFO("ready to serve and protect");
+        TH_INFO("ready to serve and protect");
     }
     void OnLoadLibrary(Document* Document)
     {
         NMake::Unpack(Document->FindPath("application.terminal"), &Terminal);
         if (Terminal)
         {
-            LT::AttachStream();
+            Debug::AttachStream();
             Log = Console::Get();
             Log->Show();
         }
         else
         {
-            LT::DetachStream();
+            Debug::DetachStream();
             delete Log;
             Log = nullptr;
         }
 
-        THAWK_INFO("loading server config from ./lynx/conf.xml");
+        TH_INFO("loading server config from ./lynx/conf.xml");
         std::string N = Socket::LocalIpAddress();
         std::string D = Content->GetEnvironment();
 
@@ -140,7 +140,7 @@ public:
                 Access = nullptr;
             }
 
-            THAWK_INFO("system log (access): %s", AccessLogs.c_str());
+            TH_INFO("system log (access): %s", AccessLogs.c_str());
         }
 
         NMake::Unpack(Document->FindPath("application.error-logs"), &ErrorLogs);
@@ -154,7 +154,7 @@ public:
                 Error = nullptr;
             }
 
-            THAWK_INFO("system log (error): %s", ErrorLogs.c_str());
+            TH_INFO("system log (error): %s", ErrorLogs.c_str());
         }
 
         NMake::Unpack(Document->FindPath("application.trace-logs"), &TraceLogs);
@@ -168,7 +168,7 @@ public:
                 Trace = nullptr;
             }
 
-            THAWK_INFO("system log (trace): %s", TraceLogs.c_str());
+            TH_INFO("system log (trace): %s", TraceLogs.c_str());
         }
 
         NMake::Unpack(Document->FindPath("application.file-directory"), &RootDirectory);
@@ -176,9 +176,9 @@ public:
         Stroke(&RootDirectory).Path(N, D);
         Reference = Document->Copy();
 
-        THAWK_INFO("tmp file directory root is %s", RootDirectory.c_str());
+        TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
         if (ForceQuit)
-            THAWK_INFO("server will be forced to shutdown");
+            TH_INFO("server will be forced to shutdown");
     }
     void OnLogCallback(const char* Value, int Level)
     {
@@ -253,7 +253,7 @@ public:
         if (!Base)
             return true;
 
-        THAWK_INFO("%s %s \"%s%s%s\" %i - %s / %llub [%llums]", Base->Request.Method, Base->Request.Version, Base->Request.URI.c_str(), Base->Request.Query.empty() ? "" : "?", Base->Request.Query.c_str(), Base->Response.StatusCode, Base->Request.RemoteAddress, Base->Stream->Outcome, Base->Info.Finish - Base->Info.Start);
+        TH_INFO("%s %s \"%s%s%s\" %i - %s / %llub [%llums]", Base->Request.Method, Base->Request.Version, Base->Request.URI.c_str(), Base->Request.Query.empty() ? "" : "?", Base->Request.Query.c_str(), Base->Response.StatusCode, Base->Request.RemoteAddress, Base->Stream->Outcome, Base->Info.Finish - Base->Info.Start);
 
         return true;
     }
@@ -268,7 +268,7 @@ public:
 
 int main()
 {
-    Tomahawk::Initialize();
+    Tomahawk::Initialize(Tomahawk::TInit_All, Tomahawk::TMem_2MB);
     {
         Application::Desc Interface;
         Interface.Threading = EventWorkflow_Mixed;
