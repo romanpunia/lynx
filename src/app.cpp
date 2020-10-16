@@ -34,13 +34,13 @@ public:
     }
     ~Runtime() override
     {
-        delete Server;
-        delete Log;
+        TH_RELEASE(Server);
+		TH_RELEASE(Log);
 
         Debug::DetachCallback();
-        delete Access;
-        delete Error;
-        delete Trace;
+		TH_RELEASE(Access);
+		TH_RELEASE(Error);
+		TH_RELEASE(Trace);
 
         if (ForceQuit)
             exit(0);
@@ -48,12 +48,12 @@ public:
     void Initialize(Desc* Conf) override
     {
         Content->SetEnvironment(OS::GetDirectory() + "lynx");
-        Content->GetProcessor<HTTP::Server>()->As<FileProcessors::ServerProcessor>()->Callback = [this](void*, Document* Doc) -> void
+        Content->GetProcessor<HTTP::Server>()->As<Processors::Server>()->Callback = [this](void*, Document* Doc) -> void
         {
             this->OnLoadLibrary(Doc);
         };
 
-        Server = Content->Load<HTTP::Server>("conf.xml", nullptr);
+        Server = Content->Load<HTTP::Server>("conf.xml");
         if (!Server)
         {
             TH_ERROR("an error occurred while loading config");
@@ -91,7 +91,7 @@ public:
         {
             NMake::Unpack(Reference->FindPath("application.task-workers-count"), &Conf->TaskWorkersCount);
             NMake::Unpack(Reference->FindPath("application.event-workers-count"), &Conf->EventWorkersCount);
-            delete Reference;
+            TH_CLEAR(Reference);
         }
 
         TH_INFO("internal queue has %i task workers and %i event workers", (int)Conf->TaskWorkersCount, (int)Conf->EventWorkersCount);
@@ -121,8 +121,7 @@ public:
         else
         {
             Debug::DetachStream();
-            delete Log;
-            Log = nullptr;
+			TH_CLEAR(Log);
         }
 
         TH_INFO("loading server config from ./lynx/conf.xml");
@@ -132,13 +131,11 @@ public:
         NMake::Unpack(Document->FindPath("application.access-logs"), &AccessLogs);
         if (!AccessLogs.empty())
         {
-            delete Access;
+            TH_RELEASE(Access);
+
             Access = new FileStream();
             if (!Access->Open(Stroke(&AccessLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
-            {
-                delete Access;
-                Access = nullptr;
-            }
+				TH_CLEAR(Access);
 
             TH_INFO("system log (access): %s", AccessLogs.c_str());
         }
@@ -146,13 +143,11 @@ public:
         NMake::Unpack(Document->FindPath("application.error-logs"), &ErrorLogs);
         if (!ErrorLogs.empty())
         {
-            delete Error;
+			TH_RELEASE(Error);
+
             Error = new FileStream();
             if (!Error->Open(Stroke(&ErrorLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
-            {
-                delete Error;
-                Error = nullptr;
-            }
+				TH_CLEAR(Error);
 
             TH_INFO("system log (error): %s", ErrorLogs.c_str());
         }
@@ -160,13 +155,11 @@ public:
         NMake::Unpack(Document->FindPath("application.trace-logs"), &TraceLogs);
         if (!TraceLogs.empty())
         {
-            delete Trace;
+			TH_RELEASE(Trace);
+
             Trace = new FileStream();
             if (!Trace->Open(Stroke(&TraceLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
-            {
-                delete Trace;
-                Trace = nullptr;
-            }
+				TH_CLEAR(Trace);
 
             TH_INFO("system log (trace): %s", TraceLogs.c_str());
         }
@@ -277,7 +270,7 @@ int main()
 
         auto App = new Runtime(&Interface);
         App->Run(&Interface);
-        delete App;
+        TH_RELEASE(App);
     }
     Tomahawk::Uninitialize();
 
