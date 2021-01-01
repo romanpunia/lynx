@@ -57,7 +57,7 @@ public:
         if (!Server)
         {
             TH_ERROR("an error occurred while loading config");
-            return Restate(ApplicationState_Terminated);
+			return Stop();
         }
 
         auto Router = (HTTP::MapRouter*)Server->GetRouter();
@@ -209,37 +209,37 @@ public:
     {
         signal(SIGABRT, OnAbort);
         if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+			Application::Get()->Stop();
     }
     static void OnArithmeticError(int Value)
     {
         signal(SIGFPE, OnArithmeticError);
-        if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+		if (CanTerminate())
+			Application::Get()->As<Runtime>()->Stop();
     }
     static void OnIllegalOperation(int Value)
     {
         signal(SIGILL, OnIllegalOperation);
         if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+            Application::Get()->Stop();
     }
     static void OnCtrl(int Value)
     {
         signal(SIGINT, OnCtrl);
         if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+			Application::Get()->Stop();
     }
     static void OnInvalidAccess(int Value)
     {
         signal(SIGSEGV, OnInvalidAccess);
         if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+			Application::Get()->Stop();
     }
     static void OnTerminate(int Value)
     {
         signal(SIGTERM, OnTerminate);
         if (CanTerminate())
-            Application::Get()->As<Runtime>()->Restate(ApplicationState_Terminated);
+			Application::Get()->Stop();
     }
     static bool OnLogAccess(HTTP::Connection* Base)
     {
@@ -269,7 +269,7 @@ int main()
         Interface.FrameLimit = 6;
 
         auto App = new Runtime(&Interface);
-        App->Run(&Interface);
+        App->Start(&Interface);
         TH_RELEASE(App);
     }
     Tomahawk::Uninitialize();
