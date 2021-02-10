@@ -12,11 +12,11 @@ using namespace Tomahawk::Script;
 class Runtime : public Application
 {
     HTTP::Server* Server = nullptr;
-    Document* Reference = nullptr;
-    Console* Log = nullptr;
     FileStream* Access = nullptr;
     FileStream* Error = nullptr;
     FileStream* Trace = nullptr;
+	Document* Reference = nullptr;
+	Console* Log = nullptr;
     std::string AccessLogs;
     std::string ErrorLogs;
     std::string TraceLogs;
@@ -89,8 +89,8 @@ public:
 
         if (Reference != nullptr)
         {
-            NMake::Unpack(Reference->FindPath("application.task-workers-count"), &Conf->TaskWorkersCount);
-            NMake::Unpack(Reference->FindPath("application.event-workers-count"), &Conf->EventWorkersCount);
+            NMake::Unpack(Reference->Fetch("application.task-workers-count"), &Conf->TaskWorkersCount);
+            NMake::Unpack(Reference->Fetch("application.event-workers-count"), &Conf->EventWorkersCount);
             TH_CLEAR(Reference);
         }
 
@@ -111,7 +111,7 @@ public:
     }
     void OnLoadLibrary(Document* Document)
     {
-        NMake::Unpack(Document->FindPath("application.terminal"), &Terminal);
+        NMake::Unpack(Document->Fetch("application.terminal"), &Terminal);
         if (Terminal)
         {
             Debug::AttachStream();
@@ -128,7 +128,7 @@ public:
         std::string N = Socket::LocalIpAddress();
         std::string D = Content->GetEnvironment();
 
-        NMake::Unpack(Document->FindPath("application.access-logs"), &AccessLogs);
+        NMake::Unpack(Document->Fetch("application.access-logs"), &AccessLogs);
         if (!AccessLogs.empty())
         {
             TH_RELEASE(Access);
@@ -140,7 +140,7 @@ public:
             TH_INFO("system log (access): %s", AccessLogs.c_str());
         }
 
-        NMake::Unpack(Document->FindPath("application.error-logs"), &ErrorLogs);
+        NMake::Unpack(Document->Fetch("application.error-logs"), &ErrorLogs);
         if (!ErrorLogs.empty())
         {
 			TH_RELEASE(Error);
@@ -152,7 +152,7 @@ public:
             TH_INFO("system log (error): %s", ErrorLogs.c_str());
         }
 
-        NMake::Unpack(Document->FindPath("application.trace-logs"), &TraceLogs);
+        NMake::Unpack(Document->Fetch("application.trace-logs"), &TraceLogs);
         if (!TraceLogs.empty())
         {
 			TH_RELEASE(Trace);
@@ -164,8 +164,8 @@ public:
             TH_INFO("system log (trace): %s", TraceLogs.c_str());
         }
 
-        NMake::Unpack(Document->FindPath("application.file-directory"), &RootDirectory);
-        NMake::Unpack(Document->FindPath("application.force-quit"), &ForceQuit);
+        NMake::Unpack(Document->Fetch("application.file-directory"), &RootDirectory);
+        NMake::Unpack(Document->Fetch("application.force-quit"), &ForceQuit);
         Stroke(&RootDirectory).Path(N, D);
         Reference = Document->Copy();
 
