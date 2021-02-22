@@ -47,7 +47,7 @@ public:
     }
     void Initialize(Desc* Conf) override
     {
-        Content->SetEnvironment(OS::GetDirectory() + "lynx");
+        Content->SetEnvironment(OS::GetDirectory() + "data");
         Content->GetProcessor<HTTP::Server>()->As<Processors::Server>()->Callback = [this](void*, Document* Doc) -> void
         {
             this->OnLoadLibrary(Doc);
@@ -89,12 +89,11 @@ public:
 
         if (Reference != nullptr)
         {
-            NMake::Unpack(Reference->Fetch("application.task-workers-count"), &Conf->TaskWorkersCount);
-            NMake::Unpack(Reference->Fetch("application.event-workers-count"), &Conf->EventWorkersCount);
+            NMake::Unpack(Reference->Fetch("application.workers-count"), &Conf->WorkersCount);
             TH_CLEAR(Reference);
         }
 
-        TH_INFO("internal queue has %i task workers and %i event workers", (int)Conf->TaskWorkersCount, (int)Conf->EventWorkersCount);
+        TH_INFO("queue has %i workers", (int)Conf->WorkersCount);
         Server->Listen(Application::Get()->Queue);
         TH_INFO("setting up signals");
 
@@ -124,7 +123,7 @@ public:
 			TH_CLEAR(Log);
         }
 
-        TH_INFO("loading server config from ./lynx/conf.xml");
+        TH_INFO("loading server config from ./data/conf.xml");
         std::string N = Socket::LocalIpAddress();
         std::string D = Content->GetEnvironment();
 
@@ -261,7 +260,7 @@ public:
 
 int main()
 {
-    Tomahawk::Initialize(Tomahawk::TInit_All, Tomahawk::TMem_2MB);
+    Tomahawk::Initialize(Tomahawk::TPreset_App, Tomahawk::TMem_4MB);
     {
         Application::Desc Interface;
         Interface.Threading = EventWorkflow_Mixed;
