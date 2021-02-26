@@ -47,7 +47,6 @@ public:
     }
     void Initialize(Desc* Conf) override
     {
-        Content->SetEnvironment(OS::GetDirectory() + "data");
         Content->GetProcessor<HTTP::Server>()->As<Processors::Server>()->Callback = [this](void*, Document* Doc) -> void
         {
             this->OnLoadLibrary(Doc);
@@ -266,6 +265,7 @@ int main()
         Interface.Threading = EventWorkflow_Mixed;
         Interface.Usage = ApplicationUse_Content_Module;
         Interface.FrameLimit = 6;
+		Interface.Directory = "data";
 
         auto App = new Runtime(&Interface);
         App->Start(&Interface);

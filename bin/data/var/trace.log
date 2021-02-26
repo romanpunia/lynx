@@ -12833,3 +12833,25 @@
 2021-02-22 17:47:35 app.cpp:248 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 798b [1ms]
 2021-02-22 17:47:35 app.cpp:248 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [2ms]
 2021-02-22 17:47:35 app.cpp:248 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 798b [2ms]
+2021-02-25 23:56:05 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-25 23:56:05 app.cpp:170 [info] tmp file directory root is 
+2021-02-25 23:56:05 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-25 23:56:05 app.cpp:66 [info] searching for sites
+2021-02-25 23:56:05 app.cpp:69 [info] site "*" info
+2021-02-25 23:56:05 app.cpp:71 [info] site "*" is attached to *
+2021-02-25 23:56:05 app.cpp:73 [info] configuring routes
+2021-02-25 23:56:05 app.cpp:78 [info] route / is alias for H:\dev\lynx\bin\data\web/
+2021-02-25 23:56:05 app.cpp:95 [info] queue has 2 workers
+2021-02-25 23:56:05 app.cpp:97 [info] setting up signals
+2021-02-25 23:56:05 app.cpp:108 [info] ready to serve and protect
+2021-02-25 23:56:11 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 786b [1ms]
+2021-02-25 23:56:11 app.cpp:247 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-02-25 23:56:14 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:17 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:17 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:18 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:20 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:21 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:27 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-25 23:56:29 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 786b [1ms]
+2021-02-25 23:56:30 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
