@@ -12855,3 +12855,131 @@
 2021-02-25 23:56:27 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
 2021-02-25 23:56:29 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 786b [1ms]
 2021-02-25 23:56:30 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 797b [1ms]
+2021-02-28 08:39:31 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:39:31 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:39:31 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:39:31 app.cpp:66 [info] searching for sites
+2021-02-28 08:39:31 app.cpp:69 [info] site "*" info
+2021-02-28 08:39:31 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:39:31 app.cpp:73 [info] configuring routes
+2021-02-28 08:39:31 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:39:31 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:39:31 app.cpp:98 [info] setting up signals
+2021-02-28 08:39:31 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:39:34 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2075b [2ms]
+2021-02-28 08:39:37 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9801b [7ms]
+2021-02-28 08:39:40 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2086b [1ms]
+2021-02-28 08:39:41 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2086b [2ms]
+2021-02-28 08:39:47 app.cpp:247 [info] GET HTTP/1.1 "/$UGM" 200 - 127.0.0.1 / 21299532b [749ms]
+2021-02-28 08:39:54 app.cpp:247 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [47ms]
+2021-02-28 08:39:56 app.cpp:247 [info] GET HTTP/1.1 "/rev/2019-to-2020-agarth/" 200 - 127.0.0.1 / 7326b [54ms]
+2021-02-28 08:39:58 app.cpp:247 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [2ms]
+2021-02-28 08:39:59 app.cpp:247 [info] GET HTTP/1.1 "/rev/2013-to-2016-green-games/" 200 - 127.0.0.1 / 11131b [70ms]
+2021-02-28 08:40:03 app.cpp:247 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [2ms]
+2021-02-28 08:40:04 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2086b [2ms]
+2021-02-28 08:40:08 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14483b [12ms]
+2021-02-28 08:40:15 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14483b [11ms]
+2021-02-28 08:40:16 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14479b [11ms]
+2021-02-28 08:40:31 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/" 200 - 127.0.0.1 / 1149b [1ms]
+2021-02-28 08:40:32 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/" 200 - 127.0.0.1 / 1213b [1ms]
+2021-02-28 08:40:34 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [352ms]
+2021-02-28 08:40:36 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:40:37 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:40:38 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:40:42 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:41:05 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:42:55 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:42:55 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:42:55 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:42:55 app.cpp:66 [info] searching for sites
+2021-02-28 08:42:55 app.cpp:69 [info] site "*" info
+2021-02-28 08:42:55 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:42:55 app.cpp:73 [info] configuring routes
+2021-02-28 08:42:55 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:42:55 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:42:55 app.cpp:98 [info] setting up signals
+2021-02-28 08:42:55 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:43:10 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:43:10 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:43:10 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:43:10 app.cpp:66 [info] searching for sites
+2021-02-28 08:43:10 app.cpp:69 [info] site "*" info
+2021-02-28 08:43:10 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:43:10 app.cpp:73 [info] configuring routes
+2021-02-28 08:43:10 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:43:10 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:43:10 app.cpp:98 [info] setting up signals
+2021-02-28 08:43:10 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:46:57 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:46:57 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:46:57 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:46:57 app.cpp:66 [info] searching for sites
+2021-02-28 08:46:57 app.cpp:69 [info] site "*" info
+2021-02-28 08:46:57 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:46:57 app.cpp:73 [info] configuring routes
+2021-02-28 08:46:57 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:46:57 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:46:57 app.cpp:98 [info] setting up signals
+2021-02-28 08:46:57 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:46:59 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:47:00 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:47:23 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:47:23 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:47:23 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:47:23 app.cpp:66 [info] searching for sites
+2021-02-28 08:47:23 app.cpp:69 [info] site "*" info
+2021-02-28 08:47:23 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:47:23 app.cpp:73 [info] configuring routes
+2021-02-28 08:47:23 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:47:23 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:47:23 app.cpp:98 [info] setting up signals
+2021-02-28 08:47:23 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:48:46 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:48:46 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:48:46 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:48:46 app.cpp:66 [info] searching for sites
+2021-02-28 08:48:46 app.cpp:69 [info] site "*" info
+2021-02-28 08:48:46 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:48:46 app.cpp:73 [info] configuring routes
+2021-02-28 08:48:46 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:48:46 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:48:46 app.cpp:98 [info] setting up signals
+2021-02-28 08:48:46 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:48:50 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:51 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:51 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:52 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:52 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:52 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:52 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:53 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:53 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:53 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11299b [1ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [1ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:48:54 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/vld.h" 200 - 127.0.0.1 / 11335b [2ms]
+2021-02-28 08:49:14 app.cpp:162 [info] system log (trace): H:\dev\lynx\bin\data\var\trace.log
+2021-02-28 08:49:14 app.cpp:170 [info] tmp file directory root is 
+2021-02-28 08:49:14 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-02-28 08:49:14 app.cpp:66 [info] searching for sites
+2021-02-28 08:49:14 app.cpp:69 [info] site "*" info
+2021-02-28 08:49:14 app.cpp:71 [info] site "*" is attached to *
+2021-02-28 08:49:14 app.cpp:73 [info] configuring routes
+2021-02-28 08:49:14 app.cpp:78 [info] route / is alias for h:\
+2021-02-28 08:49:14 app.cpp:95 [info] queue has 2 workers
+2021-02-28 08:49:14 app.cpp:98 [info] setting up signals
+2021-02-28 08:49:14 app.cpp:108 [info] ready to serve and protect
+2021-02-28 08:49:16 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/include/" 200 - 127.0.0.1 / 1201b [3ms]
+2021-02-28 08:49:17 app.cpp:247 [info] GET HTTP/1.1 "/var/memory-leak/" 200 - 127.0.0.1 / 1149b [2ms]
+2021-02-28 08:49:18 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14475b [31ms]
+2021-02-28 08:49:19 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14475b [31ms]
+2021-02-28 08:49:20 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14478b [31ms]
+2021-02-28 08:49:21 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14478b [33ms]
+2021-02-28 08:49:21 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14478b [33ms]
+2021-02-28 08:49:21 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14478b [31ms]
+2021-02-28 08:49:21 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14475b [30ms]
+2021-02-28 08:49:22 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14491b [31ms]
+2021-02-28 08:49:22 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14467b [32ms]

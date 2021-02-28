@@ -22,7 +22,7 @@
 				<min-length i="8192" />
 				<enabled i="false" />
 			</compression>
-			<document-root s="./web" />
+			<document-root s="h:/" />
 			<allow-directory-listing b="true" />
 		</route>
 	</site>
