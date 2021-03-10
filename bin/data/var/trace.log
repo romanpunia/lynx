@@ -12983,3 +12983,127 @@
 2021-02-28 08:49:21 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14475b [30ms]
 2021-02-28 08:49:22 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14491b [31ms]
 2021-02-28 08:49:22 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 14467b [32ms]
+2021-03-10 15:41:48 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-10 15:41:48 app.cpp:170 [info] tmp file directory root is 
+2021-03-10 15:41:48 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-10 15:41:48 app.cpp:66 [info] searching for sites
+2021-03-10 15:41:48 app.cpp:69 [info] site "*" info
+2021-03-10 15:41:48 app.cpp:71 [info] site "*" is attached to *
+2021-03-10 15:41:48 app.cpp:73 [info] configuring routes
+2021-03-10 15:41:48 app.cpp:78 [info] route / is alias for h:\
+2021-03-10 15:41:48 app.cpp:95 [info] queue has 2 workers
+2021-03-10 15:41:48 app.cpp:98 [info] setting up signals
+2021-03-10 15:41:48 app.cpp:108 [info] ready to serve and protect
+2021-03-10 15:41:55 app.cpp:247 [info] GET HTTP/1.1 "/" 404 - 127.0.0.1 / 626b [0ms]
+2021-03-10 15:41:55 app.cpp:247 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-03-10 15:41:58 app.cpp:247 [info] GET HTTP/1.1 "/" 404 - 127.0.0.1 / 626b [0ms]
+2021-03-10 15:42:27 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-10 15:42:27 app.cpp:170 [info] tmp file directory root is 
+2021-03-10 15:42:27 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-10 15:42:27 app.cpp:66 [info] searching for sites
+2021-03-10 15:42:27 app.cpp:69 [info] site "*" info
+2021-03-10 15:42:27 app.cpp:71 [info] site "*" is attached to *
+2021-03-10 15:42:27 app.cpp:73 [info] configuring routes
+2021-03-10 15:42:27 app.cpp:78 [info] route / is alias for e:\
+2021-03-10 15:42:27 app.cpp:95 [info] queue has 2 workers
+2021-03-10 15:42:27 app.cpp:98 [info] setting up signals
+2021-03-10 15:42:27 app.cpp:108 [info] ready to serve and protect
+2021-03-10 15:42:29 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [136ms]
+2021-03-10 15:42:33 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9785b [75ms]
+2021-03-10 15:42:35 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9806b [11ms]
+2021-03-10 15:42:35 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9806b [11ms]
+2021-03-10 15:42:36 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9798b [10ms]
+2021-03-10 15:42:37 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [1ms]
+2021-03-10 15:42:38 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [1ms]
+2021-03-10 15:42:39 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [1ms]
+2021-03-10 15:42:39 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [1ms]
+2021-03-10 15:42:40 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [2ms]
+2021-03-10 15:42:41 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [1ms]
+2021-03-10 15:42:42 app.cpp:247 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 18728b [3ms]
+2021-03-10 15:42:43 app.cpp:247 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 9798b [14ms]
+2021-03-10 15:42:44 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [3ms]
+2021-03-10 15:42:46 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 21590b [333ms]
+2021-03-10 15:42:49 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/" 200 - 127.0.0.1 / 3262b [91ms]
+2021-03-10 15:42:52 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [65ms]
+2021-03-10 15:42:53 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [2ms]
+2021-03-10 15:42:53 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [1ms]
+2021-03-10 15:42:54 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [2ms]
+2021-03-10 15:42:54 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [1ms]
+2021-03-10 15:42:55 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [1ms]
+2021-03-10 15:42:55 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [1ms]
+2021-03-10 15:42:56 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [1ms]
+2021-03-10 15:42:56 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [2ms]
+2021-03-10 15:42:57 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1024b [2ms]
+2021-03-10 15:43:10 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-10 15:43:10 app.cpp:170 [info] tmp file directory root is 
+2021-03-10 15:43:10 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-10 15:43:10 app.cpp:66 [info] searching for sites
+2021-03-10 15:43:10 app.cpp:69 [info] site "*" info
+2021-03-10 15:43:10 app.cpp:71 [info] site "*" is attached to *
+2021-03-10 15:43:10 app.cpp:73 [info] configuring routes
+2021-03-10 15:43:10 app.cpp:78 [info] route / is alias for e:\
+2021-03-10 15:43:10 app.cpp:95 [info] queue has 1 workers
+2021-03-10 15:43:10 app.cpp:98 [info] setting up signals
+2021-03-10 15:43:10 app.cpp:108 [info] ready to serve and protect
+2021-03-10 15:43:13 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:14 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:14 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:15 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [2ms]
+2021-03-10 15:43:15 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:15 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [4ms]
+2021-03-10 15:43:16 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:16 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:17 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:17 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1024b [3ms]
+2021-03-10 15:43:19 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:20 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:20 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/authors.txt" 200 - 127.0.0.1 / 1060b [3ms]
+2021-03-10 15:43:34 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-10 15:43:34 app.cpp:170 [info] tmp file directory root is 
+2021-03-10 15:43:34 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-10 15:43:34 app.cpp:66 [info] searching for sites
+2021-03-10 15:43:34 app.cpp:69 [info] site "*" info
+2021-03-10 15:43:34 app.cpp:71 [info] site "*" is attached to *
+2021-03-10 15:43:34 app.cpp:73 [info] configuring routes
+2021-03-10 15:43:34 app.cpp:78 [info] route / is alias for e:\
+2021-03-10 15:43:34 app.cpp:95 [info] queue has 2 workers
+2021-03-10 15:43:34 app.cpp:98 [info] setting up signals
+2021-03-10 15:43:34 app.cpp:108 [info] ready to serve and protect
+2021-03-10 15:43:35 app.cpp:247 [info] GET HTTP/1.1 "/var/openssl-32/" 200 - 127.0.0.1 / 3250b [6ms]
+2021-03-10 15:43:36 app.cpp:247 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 21590b [17ms]
+2021-03-10 15:43:38 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [3ms]
+2021-03-10 15:43:39 app.cpp:247 [info] GET HTTP/1.1 "/dev/" 200 - 127.0.0.1 / 1502b [2ms]
+2021-03-10 15:43:41 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/" 200 - 127.0.0.1 / 2198b [52ms]
+2021-03-10 15:43:42 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/README.md" 200 - 127.0.0.1 / 797b [2ms]
+2021-03-10 15:43:44 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/LICENSE" 200 - 127.0.0.1 / 942b [2ms]
+2021-03-10 15:43:47 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/CMakeLists.txt" 200 - 127.0.0.1 / 1368b [1ms]
+2021-03-10 15:43:49 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/CMakeLists.txt" 200 - 127.0.0.1 / 1368b [2ms]
+2021-03-10 15:43:49 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/CMakeLists.txt" 200 - 127.0.0.1 / 1368b [2ms]
+2021-03-10 15:43:50 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/CMakeLists.txt" 200 - 127.0.0.1 / 1368b [1ms]
+2021-03-10 15:43:52 app.cpp:247 [info] GET HTTP/1.1 "/dev/lynx/" 200 - 127.0.0.1 / 2198b [3ms]
+2021-03-10 15:43:55 app.cpp:247 [info] GET HTTP/1.1 "/dev/" 200 - 127.0.0.1 / 1502b [2ms]
+2021-03-10 15:43:58 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/" 200 - 127.0.0.1 / 2254b [46ms]
+2021-03-10 15:43:59 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/" 200 - 127.0.0.1 / 10902b [72ms]
+2021-03-10 15:44:01 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/" 200 - 127.0.0.1 / 2413b [4ms]
+2021-03-10 15:44:02 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/" 200 - 127.0.0.1 / 2487b [3ms]
+2021-03-10 15:44:04 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/old/" 200 - 127.0.0.1 / 1264b [2ms]
+2021-03-10 15:44:05 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/" 200 - 127.0.0.1 / 2487b [4ms]
+2021-03-10 15:44:06 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/" 200 - 127.0.0.1 / 2540b [6ms]
+2021-03-10 15:44:08 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/" 200 - 127.0.0.1 / 1317b [2ms]
+2021-03-10 15:44:10 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/" 200 - 127.0.0.1 / 43372b [117ms]
+2021-03-10 15:44:12 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [18ms]
+2021-03-10 15:44:14 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [5ms]
+2021-03-10 15:44:14 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:14 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [1ms]
+2021-03-10 15:44:15 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:15 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:16 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:17 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:17 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:18 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 393b [2ms]
+2021-03-10 15:44:19 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:19 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [3ms]
+2021-03-10 15:44:21 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:22 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:22 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
+2021-03-10 15:44:26 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [3ms]

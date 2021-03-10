@@ -1,7 +1,7 @@
 ﻿#include <tomahawk/tomahawk.h>
 #include <csignal>
 
-using namespace Tomahawk::Rest;
+using namespace Tomahawk::Core;
 using namespace Tomahawk::Audio;
 using namespace Tomahawk::Compute;
 using namespace Tomahawk::Engine;
@@ -132,7 +132,7 @@ public:
 			TH_RELEASE(Access);
 
 			Access = new FileStream();
-			if (!Access->Open(Stroke(&AccessLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
+			if (!Access->Open(Parser(&AccessLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Access);
 
 			TH_INFO("system log (access): %s", AccessLogs.c_str());
@@ -144,7 +144,7 @@ public:
 			TH_RELEASE(Error);
 
 			Error = new FileStream();
-			if (!Error->Open(Stroke(&ErrorLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
+			if (!Error->Open(Parser(&ErrorLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Error);
 
 			TH_INFO("system log (error): %s", ErrorLogs.c_str());
@@ -156,7 +156,7 @@ public:
 			TH_RELEASE(Trace);
 
 			Trace = new FileStream();
-			if (!Trace->Open(Stroke(&TraceLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
+			if (!Trace->Open(Parser(&TraceLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Trace);
 
 			TH_INFO("system log (trace): %s", TraceLogs.c_str());
@@ -164,7 +164,7 @@ public:
 
 		NMake::Unpack(Document->Fetch("application.file-directory"), &RootDirectory);
 		NMake::Unpack(Document->Fetch("application.force-quit"), &ForceQuit);
-		Stroke(&RootDirectory).Path(N, D);
+		Parser(&RootDirectory).Path(N, D);
 		Reference = Document->Copy();
 
 		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
@@ -248,7 +248,7 @@ public:
 
 		return true;
 	}
-	static bool OnHeaders(HTTP::Connection* Base, Stroke* Content)
+	static bool OnHeaders(HTTP::Connection* Base, Parser* Content)
 	{
 		if (Content != nullptr)
 			Content->Append("Server: Lynx\r\n");
