@@ -13107,3 +13107,19 @@
 2021-03-10 15:44:22 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
 2021-03-10 15:44:22 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [2ms]
 2021-03-10 15:44:26 app.cpp:247 [info] GET HTTP/1.1 "/dev/xbtpremium/bin/data/app/src/images/countries/am.png" 200 - 127.0.0.1 / 429b [3ms]
+2021-03-16 22:02:54 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-16 22:02:54 app.cpp:170 [info] tmp file directory root is 
+2021-03-16 22:02:54 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-16 22:02:54 app.cpp:66 [info] searching for sites
+2021-03-16 22:02:54 app.cpp:69 [info] site "*" info
+2021-03-16 22:02:54 app.cpp:71 [info] site "*" is attached to *
+2021-03-16 22:02:54 app.cpp:73 [info] configuring routes
+2021-03-16 22:02:54 app.cpp:78 [info] route / is alias for e:\
+2021-03-16 22:02:54 app.cpp:95 [info] queue has 2 workers
+2021-03-16 22:02:54 app.cpp:98 [info] setting up signals
+2021-03-16 22:02:54 app.cpp:108 [info] ready to serve and protect
+2021-03-16 22:03:01 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [7ms]
+2021-03-16 22:03:01 app.cpp:247 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-03-16 22:03:04 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [4ms]
+2021-03-16 22:03:05 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/" 200 - 127.0.0.1 / 1125b [1ms]
+2021-03-16 22:03:06 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [9ms]
