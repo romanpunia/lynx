@@ -34,13 +34,12 @@ public:
 	}
 	~Runtime() override
 	{
-		TH_RELEASE(Server);
-		TH_RELEASE(Log);
-
 		Debug::DetachCallback();
-		TH_RELEASE(Access);
-		TH_RELEASE(Error);
-		TH_RELEASE(Trace);
+		delete Server;
+		delete Log;
+		delete Access;
+		delete Error;
+		delete Trace;
 
 		if (ForceQuit)
 			exit(0);
@@ -129,8 +128,6 @@ public:
 		NMake::Unpack(Document->Fetch("application.access-logs"), &AccessLogs);
 		if (!AccessLogs.empty())
 		{
-			TH_RELEASE(Access);
-
 			Access = new FileStream();
 			if (!Access->Open(Parser(&AccessLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Access);
@@ -141,8 +138,6 @@ public:
 		NMake::Unpack(Document->Fetch("application.error-logs"), &ErrorLogs);
 		if (!ErrorLogs.empty())
 		{
-			TH_RELEASE(Error);
-
 			Error = new FileStream();
 			if (!Error->Open(Parser(&ErrorLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Error);
@@ -153,8 +148,6 @@ public:
 		NMake::Unpack(Document->Fetch("application.trace-logs"), &TraceLogs);
 		if (!TraceLogs.empty())
 		{
-			TH_RELEASE(Trace);
-
 			Trace = new FileStream();
 			if (!Trace->Open(Parser(&TraceLogs).Path(N, D).Get(), FileMode_Binary_Append_Only))
 				TH_CLEAR(Trace);
@@ -269,7 +262,7 @@ int main()
 
 		auto App = new Runtime(&Interface);
 		App->Start(&Interface);
-		TH_RELEASE(App);
+		delete App;
 	}
 	Tomahawk::Uninitialize();
 

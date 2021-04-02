@@ -13123,3 +13123,313 @@
 2021-03-16 22:03:04 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [4ms]
 2021-03-16 22:03:05 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/" 200 - 127.0.0.1 / 1125b [1ms]
 2021-03-16 22:03:06 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [9ms]
+2021-03-27 05:13:23 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 05:13:23 app.cpp:170 [info] tmp file directory root is 
+2021-03-27 05:13:23 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-27 05:13:23 app.cpp:66 [info] searching for sites
+2021-03-27 05:13:23 app.cpp:69 [info] site "*" info
+2021-03-27 05:13:23 app.cpp:71 [info] site "*" is attached to *
+2021-03-27 05:13:23 app.cpp:73 [info] configuring routes
+2021-03-27 05:13:23 app.cpp:78 [info] route / is alias for e:\
+2021-03-27 05:13:23 app.cpp:95 [info] queue has 2 workers
+2021-03-27 05:13:23 app.cpp:98 [info] setting up signals
+2021-03-27 05:13:23 app.cpp:108 [info] ready to serve and protect
+2021-03-27 05:13:30 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [162ms]
+2021-03-27 05:13:31 app.cpp:247 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-03-27 05:13:36 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [4ms]
+2021-03-27 05:13:37 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-03-27 05:13:38 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [2ms]
+2021-03-27 05:13:38 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [2ms]
+2021-03-27 05:13:38 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [2ms]
+2021-03-27 05:13:39 app.cpp:247 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [3ms]
+2021-03-27 05:13:41 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [96ms]
+2021-03-27 05:13:42 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/" 200 - 127.0.0.1 / 1125b [2ms]
+2021-03-27 05:13:43 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [11ms]
+2021-03-27 05:13:44 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [3ms]
+2021-03-27 05:13:44 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:45 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:45 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:46 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:46 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:47 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:47 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:48 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 714b [2ms]
+2021-03-27 05:13:48 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:49 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:49 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:50 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:50 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:50 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:51 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:51 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:51 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:51 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 714b [1ms]
+2021-03-27 05:13:51 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [2ms]
+2021-03-27 05:13:52 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:52 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/wallet.txt" 200 - 127.0.0.1 / 750b [1ms]
+2021-03-27 05:13:52 app.cpp:247 [info] GET HTTP/1.1 "/opt/wallet/2021-03-27 05:50:35 app.cpp:170 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 05:50:35 app.cpp:178 [info] tmp file directory root is 
+2021-03-27 05:50:35 app.cpp:72 [info] listening to "*" 127.0.0.1:80
+2021-03-27 05:50:35 app.cpp:74 [info] searching for sites
+2021-03-27 05:50:35 app.cpp:77 [info] site "*" info
+2021-03-27 05:50:35 app.cpp:79 [info] site "*" is attached to *
+2021-03-27 05:50:35 app.cpp:81 [info] configuring routes
+2021-03-27 05:50:35 app.cpp:86 [info] route / is alias for e:\
+2021-03-27 05:50:35 app.cpp:103 [info] queue has 2 workers
+2021-03-27 05:50:35 app.cpp:106 [info] setting up signals
+2021-03-27 05:50:35 app.cpp:116 [info] ready to serve and protect
+2021-03-27 05:53:22 app.cpp:170 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 05:53:22 app.cpp:178 [info] tmp file directory root is 
+2021-03-27 05:53:22 app.cpp:72 [info] listening to "*" 127.0.0.1:80
+2021-03-27 05:53:22 app.cpp:74 [info] searching for sites
+2021-03-27 05:53:22 app.cpp:77 [info] site "*" info
+2021-03-27 05:53:22 app.cpp:79 [info] site "*" is attached to *
+2021-03-27 05:53:22 app.cpp:81 [info] configuring routes
+2021-03-27 05:53:22 app.cpp:86 [info] route / is alias for e:\
+2021-03-27 05:53:22 app.cpp:103 [info] queue has 2 workers
+2021-03-27 05:53:22 app.cpp:106 [info] setting up signals
+2021-03-27 05:53:22 app.cpp:116 [info] ready to serve and protect
+2021-03-27 06:05:02 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 06:05:02 app.cpp:170 [info] tmp file directory root is 
+2021-03-27 06:05:02 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-27 06:05:02 app.cpp:66 [info] searching for sites
+2021-03-27 06:05:02 app.cpp:69 [info] site "*" info
+2021-03-27 06:05:02 app.cpp:71 [info] site "*" is attached to *
+2021-03-27 06:05:02 app.cpp:73 [info] configuring routes
+2021-03-27 06:05:02 app.cpp:78 [info] route / is alias for e:\
+2021-03-27 06:05:02 app.cpp:95 [info] queue has 2 workers
+2021-03-27 06:05:02 app.cpp:98 [info] setting up signals
+2021-03-27 06:05:02 app.cpp:108 [info] ready to serve and protect
+2021-03-27 06:05:06 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wallpaper.png" 200 - 127.0.0.1 / 16616729b [2790ms]
+2021-03-27 06:07:18 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wallpaper.png" 200 - 127.0.0.1 / 16616729b [71013ms]
+2021-03-27 06:07:27 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wallpaper.png" 200 - 127.0.0.1 / 16616729b [3881ms]
+2021-03-27 06:07:59 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wallpaper.png" 200 - 127.0.0.1 / 16616729b [1390ms]
+2021-03-27 06:08:15 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wallpaper.png" 200 - 127.0.0.1 / 16616729b [6598ms]
+2021-03-27 06:08:26 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33479b [50ms]
+2021-03-27 06:08:29 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/wp2239287.jpg" 200 - 127.0.0.1 / 547544b [398ms]
+2021-03-27 06:08:33 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33479b [47ms]
+2021-03-27 06:08:35 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(10).png" 200 - 127.0.0.1 / 11749b [68ms]
+2021-03-27 06:08:38 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(10).png" 200 - 127.0.0.1 / 11749b [1ms]
+2021-03-27 06:08:39 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(10).png" 200 - 127.0.0.1 / 11749b [2ms]
+2021-03-27 06:08:39 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(10).png" 200 - 127.0.0.1 / 11749b [1ms]
+2021-03-27 06:08:40 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(10).png" 200 - 127.0.0.1 / 11749b [1ms]
+2021-03-27 06:08:42 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33463b [44ms]
+2021-03-27 06:08:44 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%9d%d0%be%d0%b2%d0%be%d0%b5%20%d0%b2%d0%b8%d0%b4%d0%b5%d0%be.mp4" 206 - 127.0.0.1 / 23670b [2ms]
+2021-03-27 06:08:49 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%9d%d0%be%d0%b2%d0%be%d0%b5%20%d0%b2%d0%b8%d0%b4%d0%b5%d0%be.mp4" 206 - 127.0.0.1 / 8674423b [5249ms]
+2021-03-27 06:08:49 app.cpp:247 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [0ms]
+2021-03-27 06:08:54 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33487b [52ms]
+2021-03-27 06:08:57 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%a1%d0%ba%d0%b0%d0%bd_20200214%20(2).jpg" 200 - 127.0.0.1 / 1425348b [696ms]
+2021-03-27 06:09:00 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33463b [43ms]
+2021-03-27 06:09:02 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/scheme.js" 200 - 127.0.0.1 / 30715b [132ms]
+2021-03-27 06:09:04 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33479b [44ms]
+2021-03-27 06:09:08 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b91%20(3).png" 200 - 127.0.0.1 / 228881b [77ms]
+2021-03-27 06:09:10 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33463b [42ms]
+2021-03-27 06:09:11 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%d0%b7%d1%8b%d0%bc%d1%8f%d0%bd%d0%bd%d1%8b%d0%b9%20(5).png" 200 - 127.0.0.1 / 2559157b [280ms]
+2021-03-27 06:09:13 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/" 200 - 127.0.0.1 / 33479b [42ms]
+2021-03-27 06:09:14 app.cpp:247 [info] GET HTTP/1.1 "/opt/temp/%d0%91%d0%b5%2021-03-27 06:56:12 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 06:56:12 app.cpp:170 [info] tmp file directory root is 
+2021-03-27 06:56:12 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-27 06:56:12 app.cpp:66 [info] searching for sites
+2021-03-27 06:56:12 app.cpp:69 [info] site "*" info
+2021-03-27 06:56:12 app.cpp:71 [info] site "*" is attached to *
+2021-03-27 06:56:12 app.cpp:73 [info] configuring routes
+2021-03-27 06:56:12 app.cpp:78 [info] route / is alias for e:\
+2021-03-27 06:56:12 app.cpp:95 [info] queue has 2 workers
+2021-03-27 06:56:12 app.cpp:98 [info] setting up signals
+2021-03-27 06:56:12 app.cpp:108 [info] ready to serve and protect
+2021-03-27 06:56:14 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200129-063451.webm" 206 - 127.0.0.1 / 10279847b [231ms]
+2021-03-27 06:57:37 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200129-063451.webm" 206 - 127.0.0.1 / 5200812b [112ms]
+2021-03-27 06:58:12 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/" 200 - 127.0.0.1 / 1558b [3ms]
+2021-03-27 06:58:20 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/" 200 - 127.0.0.1 / 1558b [3ms]
+2021-03-27 06:58:22 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200131-120503.mov" 200 - 127.0.0.1 / 1708374b [148ms]
+2021-03-27 06:58:23 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200131-120503.mov" 200 - 127.0.0.1 / 1708374b [165ms]
+2021-03-27 06:58:55 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200129-063959.mov" 200 - 127.0.0.1 / 1064829291b [40705ms]
+2021-03-27 06:59:14 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200129-063959.mov" 200 - 127.0.0.1 / 1064829291b [50905ms]
+2021-03-27 06:59:15 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200129-063959.mov" 200 - 127.0.0.1 / 1064829291b [53917ms]
+2021-03-27 06:59:58 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200131-120503.mov" 200 - 127.0.0.1 / 1708374b [121ms]
+2021-03-27 07:00:31 app.cpp:247 [info] GET HTTP/1.1 "/opt/video/ice_video_20200131-120517.mov" 200 - 127.0.0.1 / 2869122904b [128542ms]
+2021-03-27 07:02:28 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [3ms]
+2021-03-27 07:02:30 app.cpp:247 [info] GET HTTP/1.1 "/opt/machines/" 200 - 127.0.0.1 / 837b [58ms]
+2021-03-27 07:02:31 app.cpp:247 [info] GET HTTP/1.1 "/opt/machines/Ubuntu/" 200 - 127.0.0.1 / 1190b [54ms]
+2021-03-27 07:02:33 app.cpp:247 [info] GET HTTP/1.1 "/opt/machines/" 200 - 127.0.0.1 / 838b [1ms]
+2021-03-27 07:02:34 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [3ms]
+2021-03-27 07:02:35 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/" 200 - 127.0.0.1 / 3198b [73ms]
+2021-03-27 07:02:36 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/" 200 - 127.0.0.1 / 1679b [66ms]
+2021-03-27 07:02:37 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [14ms]
+2021-03-27 07:02:39 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [3ms]
+2021-03-27 07:02:40 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [2ms]
+2021-03-27 07:02:40 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [1ms]
+2021-03-27 07:02:41 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [1ms]
+2021-03-27 07:02:41 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [1ms]
+2021-03-27 07:02:42 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Background.txt" 200 - 127.0.0.1 / 334b [1ms]
+2021-03-27 07:02:43 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/" 200 - 127.0.0.1 / 1678b [3ms]
+2021-03-27 07:02:47 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Communix.blend" 200 - 127.0.0.1 / 443592b [83ms]
+2021-03-27 07:02:49 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/Communix.png" 200 - 127.0.0.1 / 1267664b [263ms]
+2021-03-27 07:02:52 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/communix-2018/" 200 - 127.0.0.1 / 1678b [2ms]
+2021-03-27 07:02:53 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/" 200 - 127.0.0.1 / 3188b [3ms]
+2021-03-27 07:02:54 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/green-games-2013/" 200 - 127.0.0.1 / 893b [2ms]
+2021-03-27 07:02:56 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/green-games-2013/Logo.png" 200 - 127.0.0.1 / 58864b [67ms]
+2021-03-27 07:03:02 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/green-games-2013/" 200 - 127.0.0.1 / 886b [1ms]
+2021-03-27 07:03:02 app.cpp:247 [info] GET HTTP/1.1 "/opt/brands/" 200 - 127.0.0.1 / 3188b [4ms]
+2021-03-27 07:03:03 app.cpp:247 [info] GET HTTP/1.1 "/opt/" 200 - 127.0.0.1 / 2126b [3ms]
+2021-03-27 07:03:05 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/" 200 - 127.0.0.1 / 1133b [48ms]
+2021-03-27 07:03:06 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/rufc.vv.si.txt" 200 - 127.0.0.1 / 455b [13ms]
+2021-03-27 07:03:09 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/" 200 - 127.0.0.1 / 1133b [2ms]
+2021-03-27 07:03:11 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [47ms]
+2021-03-27 07:03:14 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:15 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:16 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:16 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:17 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [2ms]
+2021-03-27 07:03:17 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:18 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:03:18 app.cpp:247 [info] GET HTTP/1.1 "/opt/privacy/bloggerpass.txt" 200 - 127.0.0.1 / 752b [1ms]
+2021-03-27 07:10:25 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 07:10:25 app.cpp:170 [info] tmp file directory root is 
+2021-03-27 07:10:25 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-27 07:10:25 app.cpp:66 [info] searching for sites
+2021-03-27 07:10:25 app.cpp:69 [info] site "*" info
+2021-03-27 07:10:25 app.cpp:71 [info] site "*" is attached to *
+2021-03-27 07:10:25 app.cpp:73 [info] configuring routes
+2021-03-27 07:10:25 app.cpp:78 [info] route / is alias for e:\
+2021-03-27 07:10:25 app.cpp:95 [info] queue has 2 workers
+2021-03-27 07:10:25 app.cpp:98 [info] setting up signals
+2021-03-27 07:10:25 app.cpp:108 [info] ready to serve and protect
+2021-03-27 07:11:39 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-03-27 07:11:39 app.cpp:170 [info] tmp file directory root is 
+2021-03-27 07:11:39 app.cpp:64 [info] listening to "*" 127.0.0.1:80
+2021-03-27 07:11:39 app.cpp:66 [info] searching for sites
+2021-03-27 07:11:39 app.cpp:69 [info] site "*" info
+2021-03-27 07:11:39 app.cpp:71 [info] site "*" is attached to *
+2021-03-27 07:11:39 app.cpp:73 [info] configuring routes
+2021-03-27 07:11:39 app.cpp:78 [info] route / is alias for e:\
+2021-03-27 07:11:39 app.cpp:95 [info] queue has 2 workers
+2021-03-27 07:11:39 app.cpp:98 [info] setting up signals
+2021-03-27 07:11:39 app.cpp:108 [info] ready to serve and protect
+2021-04-02 17:56:23 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-02 17:56:23 app.cpp:163 [info] tmp file directory root is 
+2021-04-02 17:56:23 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-02 17:56:23 app.cpp:65 [info] searching for sites
+2021-04-02 17:56:23 app.cpp:68 [info] site "*" info
+2021-04-02 17:56:23 app.cpp:70 [info] site "*" is attached to *
+2021-04-02 17:56:23 app.cpp:72 [info] configuring routes
+2021-04-02 17:56:23 app.cpp:77 [info] route / is alias for e:\
+2021-04-02 17:56:23 app.cpp:94 [info] queue has 2 workers
+2021-04-02 17:56:23 app.cpp:97 [info] setting up signals
+2021-04-02 17:56:23 app.cpp:107 [info] ready to serve and protect
+2021-04-02 17:58:58 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [4ms]
+2021-04-02 17:58:58 app.cpp:240 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-04-02 17:59:01 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:04 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:04 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [2ms]
+2021-04-02 17:59:04 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:05 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:05 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:06 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:06 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:06 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [4ms]
+2021-04-02 17:59:07 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [2ms]
+2021-04-02 17:59:07 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:07 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [3ms]
+2021-04-02 17:59:26 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-02 17:59:26 app.cpp:163 [info] tmp file directory root is 
+2021-04-02 17:59:26 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-02 17:59:26 app.cpp:65 [info] searching for sites
+2021-04-02 17:59:26 app.cpp:68 [info] site "*" info
+2021-04-02 17:59:26 app.cpp:70 [info] site "*" is attached to *
+2021-04-02 17:59:26 app.cpp:72 [info] configuring routes
+2021-04-02 17:59:26 app.cpp:77 [info] route / is alias for e:\
+2021-04-02 17:59:26 app.cpp:94 [info] queue has 2 workers
+2021-04-02 17:59:26 app.cpp:97 [info] setting up signals
+2021-04-02 17:59:26 app.cpp:107 [info] ready to serve and protect
+2021-04-02 17:59:28 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [10ms]
+2021-04-02 17:59:28 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [10ms]
+2021-04-02 17:59:28 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [11ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:29 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [11ms]
+2021-04-02 17:59:30 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [9ms]
+2021-04-02 17:59:30 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [11ms]
+2021-04-02 17:59:30 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [12ms]
+2021-04-02 17:59:30 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:30 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [13ms]
+2021-04-02 17:59:31 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [11ms]
+2021-04-02 17:59:32 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 17:59:32 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [14ms]
+2021-04-02 17:59:32 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [9ms]
+2021-04-02 17:59:32 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [10ms]
+2021-04-02 17:59:32 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2990b [9ms]
+2021-04-02 17:59:33 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [12ms]
+2021-04-02 17:59:33 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [14ms]
+2021-04-02 17:59:33 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2998b [10ms]
+2021-04-02 18:02:05 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-02 18:02:05 app.cpp:163 [info] tmp file directory root is 
+2021-04-02 18:02:05 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-02 18:02:05 app.cpp:65 [info] searching for sites
+2021-04-02 18:02:05 app.cpp:68 [info] site "*" info
+2021-04-02 18:02:05 app.cpp:70 [info] site "*" is attached to *
+2021-04-02 18:02:05 app.cpp:72 [info] configuring routes
+2021-04-02 18:02:05 app.cpp:77 [info] route / is alias for e:\
+2021-04-02 18:02:05 app.cpp:94 [info] queue has 2 workers
+2021-04-02 18:02:05 app.cpp:97 [info] setting up signals
+2021-04-02 18:02:05 app.cpp:107 [info] ready to serve and protect
+2021-04-02 18:02:07 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2075b [13ms]
+2021-04-02 18:02:13 app.cpp:240 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [74ms]
+2021-04-02 18:02:17 app.cpp:240 [info] GET HTTP/1.1 "/rev/2013-to-2016-green-games/" 200 - 127.0.0.1 / 11131b [322ms]
+2021-04-02 18:02:22 app.cpp:240 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [8ms]
+2021-04-02 18:02:23 app.cpp:240 [info] GET HTTP/1.1 "/rev/2016-to-2017-seventies-games/" 200 - 127.0.0.1 / 3534b [130ms]
+2021-04-02 18:02:25 app.cpp:240 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [8ms]
+2021-04-02 18:02:27 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16183b [567ms]
+2021-04-02 18:02:36 app.cpp:240 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2116b [6ms]
+2021-04-02 18:02:37 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2018-naive-task/" 200 - 127.0.0.1 / 1678b [76ms]
+2021-04-02 18:02:38 app.cpp:240 [info] GET HTTP/1.1 "/rev/" 200 - 127.0.0.1 / 2126b [8ms]
+2021-04-02 18:02:40 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [48ms]
+2021-04-02 18:02:41 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [52ms]
+2021-04-02 18:02:42 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [49ms]
+2021-04-02 18:02:42 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [45ms]
+2021-04-02 18:02:43 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [45ms]
+2021-04-02 18:02:43 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16174b [45ms]
+2021-04-02 18:02:44 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16183b [47ms]
+2021-04-02 18:02:44 app.cpp:240 [info] GET HTTP/1.1 "/rev/2017-to-2017-revind/" 200 - 127.0.0.1 / 16160b [53ms]
+2021-04-02 18:42:29 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-02 18:42:29 app.cpp:163 [info] tmp file directory root is 
+2021-04-02 18:42:29 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-02 18:42:29 app.cpp:65 [info] searching for sites
+2021-04-02 18:42:29 app.cpp:68 [info] site "*" info
+2021-04-02 18:42:29 app.cpp:70 [info] site "*" is attached to *
+2021-04-02 18:42:29 app.cpp:72 [info] configuring routes
+2021-04-02 18:42:29 app.cpp:77 [info] route / is alias for e:\
+2021-04-02 18:42:29 app.cpp:94 [info] queue has 2 workers
+2021-04-02 18:42:29 app.cpp:97 [info] setting up signals
+2021-04-02 18:42:29 app.cpp:107 [info] ready to serve and protect
+2021-04-02 18:42:35 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/styles/core.css" 200 - 127.0.0.1 / 7557b [5ms]
+2021-04-02 18:42:51 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/styles/core.css" 200 - 127.0.0.1 / 7557b [5125ms]
+2021-04-02 18:42:54 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/styles/" 200 - 127.0.0.1 / 949b [6ms]
+2021-04-02 18:42:56 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/" 200 - 127.0.0.1 / 2494b [15ms]
+2021-04-02 18:42:57 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/pages/" 200 - 127.0.0.1 / 2575b [390ms]
+2021-04-02 18:42:59 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/" 200 - 127.0.0.1 / 2502b [15ms]
+2021-04-02 18:43:00 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/" 200 - 127.0.0.1 / 3769b [84ms]
+2021-04-02 18:44:48 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [104844ms]
+2021-04-02 18:44:56 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [9ms]
+2021-04-02 18:44:57 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [7ms]
+2021-04-02 18:44:58 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [8ms]
+2021-04-02 18:44:58 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [9ms]
+2021-04-02 18:45:00 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/hash.js" 200 - 127.0.0.1 / 2459b [6ms]
+2021-04-02 18:45:06 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/" 200 - 127.0.0.1 / 3769b [28ms]
+2021-04-02 18:45:10 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/api.js" 200 - 127.0.0.1 / 3643b [396ms]
+2021-04-02 18:45:14 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/api.js" 200 - 127.0.0.1 / 3643b [7ms]
+2021-04-02 18:45:16 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/api.js" 200 - 127.0.0.1 / 3643b [8ms]
+2021-04-02 18:45:18 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/scripts/" 200 - 127.0.0.1 / 3769b [22ms]
+2021-04-02 18:45:21 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/" 200 - 127.0.0.1 / 2502b [14ms]
+2021-04-02 18:45:23 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/dist/" 200 - 127.0.0.1 / 3734b [23ms]
+2021-04-02 18:45:26 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/dist/app.js" 200 - 127.0.0.1 / 238160b [809ms]
+2021-04-02 18:45:30 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/dist/app.js" 200 - 127.0.0.1 / 238160b [278ms]
+2021-04-02 18:45:45 app.cpp:240 [info] GET HTTP/1.1 "/dev/exprema/bin/data/app/src/dist/app.js" 200 - 127.0.0.1 / 238160b [283ms]

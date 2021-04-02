@@ -20,7 +20,7 @@
 				<quality-level i="8" />
 				<memory-level i="8" />
 				<min-length i="8192" />
-				<enabled i="false" />
+				<enabled b="true" />
 			</compression>
 			<document-root s="e:/" />
 			<allow-directory-listing b="true" />
