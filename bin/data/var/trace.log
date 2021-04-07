@@ -13446,3 +13446,34 @@
 2021-04-03 22:04:30 app.cpp:107 [info] ready to serve and protect
 2021-04-03 22:04:36 app.cpp:240 [info] GET HTTP/1.1 "/" 404 - 127.0.0.1 / 626b [0ms]
 2021-04-03 22:04:36 app.cpp:240 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [0ms]
+2021-04-05 17:03:33 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-05 17:03:33 app.cpp:163 [info] tmp file directory root is 
+2021-04-05 17:03:33 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-05 17:03:33 app.cpp:65 [info] searching for sites
+2021-04-05 17:03:33 app.cpp:68 [info] site "*" info
+2021-04-05 17:03:33 app.cpp:70 [info] site "*" is attached to *
+2021-04-05 17:03:33 app.cpp:72 [info] configuring routes
+2021-04-05 17:03:33 app.cpp:77 [info] route / is alias for e:\
+2021-04-05 17:03:33 app.cpp:94 [info] queue has 2 workers
+2021-04-05 17:03:33 app.cpp:97 [info] setting up signals
+2021-04-05 17:03:33 app.cpp:107 [info] ready to serve and protect
+2021-04-05 17:03:41 app.cpp:240 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [0ms]
+2021-04-05 17:03:44 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2087b [64ms]
+2021-04-05 17:03:44 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2075b [3ms]
+2021-04-05 17:03:45 app.cpp:240 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 2087b [3ms]
+2021-04-05 17:03:47 app.cpp:240 [info] GET HTTP/1.1 "/make/" 200 - 127.0.0.1 / 6618b [94ms]
+2021-04-05 17:03:50 app.cpp:240 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 4284b [63ms]
+2021-04-05 17:03:52 app.cpp:240 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 4284b [3ms]
+2021-04-05 17:03:53 app.cpp:240 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 4284b [3ms]
+2021-04-05 17:03:54 app.cpp:240 [info] GET HTTP/1.1 "/make/CMakeCache.txt" 200 - 127.0.0.1 / 4284b [4ms]
+2021-04-07 12:30:41 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-07 12:30:41 app.cpp:163 [info] tmp file directory root is 
+2021-04-07 12:30:41 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-07 12:30:41 app.cpp:65 [info] searching for sites
+2021-04-07 12:30:41 app.cpp:68 [info] site "*" info
+2021-04-07 12:30:41 app.cpp:70 [info] site "*" is attached to *
+2021-04-07 12:30:41 app.cpp:72 [info] configuring routes
+2021-04-07 12:30:41 app.cpp:77 [info] route / is alias for e:\
+2021-04-07 12:30:41 app.cpp:94 [info] queue has 2 workers
+2021-04-07 12:30:41 app.cpp:97 [info] setting up signals
+2021-04-07 12:30:41 app.cpp:107 [info] ready to serve and protect

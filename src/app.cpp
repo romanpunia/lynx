@@ -81,7 +81,7 @@ public:
 				if (!AccessLogs.empty())
 					Entry->Callbacks.Access = Runtime::OnLogAccess;
 
-				TH_INFO("route %s is alias for %s", Entry->URI.Regex.c_str(), Entry->DocumentRoot.c_str());
+				TH_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
 			}
 		}
 
