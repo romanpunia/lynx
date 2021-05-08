@@ -9,7 +9,7 @@
 	</application>
 	<listen s="*">
 		<hostname s="127.0.0.1" />
-		<port i="80" />
+		<port i="8080" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
@@ -22,7 +22,7 @@
 				<min-length i="8192" />
 				<enabled b="true" />
 			</compression>
-			<document-root s="e:/" />
+			<document-root s="./" />
 			<allow-directory-listing b="true" />
 		</route>
 	</site>

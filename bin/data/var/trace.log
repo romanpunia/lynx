@@ -13477,3 +13477,14 @@
 2021-04-07 12:30:41 app.cpp:94 [info] queue has 2 workers
 2021-04-07 12:30:41 app.cpp:97 [info] setting up signals
 2021-04-07 12:30:41 app.cpp:107 [info] ready to serve and protect
+2021-04-22 14:20:24 app.cpp:155 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-04-22 14:20:24 app.cpp:163 [info] tmp file directory root is 
+2021-04-22 14:20:24 app.cpp:63 [info] listening to "*" 127.0.0.1:80
+2021-04-22 14:20:24 app.cpp:65 [info] searching for sites
+2021-04-22 14:20:24 app.cpp:68 [info] site "*" info
+2021-04-22 14:20:24 app.cpp:70 [info] site "*" is attached to *
+2021-04-22 14:20:24 app.cpp:72 [info] configuring routes
+2021-04-22 14:20:24 app.cpp:77 [info] route / is alias for e:\
+2021-04-22 14:20:24 app.cpp:94 [info] queue has 2 workers
+2021-04-22 14:20:24 app.cpp:97 [info] setting up signals
+2021-04-22 14:20:24 app.cpp:107 [info] ready to serve and protect
