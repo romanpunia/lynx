@@ -1,4 +1,4 @@
-﻿#include <tomahawk/tomahawk.h>
+#include <tomahawk/tomahawk.h>
 #include <csignal>
 
 using namespace Tomahawk::Core;
@@ -87,11 +87,13 @@ public:
 
 		if (Reference != nullptr)
 		{
-			NMake::Unpack(Reference->Fetch("application.workers-count"), &Conf->Workers);
+			NMake::Unpack(Reference->Fetch("application.threads"), &Conf->Threads);
+            NMake::Unpack(Reference->Fetch("application.coroutines"), &Conf->Coroutines);
+            NMake::Unpack(Reference->Fetch("application.stack"), &Conf->Stack);
 			TH_CLEAR(Reference);
 		}
 
-		TH_INFO("queue has %i workers", (int)Conf->Workers);
+		TH_INFO("queue has %i threads", (int)Conf->Threads);
 		Server->Listen();
 
 		TH_INFO("setting up signals");
