@@ -254,9 +254,77 @@ public:
 
 int main()
 {
-	Tomahawk::Initialize(Tomahawk::TPreset_App, Tomahawk::TMem_4MB);
+	Tomahawk::Initialize(Tomahawk::TPreset_App);
 	{
-		Application::Desc Interface;
+		Console* Debug = Console::Get();
+        Debug->Show();
+
+        Schedule* Queue = Schedule::Get();
+		Queue->Start(true, 4);
+
+		Multiplexer::Create(256, 1000);
+
+        HTTP::Client* Client = new HTTP::Client(1000);
+		Coasync([Client, Queue, Debug]()
+		{
+			Host Address;
+			Address.Hostname = "jsonplaceholder.typicode.com";
+			Address.Port = 443;
+			Address.Secure = true;
+
+			int ErrorCode = Coawait(Client->Connect(&Address, true));
+			if (ErrorCode < 0)
+			{
+				Debug->WriteLine("connection error: " + std::to_string(ErrorCode));
+				Queue->Stop();
+				return;
+			}
+
+			for (uint32_t i = 0; i < 10; i++)
+			{
+				Debug->CaptureTime();
+
+				HTTP::RequestFrame Request;
+				strcpy(Request.Version, "HTTP/1.1");
+				strcpy(Request.Method, "GET");
+				Request.URI.assign("/posts/" + std::to_string(i + 1));
+
+				HTTP::ResponseFrame* Response = Coawait(Client->Send(&Request));
+				if (Response->StatusCode <= 0)
+				{
+					Debug->WriteLine("response error: " + std::to_string(Response->StatusCode));
+					Queue->Stop();
+					break;
+				}
+
+				Coawait(Client->Consume(1024 * 64));
+				if (Request.ContentState == HTTP::Content_Corrupted)
+				{
+					Debug->WriteLine("response error: corrupted response");
+					Queue->Stop();
+					break;
+				}
+
+				Debug->WriteLine("response from request #" + std::to_string(i));
+				Debug->WriteLine(std::string(Response->Buffer.data(), Response->Buffer.size()));
+				Debug->fWriteLine("Request time: %f ms", (float)Debug->GetCapturedTime());
+
+				Debug->CaptureTime();
+				Cosleep(1000);
+				Debug->fWriteLine("Sleep time: %f ms", (float)Debug->GetCapturedTime());
+			}
+
+			Queue->Stop();
+		});
+		
+        while (Queue->IsActive())
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+        Debug->Release();
+        Client->Release();
+        Queue->Release();
+		
+		/*Application::Desc Interface;
 		Interface.Usage = ApplicationUse_Content_Module;
 		Interface.Directory = "data";
 		Interface.Framerate = 6;
@@ -264,7 +332,7 @@ int main()
 
 		auto App = new Runtime(&Interface);
 		App->Start(&Interface);
-		delete App;
+		delete App;*/
 	}
 	Tomahawk::Uninitialize();
 

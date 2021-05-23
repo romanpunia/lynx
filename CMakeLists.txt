@@ -1,8 +1,23 @@
 cmake_minimum_required(VERSION 3.6)
-cmake_policy(SET CMP0054 NEW)
+if (POLICY CMP0077)
+	cmake_policy(SET CMP0077 NEW)
+else()
+	cmake_policy(SET CMP0054 NEW)
+endif()
 
 #Setup toolchain file if needed
-set(TH_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../tomahawk CACHE STRING "Tomahawk directory" FORCE)
+set(TH_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../tomahawk CACHE STRING "Tomahawk directory")
+set(TH_USE_ASSIMP OFF CACHE BOOL "Assimp is not used")
+set(TH_USE_FREETYPE OFF CACHE BOOL "FreeType is not used")
+set(TH_USE_GLEW OFF CACHE BOOL "GLEW is not used")
+set(TH_USE_OPENAL OFF CACHE BOOL "OpenAL is not used")
+set(TH_USE_OPENGL OFF CACHE BOOL "OpenGL is not used")
+set(TH_USE_SDL2 OFF CACHE BOOL "SDL2 is not used")
+set(TH_USE_POSTGRESQL OFF CACHE BOOL "PostgreSQL is not used")
+set(TH_USE_MONGOC OFF CACHE BOOL "MongoDB is not used")
+set(TH_WITH_BULLET3 OFF CACHE BOOL "Bullet3 is not used")
+set(TH_WITH_RMLUI OFF CACHE BOOL "RmlUi is not used")
+set(TH_WITH_SHADERS OFF CACHE BOOL "Shaders are not used")
 include(${TH_DIRECTORY}/lib/toolchain.cmake)
 
 #Project's metadata
@@ -40,7 +55,9 @@ endforeach()
 add_executable(lynx ${SOURCE})
 set_target_properties(lynx PROPERTIES
 		OUTPUT_NAME "lynxd"
-		CXX_STANDARD_REQUIRED 14
+		CXX_STANDARD 14
+		CXX_STANDARD_REQUIRED ON
+		CXX_EXTENSIONS OFF
 		VERSION ${PROJECT_VERSION}
 		SOVERSION ${PROJECT_VERSION})
 target_compile_definitions(lynx PRIVATE -DTH_EXPORT)
@@ -49,20 +66,21 @@ target_compile_definitions(lynx PRIVATE -DTH_EXPORT)
 if (NOT MSVC)
     set(CMAKE_CXX_FLAGS_DEBUG "-g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
-    if (WIN32 AND MINGW)
+    if (NOT (WIN32 AND MINGW))
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wformat=0 -std=c++14 -fexceptions")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -fexceptions")
+		if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+			if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+				set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+				set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
+			else()
+				set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2")
+				set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2")
+			endif()
+		endif()
+	else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows -D_WIN32_WINNT=0x0600")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows -D_WIN32_WINNT=0x0600")
-    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wformat=0 -std=c++14 -O0 -fexceptions")
-            set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -lz -O0 -fexceptions")
-        else()
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wformat=0 -std=c++14 -msse2 -fexceptions")
-            set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -lz -msse2 -fexceptions")
-        endif()
-    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wformat=0 -std=c++14 -fexceptions")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration -fexceptions")
     endif()
 else()
     set(CMAKE_EXE_LINKER_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
@@ -73,9 +91,6 @@ else()
     target_compile_definitions(lynx PRIVATE
             -D_CRT_SECURE_NO_WARNINGS
             -D_SCL_SECURE_NO_WARNINGS)
-    target_compile_options(lynx PRIVATE
-            /wd4305
-            /wd4244)
 endif()
 
 #Project's dependency resolvers
