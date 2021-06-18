@@ -13488,3 +13488,33 @@
 2021-04-22 14:20:24 app.cpp:94 [info] queue has 2 workers
 2021-04-22 14:20:24 app.cpp:97 [info] setting up signals
 2021-04-22 14:20:24 app.cpp:107 [info] ready to serve and protect
+2021-06-18 06:39:26 app.cpp:157 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-06-18 06:39:26 app.cpp:165 [info] tmp file directory root is 
+2021-06-18 06:39:27 app.cpp:63 [info] listening to "*" 127.0.0.1:8080
+2021-06-18 06:39:27 app.cpp:65 [info] searching for sites
+2021-06-18 06:39:27 app.cpp:68 [info] site "*" info
+2021-06-18 06:39:27 app.cpp:70 [info] site "*" is attached to *
+2021-06-18 06:39:27 app.cpp:72 [info] configuring routes
+2021-06-18 06:39:27 app.cpp:77 [info] route / is alias for E:\dev\lynx\bin\data\
+2021-06-18 06:39:27 app.cpp:96 [info] queue has 2 threads
+2021-06-18 06:39:27 app.cpp:99 [info] setting up signals
+2021-06-18 06:39:27 app.cpp:109 [info] ready to serve and protect
+2021-06-18 06:39:46 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [24ms]
+2021-06-18 06:39:48 app.cpp:242 [info] GET HTTP/1.1 "/tmp/" 200 - 127.0.0.1 / 813b [1ms]
+2021-06-18 06:39:49 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [2ms]
+2021-06-18 06:39:50 app.cpp:242 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 1085b [7ms]
+2021-06-18 06:39:51 app.cpp:242 [info] GET HTTP/1.1 "/var/access.log" 200 - 127.0.0.1 / 8422b [83ms]
+2021-06-18 06:40:00 app.cpp:242 [info] GET HTTP/1.1 "/var/access.log" 200 - 127.0.0.1 / 8422b [15ms]
+2021-06-18 06:40:00 app.cpp:242 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-06-18 06:40:02 app.cpp:242 [info] GET HTTP/1.1 "/var/access.log" 200 - 127.0.0.1 / 8422b [15ms]
+2021-06-18 06:40:13 app.cpp:242 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 1085b [4ms]
+2021-06-18 06:40:14 app.cpp:242 [info] GET HTTP/1.1 "/var/error.log" 200 - 127.0.0.1 / 1426b [64ms]
+2021-06-18 06:40:24 app.cpp:242 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 1085b [3ms]
+2021-06-18 06:40:26 app.cpp:242 [info] GET HTTP/1.1 "/var/trace.log" 200 - 127.0.0.1 / 44651b [151ms]
+2021-06-18 06:41:36 app.cpp:242 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 1085b [3ms]
+2021-06-18 06:41:38 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [2ms]
+2021-06-18 06:41:39 app.cpp:242 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 980b [2ms]
+2021-06-18 06:41:47 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [4ms]
+2021-06-18 06:41:49 app.cpp:242 [info] GET HTTP/1.1 "/web/" 200 - 127.0.0.1 / 813b [2ms]
+2021-06-18 06:41:50 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [2ms]
+2021-06-18 06:41:51 app.cpp:242 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1485b [2ms]
