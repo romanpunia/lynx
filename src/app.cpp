@@ -34,13 +34,6 @@ public:
 	}
 	~Runtime() override
 	{
-		Debug::DetachCallback();
-		delete Server;
-		delete Log;
-		delete Access;
-		delete Error;
-		delete Trace;
-
 		if (ForceQuit)
 			exit(0);
 	}
@@ -107,6 +100,15 @@ public:
 		signal(SIGPIPE, SIG_IGN);
 #endif
 		TH_INFO("ready to serve and protect");
+	}
+	void CloseEvent() override
+	{
+		Debug::DetachCallback();
+		delete Server;
+		delete Log;
+		delete Access;
+		delete Error;
+		delete Trace;
 	}
 	void OnLoadLibrary(Document* Document)
 	{
