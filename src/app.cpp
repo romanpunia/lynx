@@ -78,14 +78,20 @@ public:
 			}
 		}
 
+		int MaxEvents = 256; int64_t PollTimeout = 200; 
 		if (Reference != nullptr)
 		{
 			NMake::Unpack(Reference->Fetch("application.threads"), &Conf->Threads);
             NMake::Unpack(Reference->Fetch("application.coroutines"), &Conf->Coroutines);
             NMake::Unpack(Reference->Fetch("application.stack"), &Conf->Stack);
+            NMake::Unpack(Reference->Fetch("application.max-events"), &MaxEvents);
+            NMake::Unpack(Reference->Fetch("application.poll-timeout"), &PollTimeout);
 			TH_CLEAR(Reference);
 		}
 
+		TH_INFO("multiplexer drivers initialization");
+		Driver::Create(MaxEvents, PollTimeout);
+		
 		TH_INFO("queue has %i threads", (int)Conf->Threads);
 		Server->Listen();
 
