@@ -78,7 +78,7 @@ public:
 			}
 		}
 
-		int MaxEvents = 256; int64_t PollTimeout = 200; 
+		int MaxEvents = 256; int64_t PollTimeout = 100; 
 		if (Reference != nullptr)
 		{
 			NMake::Unpack(Reference->Fetch("application.threads"), &Conf->Threads);
@@ -265,7 +265,7 @@ int main()
 	Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
 	{
 		Application::Desc Interface;
-		Interface.Usage = (size_t)ApplicationUse::Content_Module;
+		Interface.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
 		Interface.Directory = "data";
 		Interface.Framerate = 6;
 		Interface.Async = true;
