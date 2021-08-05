@@ -2346,4 +2346,61 @@
 2021-03-27 06:04:38 app.cpp:53 [info] i am 1001 ms callback
 2021-03-27 06:04:39 app.cpp:53 [info] i am 1001 ms callback
 2021-03-27 06:04:40 app.cpp:53 [info] i am 1001 ms callback
-2021-03-27 06:04:41 app.cpp:53 [info] i am 1001 ms callba
+2021-03-27 06:04:41 app.cpp:53 [info] i am 1001 ms callba2021-08-05 06:12:14 app.cpp:142 [info] system log (access): E:\dev\lynx\bin\data\var\access.log
+2021-08-05 06:12:14 app.cpp:152 [info] system log (error): E:\dev\lynx\bin\data\var\error.log
+2021-08-05 06:12:14 app.cpp:162 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-08-05 06:12:14 app.cpp:169 [info] tmp file directory root is 
+2021-08-05 06:12:14 app.cpp:53 [info] listening to "*" 127.0.0.1:8080
+2021-08-05 06:12:14 app.cpp:55 [info] searching for sites
+2021-08-05 06:12:14 app.cpp:58 [info] site "*" info
+2021-08-05 06:12:14 app.cpp:60 [info] site "*" is attached to *
+2021-08-05 06:12:14 app.cpp:62 [info] configuring routes
+2021-08-05 06:12:14 app.cpp:67 [info] route / is alias for E:\dev\lynx\bin\data\
+2021-08-05 06:12:14 app.cpp:89 [info] multiplexer drivers initialization
+2021-08-05 06:12:14 app.cpp:92 [info] queue has 4 threads
+2021-08-05 06:12:14 app.cpp:95 [info] setting up signals
+2021-08-05 06:12:14 app.cpp:105 [info] ready to serve and protect
+2021-08-05 06:12:33 app.cpp:244 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [55ms]
+2021-08-05 06:12:35 app.cpp:244 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [5ms]
+2021-08-05 06:12:35 app.cpp:244 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-05 06:12:36 app.cpp:244 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:12:48 app.cpp:244 [info] GET HTTP/1.1 "/web/" 200 - 127.0.0.1 / 2505b [419ms]
+2021-08-05 06:12:56 app.cpp:244 [info] GET HTTP/1.1 "/web/site/" 200 - 127.0.0.1 / 772b [4ms]
+2021-08-05 06:12:57 app.cpp:244 [info] GET HTTP/1.1 "/web/site/index.html" 200 - 127.0.0.1 / 412b [5ms]
+2021-08-05 06:20:49 [info] system log (access): E:\dev\lynx\bin\data\var\access.log
+2021-08-05 06:20:49 [info] system log (error): E:\dev\lynx\bin\data\var\error.log
+2021-08-05 06:20:49 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-08-05 06:20:49 [info] tmp file directory root is 
+2021-08-05 06:20:49 [info] listening to "*" 127.0.0.1:8080
+2021-08-05 06:20:49 [info] searching for sites
+2021-08-05 06:20:49 [info] site "*" info
+2021-08-05 06:20:49 [info] site "*" is attached to *
+2021-08-05 06:20:49 [info] configuring routes
+2021-08-05 06:20:49 [info] route / is alias for E:\dev\lynx\bin\data\
+2021-08-05 06:20:49 [info] multiplexer drivers initialization
+2021-08-05 06:20:49 [info] queue has 4 threads
+2021-08-05 06:20:49 [info] setting up signals
+2021-08-05 06:20:49 [info] ready to serve and protect
+2021-08-05 06:20:58 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [5ms]
+2021-08-05 06:21:00 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:00 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:01 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:01 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:02 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:08 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-05 06:21:08 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:09 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:09 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:10 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [2ms]
+2021-08-05 06:21:10 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-05 06:21:10 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [2ms]
+2021-08-05 06:21:10 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [2ms]
+2021-08-05 06:21:11 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:11 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1019b [3ms]
+2021-08-05 06:21:11 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [3ms]
+2021-08-05 06:21:13 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [2ms]
+2021-08-05 06:21:15 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [2ms]
+2021-08-05 06:21:15 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [1ms]
+2021-08-05 06:21:16 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [1ms]
+2021-08-05 06:21:16 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [2ms]
+2021-08-05 06:21:17 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [1ms]

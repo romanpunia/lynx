@@ -1,7 +1,10 @@
 <lynx>
 	<application>
+		<access-logs s="./var/access.log" />
+		<error-logs s="./var/error.log" />
+		<trace-logs s="./var/trace.log" />
 		<force-quit b="false" />
-		<terminal b="false" />
+		<terminal b="true" />
         <threads i="4" />
 	</application>
 	<netstat>

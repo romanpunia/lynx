@@ -22,10 +22,9 @@ class Runtime : public Application
 	std::string TraceLogs;
 	std::string RootDirectory;
 	bool Terminal;
-	bool ForceQuit;
 
 public:
-	explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false), ForceQuit(false)
+	explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false)
 	{
 		Debug::AttachCallback([this](const char* Value, int Level)
 		{
@@ -34,8 +33,6 @@ public:
 	}
 	~Runtime() override
 	{
-		if (ForceQuit)
-			exit(0);
 	}
 	void Initialize(Desc* Conf) override
 	{
@@ -47,11 +44,11 @@ public:
 		Server = Content->Load<HTTP::Server>("conf.xml");
 		if (!Server)
 		{
-			TH_ERROR("an error occurred while loading config");
+			TH_ERR("an error occurred while loading config");
 			return Stop();
 		}
 
-		auto Router = (HTTP::MapRouter*)Server->GetRouter();
+		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
 			TH_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
@@ -166,29 +163,26 @@ public:
 		}
 
 		NMake::Unpack(Document->Fetch("application.file-directory"), &RootDirectory);
-		NMake::Unpack(Document->Fetch("application.force-quit"), &ForceQuit);
 		Parser(&RootDirectory).Path(N, D);
 		Reference = Document->Copy();
 
 		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
-		if (ForceQuit)
-			TH_INFO("server will be forced to shutdown");
 	}
 	void OnLogCallback(const char* Value, int Level)
 	{
-		if (Level == 3 || Level == 4)
+		if (Level == 4)
 		{
-			if (Trace != nullptr)
+			if (Trace != nullptr && Trace->GetBuffer())
 				Trace->Write(Value, strlen(Value));
 		}
-		else if (Level == 0)
+		else if (Level == 3)
 		{
-			if (Access != nullptr)
+			if (Access != nullptr && Access->GetBuffer())
 				Access->Write(Value, strlen(Value));
 		}
 		else if (Level == 1 || Level == 2)
 		{
-			if (Error != nullptr)
+			if (Error != nullptr && Error->GetBuffer())
 				Error->Write(Value, strlen(Value));
 		}
 	}
@@ -248,7 +242,6 @@ public:
 			return true;
 
 		TH_INFO("%s %s \"%s%s%s\" %i - %s / %llub [%llums]", Base->Request.Method, Base->Request.Version, Base->Request.URI.c_str(), Base->Request.Query.empty() ? "" : "?", Base->Request.Query.c_str(), Base->Response.StatusCode, Base->Request.RemoteAddress, Base->Stream->Outcome, Base->Info.Finish - Base->Info.Start);
-
 		return true;
 	}
 	static bool OnHeaders(HTTP::Connection* Base, Parser* Content)
@@ -270,9 +263,9 @@ int main()
 		Interface.Framerate = 1.0;
 		Interface.Async = true;
 
-		auto App = new Runtime(&Interface);
+		auto* App = new Runtime(&Interface);
 		App->Start(&Interface);
-		delete App;
+		TH_RELEASE(App);
 	}
 	Tomahawk::Uninitialize();
 
