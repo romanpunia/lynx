@@ -34,9 +34,10 @@ public:
 	~Runtime() override
 	{
 	}
-	void Initialize(Desc* Conf) override
+	void Initialize() override
 	{
-		Content->GetProcessor<HTTP::Server>()->As<Processors::Server>()->Callback = [this](void*, Document* Doc) -> void
+		auto* Processor = (Processors::Server*)Content->GetProcessor<HTTP::Server>();
+		Processor->Callback = [this](void*, Document* Doc) -> void
 		{
 			this->OnLoadLibrary(Doc);
 		};
@@ -78,9 +79,9 @@ public:
 		int MaxEvents = 256; int64_t PollTimeout = 100; 
 		if (Reference != nullptr)
 		{
-			NMake::Unpack(Reference->Fetch("application.threads"), &Conf->Threads);
-            NMake::Unpack(Reference->Fetch("application.coroutines"), &Conf->Coroutines);
-            NMake::Unpack(Reference->Fetch("application.stack"), &Conf->Stack);
+			NMake::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
+            NMake::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
+            NMake::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
             NMake::Unpack(Reference->Fetch("application.max-events"), &MaxEvents);
             NMake::Unpack(Reference->Fetch("application.poll-timeout"), &PollTimeout);
 			TH_CLEAR(Reference);
@@ -89,7 +90,7 @@ public:
 		TH_INFO("multiplexer drivers initialization");
 		Driver::Create(MaxEvents, PollTimeout);
 		
-		TH_INFO("queue has %i threads", (int)Conf->Threads);
+		TH_INFO("queue has %i threads", (int)Control.Threads);
 		Server->Listen();
 
 		TH_INFO("setting up signals");
@@ -210,7 +211,7 @@ public:
 	{
 		signal(SIGFPE, OnArithmeticError);
 		if (CanTerminate())
-			Application::Get()->As<Runtime>()->Stop();
+			Application::Get()->Stop();
 	}
 	static void OnIllegalOperation(int Value)
 	{
@@ -264,7 +265,7 @@ int main()
 		Interface.Async = true;
 
 		auto* App = new Runtime(&Interface);
-		App->Start(&Interface);
+		App->Start();
 		TH_RELEASE(App);
 	}
 	Tomahawk::Uninitialize();

@@ -2404,3 +2404,20 @@
 2021-08-05 06:21:16 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [1ms]
 2021-08-05 06:21:16 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [2ms]
 2021-08-05 06:21:17 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1037b [1ms]
+2021-08-08 07:41:04 app.cpp:143 [info] system log (access): E:\dev\lynx\bin\data\var\access.log
+2021-08-08 07:41:04 app.cpp:153 [info] system log (error): E:\dev\lynx\bin\data\var\error.log
+2021-08-08 07:41:04 app.cpp:163 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-08-08 07:41:04 app.cpp:170 [info] tmp file directory root is 
+2021-08-08 07:41:04 app.cpp:54 [info] listening to "*" 127.0.0.1:8080
+2021-08-08 07:41:04 app.cpp:56 [info] searching for sites
+2021-08-08 07:41:04 app.cpp:59 [info] site "*" info
+2021-08-08 07:41:04 app.cpp:61 [info] site "*" is attached to *
+2021-08-08 07:41:04 app.cpp:63 [info] configuring routes
+2021-08-08 07:41:04 app.cpp:68 [info] route / is alias for E:\dev\lynx\bin\data\
+2021-08-08 07:41:04 app.cpp:90 [info] multiplexer drivers initialization
+2021-08-08 07:41:04 app.cpp:93 [info] queue has 4 threads
+2021-08-08 07:41:04 app.cpp:96 [info] setting up signals
+2021-08-08 07:41:04 app.cpp:106 [info] ready to serve and protect
+2021-08-08 07:41:22 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-08 07:41:22 app.cpp:245 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-08 07:41:33 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [6ms]

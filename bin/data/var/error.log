@@ -138,3 +138,7 @@
 2020-05-15 16:21:53 Tomahawk::Rest::Debugger::RemoveObject() Error: delete (01068C70): 120 bytes
 2020-05-15 16:212020-08-26 10:22:53 Tomahawk::Network::SocketServer::Configure() Error: cannot bind 25.89.98.169:80
 	system cause: The requested address is not valid in its context.
+2021-08-08 07:41:33 core.cpp:4340 [warn] [perf] @sock-accept took 6 ms (6243 us)
+	function: Tomahawk::Network::SocketServer::Accept()
+	file: network.cpp:1935
+	expected: 5 ms at most
