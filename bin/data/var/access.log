@@ -2421,3 +2421,42 @@
 2021-08-08 07:41:22 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
 2021-08-08 07:41:22 app.cpp:245 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
 2021-08-08 07:41:33 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [6ms]
+2021-08-13 10:45:32 app.cpp:143 [info] system log (access): E:\dev\lynx\bin\data\var\access.log
+2021-08-13 10:45:32 app.cpp:153 [info] system log (error): E:\dev\lynx\bin\data\var\error.log
+2021-08-13 10:45:32 app.cpp:163 [info] system log (trace): E:\dev\lynx\bin\data\var\trace.log
+2021-08-13 10:45:32 app.cpp:170 [info] tmp file directory root is 
+2021-08-13 10:45:32 app.cpp:54 [info] listening to "*" 127.0.0.1:8080
+2021-08-13 10:45:32 app.cpp:56 [info] searching for sites
+2021-08-13 10:45:32 app.cpp:60 [info] host "*" info
+2021-08-13 10:45:32 app.cpp:65 [info] route / is alias for E:\dev\lynx\bin\data\
+2021-08-13 10:45:32 app.cpp:90 [info] multiplexer drivers initialization
+2021-08-13 10:45:32 app.cpp:93 [info] queue has 4 threads
+2021-08-13 10:45:32 app.cpp:96 [info] setting up signals
+2021-08-13 10:45:32 app.cpp:106 [info] ready to serve and protect
+2021-08-13 10:45:46 app.cpp:245 [info] POST HTTP/1.1 "/api/auth/refresh" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/supplies.js.map" 404 - 127.0.0.1 / 626b [0ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/main.js.map" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/dd97537223d162c4955436a7b77f87da.c.js" 404 - 127.0.0.1 / 626b [0ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/dbb8fe5ee637877ca83f5c30eac37fc0.c.js.map" 404 - 127.0.0.1 / 626b [0ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/879e99368e94739780809b029b0facdd.c.js.map" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/43a591d5d6f9a5b4c6952ee8a138797f.c.js.map" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:46 app.cpp:245 [info] GET HTTP/1.1 "/dist/3561e3a1c11aafc12aa22781e45522ec.c.js.map" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:49 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-13 10:45:50 app.cpp:245 [info] GET HTTP/1.1 "/favicon.ico" 404 - 127.0.0.1 / 626b [1ms]
+2021-08-13 10:45:50 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [5ms]
+2021-08-13 10:45:51 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-13 10:45:51 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-13 10:45:52 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1019b [3ms]
+2021-08-13 10:46:04 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [3ms]
+2021-08-13 10:46:06 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [2ms]
+2021-08-13 10:46:07 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [1ms]
+2021-08-13 10:46:07 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [1ms]
+2021-08-13 10:46:08 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [3ms]
+2021-08-13 10:46:09 app.cpp:245 [info] GET HTTP/1.1 "/conf.xml" 200 - 127.0.0.1 / 1066b [1ms]
+2021-08-13 10:46:13 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [2ms]
+2021-08-13 10:46:16 app.cpp:245 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 985b [5ms]
+2021-08-13 10:46:19 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]
+2021-08-13 10:46:21 app.cpp:245 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 949b [3ms]
+2021-08-13 10:46:23 app.cpp:245 [info] GET HTTP/1.1 "/var/trace.log" 200 - 127.0.0.1 / 213589b [1369ms]
+2021-08-13 10:46:38 app.cpp:245 [info] GET HTTP/1.1 "/var/" 200 - 127.0.0.1 / 985b [3ms]
+2021-08-13 10:46:39 app.cpp:245 [info] GET HTTP/1.1 "/" 200 - 127.0.0.1 / 1055b [4ms]

@@ -54,25 +54,25 @@ public:
 			TH_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
 		TH_INFO("searching for sites");
-		for (auto& Site : Router->Sites)
+		for (auto& Hoster : Router->Sites)
 		{
-			TH_INFO("site \"%s\" info", Site->SiteName.c_str());
-			for (auto It = Site->Hosts.begin(); It != Site->Hosts.end(); It++)
-				TH_INFO("site \"%s\" is attached to %s", Site->SiteName.c_str(), It->c_str());
-
-			TH_INFO("configuring routes");
+			auto* Site = Hoster.second;
+			TH_INFO("host \"%s\" info", Hoster.first.c_str());
 			Site->Base->Callbacks.Headers = Runtime::OnHeaders;
 			if (!AccessLogs.empty())
 				Site->Base->Callbacks.Access = Runtime::OnLogAccess;
 
 			TH_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
-			for (auto Entry : Site->Routes)
+			for (auto& Group : Site->Groups)
 			{
-				Entry->Callbacks.Headers = Runtime::OnHeaders;
-				if (!AccessLogs.empty())
-					Entry->Callbacks.Access = Runtime::OnLogAccess;
+				for (auto Entry : Group.Routes)
+				{
+					Entry->Callbacks.Headers = Runtime::OnHeaders;
+					if (!AccessLogs.empty())
+						Entry->Callbacks.Access = Runtime::OnLogAccess;
 
-				TH_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
+					TH_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
+				}
 			}
 		}
 

@@ -142,3 +142,15 @@
 	function: Tomahawk::Network::SocketServer::Accept()
 	file: network.cpp:1935
 	expected: 5 ms at most
+2021-08-13 10:46:22 core.cpp:4327 [warn] [perf] @dispatch-task took 346 ms (346231 us)
+	function: Tomahawk::Core::Schedule::DispatchTask()
+	file: core.cpp:7666
+	expected: 200 ms at most
+2021-08-13 10:46:23 core.cpp:4327 [warn] [perf] @schedule-task took 6 ms (6150 us)
+	function: Tomahawk::Core::Schedule::SetTask()
+	file: core.cpp:7373
+	expected: 1 ms at most
+2021-08-13 10:46:50 core.cpp:4327 [warn] [perf] @dispatch-task took 1285 ms (1285720 us)
+	function: Tomahawk::Core::Schedule::DispatchTask()
+	file: core.cpp:7666
+	expected: 200 ms at most

@@ -17,16 +17,17 @@
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
-		<host s="*" />
-		<route s="/">
-			<compression>
-				<quality-level i="8" />
-				<memory-level i="8" />
-				<min-length i="8192" />
-				<enabled b="true" />
-			</compression>
-			<document-root s="./" />
-			<allow-directory-listing b="true" />
-		</route>
+		<group name="static">
+			<route s="/">
+				<compression>
+					<quality-level i="8" />
+					<memory-level i="8" />
+					<min-length i="8192" />
+					<enabled b="true" />
+				</compression>
+				<document-root s="./" />
+				<allow-directory-listing b="true" />
+			</route>
+		</group>
 	</site>
 </lynx>
