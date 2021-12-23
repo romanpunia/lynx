@@ -11,6 +11,6 @@ bin/*.pdb
 bin/*.exe
 bin/*.ilk
 bin/*.exp
-bin/lynx/var/*.log
-bin/lynx/tmp/*.*
-bin/lynx/web
+bin/var/*.log
+bin/tmp/*.*
+bin/web

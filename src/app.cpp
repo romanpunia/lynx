@@ -42,7 +42,7 @@ public:
 			this->OnLoadLibrary(Doc);
 		};
 
-		Server = Content->Load<HTTP::Server>("conf.xml");
+		Server = Content->Load<HTTP::Server>("config.xml");
 		if (!Server)
 		{
 			TH_ERR("an error occurred while loading config");
@@ -129,7 +129,7 @@ public:
 			TH_CLEAR(Log);
 		}
 
-		TH_INFO("loading server config from ./data/conf.xml");
+		TH_INFO("loading server config from ./config.xml");
 		std::string N = Socket::LocalIpAddress();
 		std::string D = Content->GetEnvironment();
 
@@ -137,7 +137,7 @@ public:
 		if (!AccessLogs.empty())
 		{
 			Access = new FileStream();
-			if (!Access->Open(Parser(&AccessLogs).Path(N, D).Get(), FileMode::Binary_Append_Only))
+			if (!Access->Open(Parser(&AccessLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
 				TH_CLEAR(Access);
 
 			TH_INFO("system log (access): %s", AccessLogs.c_str());
@@ -147,7 +147,7 @@ public:
 		if (!ErrorLogs.empty())
 		{
 			Error = new FileStream();
-			if (!Error->Open(Parser(&ErrorLogs).Path(N, D).Get(), FileMode::Binary_Append_Only))
+			if (!Error->Open(Parser(&ErrorLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
 				TH_CLEAR(Error);
 
 			TH_INFO("system log (error): %s", ErrorLogs.c_str());
@@ -157,14 +157,14 @@ public:
 		if (!TraceLogs.empty())
 		{
 			Trace = new FileStream();
-			if (!Trace->Open(Parser(&TraceLogs).Path(N, D).Get(), FileMode::Binary_Append_Only))
+			if (!Trace->Open(Parser(&TraceLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
 				TH_CLEAR(Trace);
 
 			TH_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		NMake::Unpack(Document->Fetch("application.file-directory"), &RootDirectory);
-		Parser(&RootDirectory).Path(N, D);
+		Parser(&RootDirectory).Eval(N, D);
 		Reference = Document->Copy();
 
 		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
@@ -260,7 +260,7 @@ int main()
 	{
 		Application::Desc Interface;
 		Interface.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
-		Interface.Directory = "data";
+		Interface.Directory.clear();
 		Interface.Framerate = 1.0;
 		Interface.Async = true;
 

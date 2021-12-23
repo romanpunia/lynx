@@ -12,19 +12,13 @@
 		<enable-no-delay b="true" />
 	</netstat>
 	<listen s="*">
-		<hostname s="127.0.0.1" />
+		<hostname s="25.32.217.14" />
 		<port i="8080" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<compression>
-					<quality-level i="8" />
-					<memory-level i="8" />
-					<min-length i="8192" />
-					<enabled b="true" />
-				</compression>
 				<document-root s="./" />
 				<allow-directory-listing b="true" />
 			</route>
