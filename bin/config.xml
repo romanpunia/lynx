@@ -12,14 +12,14 @@
 		<enable-no-delay b="true" />
 	</netstat>
 	<listen s="*">
-		<hostname s="25.32.217.14" />
+		<hostname s="127.0.0.1" />
 		<port i="8080" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./" />
+				<document-root s="./web" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>

@@ -26,7 +26,7 @@ class Runtime : public Application
 public:
 	explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false)
 	{
-		Debug::AttachCallback([this](const char* Value, int Level)
+		OS::SetLogCallback([this](const char* Value, int Level)
 		{
 			this->OnLogCallback(Value, Level);
 		});
@@ -107,7 +107,7 @@ public:
 	}
 	void CloseEvent() override
 	{
-		Debug::DetachCallback();
+		OS::SetLogCallback(nullptr);
 		delete Server;
 		delete Log;
 		delete Access;
@@ -119,18 +119,14 @@ public:
 		NMake::Unpack(Document->Fetch("application.terminal"), &Terminal);
 		if (Terminal)
 		{
-			Debug::AttachStream();
 			Log = Console::Get();
 			Log->Show();
 		}
 		else
-		{
-			Debug::DetachStream();
 			TH_CLEAR(Log);
-		}
 
 		TH_INFO("loading server config from ./config.xml");
-		std::string N = Socket::LocalIpAddress();
+		std::string N = Socket::GetLocalAddress();
 		std::string D = Content->GetEnvironment();
 
 		NMake::Unpack(Document->Fetch("application.access-logs"), &AccessLogs);
