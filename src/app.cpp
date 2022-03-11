@@ -15,7 +15,7 @@ class Runtime : public Application
 	FileStream* Access = nullptr;
 	FileStream* Error = nullptr;
 	FileStream* Trace = nullptr;
-	Document* Reference = nullptr;
+	Schema* Reference = nullptr;
 	Console* Log = nullptr;
 	std::string AccessLogs;
 	std::string ErrorLogs;
@@ -37,7 +37,7 @@ public:
 	void Initialize() override
 	{
 		auto* Processor = (Processors::Server*)Content->GetProcessor<HTTP::Server>();
-		Processor->Callback = [this](void*, Document* Doc) -> void
+		Processor->Callback = [this](void*, Schema* Doc) -> void
 		{
 			this->OnLoadLibrary(Doc);
 		};
@@ -76,20 +76,14 @@ public:
 			}
 		}
 
-		int MaxEvents = 256; int64_t PollTimeout = 100; 
 		if (Reference != nullptr)
 		{
 			NMake::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
             NMake::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
             NMake::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
-            NMake::Unpack(Reference->Fetch("application.max-events"), &MaxEvents);
-            NMake::Unpack(Reference->Fetch("application.poll-timeout"), &PollTimeout);
 			TH_CLEAR(Reference);
 		}
 
-		TH_INFO("multiplexer drivers initialization");
-		Driver::Create(MaxEvents, PollTimeout);
-		
 		TH_INFO("queue has %i threads", (int)Control.Threads);
 		Server->Listen();
 
@@ -114,9 +108,9 @@ public:
 		delete Error;
 		delete Trace;
 	}
-	void OnLoadLibrary(Document* Document)
+	void OnLoadLibrary(Schema* Schema)
 	{
-		NMake::Unpack(Document->Fetch("application.terminal"), &Terminal);
+		NMake::Unpack(Schema->Fetch("application.terminal"), &Terminal);
 		if (Terminal)
 		{
 			Log = Console::Get();
@@ -129,7 +123,7 @@ public:
 		std::string N = Socket::GetLocalAddress();
 		std::string D = Content->GetEnvironment();
 
-		NMake::Unpack(Document->Fetch("application.access-logs"), &AccessLogs);
+		NMake::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
 		if (!AccessLogs.empty())
 		{
 			Access = new FileStream();
@@ -139,7 +133,7 @@ public:
 			TH_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
-		NMake::Unpack(Document->Fetch("application.error-logs"), &ErrorLogs);
+		NMake::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
 		if (!ErrorLogs.empty())
 		{
 			Error = new FileStream();
@@ -149,7 +143,7 @@ public:
 			TH_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
-		NMake::Unpack(Document->Fetch("application.trace-logs"), &TraceLogs);
+		NMake::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
 		if (!TraceLogs.empty())
 		{
 			Trace = new FileStream();
@@ -159,9 +153,9 @@ public:
 			TH_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
-		NMake::Unpack(Document->Fetch("application.file-directory"), &RootDirectory);
+		NMake::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
 		Parser(&RootDirectory).Eval(N, D);
-		Reference = Document->Copy();
+		Reference = Schema->Copy();
 
 		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
