@@ -251,7 +251,7 @@ int main()
 		Application::Desc Interface;
 		Interface.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
 		Interface.Directory.clear();
-		Interface.Framerate = 1.0;
+		Interface.Daemon = true;
 		Interface.Async = true;
 
 		auto* App = new Runtime(&Interface);
