@@ -26,9 +26,9 @@ class Runtime : public Application
 public:
 	explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false)
 	{
-		OS::SetLogCallback([this](const char* Value, int Level)
+		OS::SetLogCallback([this](OS::Message& Data)
 		{
-			this->OnLogCallback(Value, Level);
+			this->OnLogCallback(Data);
 		});
 	}
 	~Runtime() override
@@ -159,22 +159,23 @@ public:
 
 		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
-	void OnLogCallback(const char* Value, int Level)
+	void OnLogCallback(OS::Message& Data)
 	{
+		auto& Text = Data.GetText();
 		if (Level == 4)
 		{
 			if (Trace != nullptr && Trace->GetBuffer())
-				Trace->Write(Value, strlen(Value));
+				Trace->Write(Text.c_str(), Text.size());
 		}
 		else if (Level == 3)
 		{
 			if (Access != nullptr && Access->GetBuffer())
-				Access->Write(Value, strlen(Value));
+				Access->Write(Text.c_str(), Text.size());
 		}
 		else if (Level == 1 || Level == 2)
 		{
 			if (Error != nullptr && Error->GetBuffer())
-				Error->Write(Value, strlen(Value));
+				Error->Write(Text.c_str(), Text.size());
 		}
 	}
 
@@ -232,7 +233,16 @@ public:
 		if (!Base)
 			return true;
 
-		TH_INFO("%s %s \"%s%s%s\" %i - %s / %llub [%llums]", Base->Request.Method, Base->Request.Version, Base->Request.URI.c_str(), Base->Request.Query.empty() ? "" : "?", Base->Request.Query.c_str(), Base->Response.StatusCode, Base->Request.RemoteAddress, Base->Stream->Outcome, Base->Info.Finish - Base->Info.Start);
+		TH_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
+			Base->Response.StatusCode,
+			Base->Request.Method,
+			Base->Request.Where.c_str(),
+			Base->Request.Query.empty() ? "" : "?",
+			Base->Request.Query.c_str(),
+			Base->Request.RemoteAddress,
+			Base->Stream->Outcome,
+			Base->Info.Finish - Base->Info.Start);
+		
 		return true;
 	}
 	static bool OnHeaders(HTTP::Connection* Base, Parser* Content)
