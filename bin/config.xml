@@ -13,7 +13,7 @@
 	</netstat>
 	<listen s="*">
 		<hostname s="127.0.0.1" />
-		<port i="8080" />
+		<port i="8090" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />

@@ -162,17 +162,17 @@ public:
 	void OnLogCallback(OS::Message& Data)
 	{
 		auto& Text = Data.GetText();
-		if (Level == 4)
+		if (Data.Level == 4)
 		{
 			if (Trace != nullptr && Trace->GetBuffer())
 				Trace->Write(Text.c_str(), Text.size());
 		}
-		else if (Level == 3)
+		else if (Data.Level == 3)
 		{
 			if (Access != nullptr && Access->GetBuffer())
 				Access->Write(Text.c_str(), Text.size());
 		}
-		else if (Level == 1 || Level == 2)
+		else if (Data.Level == 1 || Data.Level == 2)
 		{
 			if (Error != nullptr && Error->GetBuffer())
 				Error->Write(Text.c_str(), Text.size());
