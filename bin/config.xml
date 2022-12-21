@@ -13,13 +13,13 @@
 	</netstat>
 	<listen s="*">
 		<hostname s="127.0.0.1" />
-		<port i="8090" />
+		<port i="8080" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./web" />
+				<document-root s="./" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>
