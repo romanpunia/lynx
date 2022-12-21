@@ -4,13 +4,9 @@
 		<error-logs s="./var/error.log" />
 		<trace-logs s="./var/trace.log" />
 		<force-quit b="false" />
-		<terminal b="true" />
+		<terminal b="false" />
         <threads i="4" />
 	</application>
-	<netstat>
-		<keep-alive i="10" />
-		<enable-no-delay b="true" />
-	</netstat>
 	<listen s="*">
 		<hostname s="127.0.0.1" />
 		<port i="8090" />
@@ -19,7 +15,7 @@
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./web" />
+				<document-root s="D:/" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>
