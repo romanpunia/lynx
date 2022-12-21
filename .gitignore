@@ -3,6 +3,7 @@
 debug/
 release/
 bin/*.so
+bin/*.SOVERSION
 bin/*.a
 bin/*.dylib
 bin/*.dll
@@ -11,6 +12,8 @@ bin/*.pdb
 bin/*.exe
 bin/*.ilk
 bin/*.exp
-bin/var/*.log
-bin/tmp/*.*
+bin/lynxd
+bin/lynxd-SOVERSION
+bin/var
+bin/tmp
 bin/web

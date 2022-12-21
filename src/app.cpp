@@ -124,6 +124,8 @@ public:
 		std::string D = Content->GetEnvironment();
 
 		NMake::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
+        
 		if (!AccessLogs.empty())
 		{
 			Access = new FileStream();
@@ -134,6 +136,8 @@ public:
 		}
 
 		NMake::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(ErrorLogs.c_str()));
+        
 		if (!ErrorLogs.empty())
 		{
 			Error = new FileStream();
@@ -144,6 +148,8 @@ public:
 		}
 
 		NMake::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(TraceLogs.c_str()));
+        
 		if (!TraceLogs.empty())
 		{
 			Trace = new FileStream();
@@ -232,23 +238,23 @@ public:
 	{
 		if (!Base)
 			return true;
+        
+        TH_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
+            Base->Response.StatusCode,
+            Base->Request.Method,
+            Base->Request.Where.c_str(),
+            Base->Request.Query.empty() ? "" : "?",
+            Base->Request.Query.c_str(),
+            Base->RemoteAddress,
+            Base->Stream->Outcome,
+            Base->Info.Finish - Base->Info.Start);
 
-		TH_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
-			Base->Response.StatusCode,
-			Base->Request.Method,
-			Base->Request.Where.c_str(),
-			Base->Request.Query.empty() ? "" : "?",
-			Base->Request.Query.c_str(),
-			Base->Request.RemoteAddress,
-			Base->Stream->Outcome,
-			Base->Info.Finish - Base->Info.Start);
-		
 		return true;
 	}
 	static bool OnHeaders(HTTP::Connection* Base, Parser* Content)
 	{
 		if (Content != nullptr)
-			Content->Append("Server: Lynx\r\n");
+			Content->Append("Server: lynx\r\n");
 
 		return true;
 	}
@@ -256,19 +262,15 @@ public:
 
 int main()
 {
-	Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
-	{
-		Application::Desc Interface;
-		Interface.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
-		Interface.Directory.clear();
-		Interface.Daemon = true;
-		Interface.Async = true;
+    Application::Desc Init;
+    Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
+    Init.Directory.clear();
+    Init.Daemon = true;
+    Init.Async = true;
 
-		auto* App = new Runtime(&Interface);
-		App->Start();
-		TH_RELEASE(App);
-	}
-	Tomahawk::Uninitialize();
+    Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
+    int ExitCode = Application::StartApp<Runtime>(&Init);
+    Tomahawk::Uninitialize();
 
-	return 0;
+	return ExitCode;
 }
