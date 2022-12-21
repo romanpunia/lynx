@@ -124,6 +124,8 @@ public:
 		std::string D = Content->GetEnvironment();
 
 		NMake::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
+        
 		if (!AccessLogs.empty())
 		{
 			Access = new FileStream();
@@ -134,6 +136,8 @@ public:
 		}
 
 		NMake::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(ErrorLogs.c_str()));
+        
 		if (!ErrorLogs.empty())
 		{
 			Error = new FileStream();
@@ -144,6 +148,8 @@ public:
 		}
 
 		NMake::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
+        OS::Directory::Patch(OS::Path::GetDirectory(TraceLogs.c_str()));
+        
 		if (!TraceLogs.empty())
 		{
 			Trace = new FileStream();
