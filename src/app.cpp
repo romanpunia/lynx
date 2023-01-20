@@ -78,9 +78,9 @@ public:
 
 		if (Reference != nullptr)
 		{
-			NMake::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
-            NMake::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
-            NMake::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
+			Series::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
+            Series::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
+            Series::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
 			TH_CLEAR(Reference);
 		}
 
@@ -110,7 +110,7 @@ public:
 	}
 	void OnLoadLibrary(Schema* Schema)
 	{
-		NMake::Unpack(Schema->Fetch("application.terminal"), &Terminal);
+		Series::Unpack(Schema->Fetch("application.terminal"), &Terminal);
 		if (Terminal)
 		{
 			Log = Console::Get();
@@ -123,7 +123,7 @@ public:
 		std::string N = Socket::GetLocalAddress();
 		std::string D = Content->GetEnvironment();
 
-		NMake::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
+		Series::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
         
 		if (!AccessLogs.empty())
@@ -135,7 +135,7 @@ public:
 			TH_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
-		NMake::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
+		Series::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(ErrorLogs.c_str()));
         
 		if (!ErrorLogs.empty())
@@ -147,7 +147,7 @@ public:
 			TH_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
-		NMake::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
+		Series::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(TraceLogs.c_str()));
         
 		if (!TraceLogs.empty())
@@ -159,7 +159,7 @@ public:
 			TH_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
-		NMake::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
+		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
 		Parser(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
 
@@ -266,7 +266,7 @@ int main()
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
     Init.Directory.clear();
     Init.Daemon = true;
-    Init.Async = true;
+    Init.Parallel = true;
 
     Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
     int ExitCode = Application::StartApp<Runtime>(&Init);
