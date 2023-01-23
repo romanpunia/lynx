@@ -3,9 +3,7 @@
 		<access-logs s="./var/access.log" />
 		<error-logs s="./var/error.log" />
 		<trace-logs s="./var/trace.log" />
-		<force-quit b="false" />
-		<terminal b="false" />
-        <threads i="4" />
+		<terminal b="true" />
 	</application>
 	<listen s="*">
 		<hostname s="127.0.0.1" />

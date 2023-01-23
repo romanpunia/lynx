@@ -37,10 +37,7 @@ public:
 	void Initialize() override
 	{
 		auto* Processor = (Processors::Server*)Content->GetProcessor<HTTP::Server>();
-		Processor->Callback = [this](void*, Schema* Doc) -> void
-		{
-			this->OnLoadLibrary(Doc);
-		};
+		Processor->Callback = [this](void*, Schema* Doc) { OnLoadLibrary(Doc); };
 
 		Server = Content->Load<HTTP::Server>("config.xml");
 		if (!Server)
