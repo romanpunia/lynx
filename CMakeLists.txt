@@ -69,5 +69,8 @@ else()
             -D_SCL_SECURE_NO_WARNINGS)
 endif()
 
-#Project's dependency resolvers
-include(lib/tomahawk/CMakeLists.txt)
+#Add Tomahawk as dependency
+add_subdirectory(${TH_DIRECTORY} tomahawk)
+link_directories(${TH_DIRECTORY})
+target_include_directories(lynx PRIVATE ${TH_DIRECTORY})
+target_link_libraries(lynx PRIVATE tomahawk)
