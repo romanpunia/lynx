@@ -21,6 +21,7 @@ class Runtime : public Application
 	std::string ErrorLogs;
 	std::string TraceLogs;
 	std::string RootDirectory;
+	bool Requests;
 	bool Terminal;
 
 public:
@@ -56,7 +57,7 @@ public:
 			auto* Site = Hoster.second;
 			TH_INFO("host \"%s\" info", Hoster.first.c_str());
 			Site->Base->Callbacks.Headers = Runtime::OnHeaders;
-			if (!AccessLogs.empty())
+			if (Requests && !AccessLogs.empty())
 				Site->Base->Callbacks.Access = Runtime::OnLogAccess;
 
 			TH_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
@@ -65,7 +66,7 @@ public:
 				for (auto Entry : Group.Routes)
 				{
 					Entry->Callbacks.Headers = Runtime::OnHeaders;
-					if (!AccessLogs.empty())
+					if (Requests && !AccessLogs.empty())
 						Entry->Callbacks.Access = Runtime::OnLogAccess;
 
 					TH_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
@@ -79,6 +80,12 @@ public:
             Series::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
             Series::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
 			TH_CLEAR(Reference);
+		}
+
+		if (!Control.Threads)
+		{
+			auto Quantity = OS::CPU::GetQuantityInfo();
+			Control.Threads = std::max<uint32_t>(2, Quantity.Logical) - 1;
 		}
 
 		TH_INFO("queue has %i threads", (int)Control.Threads);
@@ -95,6 +102,7 @@ public:
 		signal(SIGPIPE, SIG_IGN);
 #endif
 		TH_INFO("ready to serve and protect");
+		OS::SetLogDeferred(true);
 	}
 	void CloseEvent() override
 	{
@@ -107,7 +115,8 @@ public:
 	}
 	void OnLoadLibrary(Schema* Schema)
 	{
-		Series::Unpack(Schema->Fetch("application.terminal"), &Terminal);
+		Series::Unpack(Schema->Fetch("application.log-requests"), &Requests);
+		Series::Unpack(Schema->Fetch("application.show-terminal"), &Terminal);
 		if (Terminal)
 		{
 			Log = Console::Get();
@@ -261,9 +270,7 @@ int main()
 {
     Application::Desc Init;
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
-    Init.Directory.clear();
     Init.Daemon = true;
-    Init.Parallel = true;
 
     Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
     int ExitCode = Application::StartApp<Runtime>(&Init);
