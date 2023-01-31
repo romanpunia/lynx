@@ -17,3 +17,5 @@ bin/lynxd-SOVERSION
 bin/var
 bin/tmp
 bin/web
+var/node_modules/
+var/package-lock.json

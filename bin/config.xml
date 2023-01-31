@@ -13,7 +13,7 @@
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./" />
+				<document-root s="./web" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>

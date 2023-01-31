@@ -122,7 +122,7 @@ public:
 
 		Series::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
-        
+
 		if (!AccessLogs.empty())
 		{
 			Access = new FileStream();
