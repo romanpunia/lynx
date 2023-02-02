@@ -35,6 +35,7 @@ public:
 	}
 	~Runtime() override
 	{
+		delete Log;
 	}
 	void Initialize() override
 	{
@@ -109,7 +110,6 @@ public:
 	{
 		OS::SetLogCallback(nullptr);
 		delete Server;
-		delete Log;
 		delete Access;
 		delete Error;
 		delete Trace;
