@@ -1,13 +1,14 @@
 #include <tomahawk/tomahawk.h>
+#include <tomahawk/core/network.h>
+#include <tomahawk/core/engine.h>
+#include <tomahawk/network/http.h>
+#include <tomahawk/engine/processors.h>
 #include <csignal>
 
 using namespace Tomahawk::Core;
-using namespace Tomahawk::Audio;
 using namespace Tomahawk::Compute;
 using namespace Tomahawk::Engine;
 using namespace Tomahawk::Network;
-using namespace Tomahawk::Graphics;
-using namespace Tomahawk::Script;
 
 class Runtime : public Application
 {
