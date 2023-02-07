@@ -1,14 +1,14 @@
-#include <tomahawk/tomahawk.h>
-#include <tomahawk/core/network.h>
-#include <tomahawk/core/engine.h>
-#include <tomahawk/network/http.h>
-#include <tomahawk/engine/processors.h>
+#include <edge/edge.h>
+#include <edge/core/network.h>
+#include <edge/core/engine.h>
+#include <edge/network/http.h>
+#include <edge/engine/processors.h>
 #include <csignal>
 
-using namespace Tomahawk::Core;
-using namespace Tomahawk::Compute;
-using namespace Tomahawk::Engine;
-using namespace Tomahawk::Network;
+using namespace Edge::Core;
+using namespace Edge::Compute;
+using namespace Edge::Engine;
+using namespace Edge::Network;
 
 class Runtime : public Application
 {
@@ -45,24 +45,24 @@ public:
 		Server = Content->Load<HTTP::Server>("config.xml");
 		if (!Server)
 		{
-			TH_ERR("an error occurred while loading config");
+			ED_ERR("an error occurred while loading config");
 			return Stop();
 		}
 
 		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
-			TH_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
+			ED_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
-		TH_INFO("searching for sites");
+		ED_INFO("searching for sites");
 		for (auto& Hoster : Router->Sites)
 		{
 			auto* Site = Hoster.second;
-			TH_INFO("host \"%s\" info", Hoster.first.c_str());
+			ED_INFO("host \"%s\" info", Hoster.first.c_str());
 			Site->Base->Callbacks.Headers = Runtime::OnHeaders;
 			if (Requests && !AccessLogs.empty())
 				Site->Base->Callbacks.Access = Runtime::OnLogAccess;
 
-			TH_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
+			ED_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
 			for (auto& Group : Site->Groups)
 			{
 				for (auto Entry : Group.Routes)
@@ -71,7 +71,7 @@ public:
 					if (Requests && !AccessLogs.empty())
 						Entry->Callbacks.Access = Runtime::OnLogAccess;
 
-					TH_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
+					ED_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
 				}
 			}
 		}
@@ -81,7 +81,7 @@ public:
 			Series::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
             Series::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
             Series::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
-			TH_CLEAR(Reference);
+			ED_CLEAR(Reference);
 		}
 
 		if (!Control.Threads)
@@ -90,20 +90,20 @@ public:
 			Control.Threads = std::max<uint32_t>(2, Quantity.Logical) - 1;
 		}
 
-		TH_INFO("queue has %i threads", (int)Control.Threads);
+		ED_INFO("queue has %i threads", (int)Control.Threads);
 		Server->Listen();
 
-		TH_INFO("setting up signals");
+		ED_INFO("setting up signals");
 		signal(SIGABRT, OnAbort);
 		signal(SIGFPE, OnArithmeticError);
 		signal(SIGILL, OnIllegalOperation);
 		signal(SIGINT, OnCtrl);
 		signal(SIGSEGV, OnInvalidAccess);
 		signal(SIGTERM, OnTerminate);
-#ifdef TH_UNIX
+#ifdef ED_UNIX
 		signal(SIGPIPE, SIG_IGN);
 #endif
-		TH_INFO("ready to serve and protect");
+		ED_INFO("ready to serve and protect");
 		OS::SetLogDeferred(true);
 	}
 	void CloseEvent() override
@@ -124,9 +124,9 @@ public:
 			Log->Show();
 		}
 		else
-			TH_CLEAR(Log);
+			ED_CLEAR(Log);
 
-		TH_INFO("loading server config from ./config.xml");
+		ED_INFO("loading server config from ./config.xml");
 		std::string N = Socket::GetLocalAddress();
 		std::string D = Content->GetEnvironment();
 
@@ -137,9 +137,9 @@ public:
 		{
 			Access = new FileStream();
 			if (!Access->Open(Parser(&AccessLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				TH_CLEAR(Access);
+				ED_CLEAR(Access);
 
-			TH_INFO("system log (access): %s", AccessLogs.c_str());
+			ED_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
@@ -149,9 +149,9 @@ public:
 		{
 			Error = new FileStream();
 			if (!Error->Open(Parser(&ErrorLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				TH_CLEAR(Error);
+				ED_CLEAR(Error);
 
-			TH_INFO("system log (error): %s", ErrorLogs.c_str());
+			ED_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
@@ -161,16 +161,16 @@ public:
 		{
 			Trace = new FileStream();
 			if (!Trace->Open(Parser(&TraceLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				TH_CLEAR(Trace);
+				ED_CLEAR(Trace);
 
-			TH_INFO("system log (trace): %s", TraceLogs.c_str());
+			ED_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
 		Parser(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
 
-		TH_INFO("tmp file directory root is %s", RootDirectory.c_str());
+		ED_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
 	void OnLogCallback(OS::Message& Data)
 	{
@@ -246,7 +246,7 @@ public:
 		if (!Base)
 			return true;
         
-        TH_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
+        ED_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
             Base->Response.StatusCode,
             Base->Request.Method,
             Base->Request.Where.c_str(),
@@ -273,9 +273,9 @@ int main()
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
     Init.Daemon = true;
 
-    Tomahawk::Initialize((uint64_t)Tomahawk::Preset::App);
+    Edge::Initialize((uint64_t)Edge::Preset::App);
     int ExitCode = Application::StartApp<Runtime>(&Init);
-    Tomahawk::Uninitialize();
+    Edge::Uninitialize();
 
 	return ExitCode;
 }

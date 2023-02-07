@@ -4,10 +4,10 @@ Lynx is a high performance async HTTP web server.
 ## Core built-in dependencies
 *These are used widely and presents useful features*
 
-* [Tomahawk](https://github.com/romanpunia/tomahawk)
+* [Edge](https://github.com/romanpunia/edge)
 
 ## Building
-To build this project you have to clone Tomahawk, also you need to make sure that it can be build on your machine. CMake's **TH_DIRECTORY** is a path to Tomahawk source folder.
+To build this project you have to clone Edge, also you need to make sure that it can be build on your machine. CMake's **ED_DIRECTORY** is a path to Edge source folder.
 
 ## Benchmark
 There is a **/bin/web/favicon.ico** which is Google Chrome logo (32x32). To measure raw performance we will request this resource. Measurement will be done relative to Node.js with Express.js package.
