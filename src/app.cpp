@@ -13,15 +13,16 @@ using namespace Edge::Network;
 class Runtime : public Application
 {
 	HTTP::Server* Server = nullptr;
-	FileStream* Access = nullptr;
-	FileStream* Error = nullptr;
-	FileStream* Trace = nullptr;
+	Stream* Access = nullptr;
+	Stream* Error = nullptr;
+	Stream* Trace = nullptr;
 	Schema* Reference = nullptr;
 	Console* Log = nullptr;
 	std::string AccessLogs;
 	std::string ErrorLogs;
 	std::string TraceLogs;
 	std::string RootDirectory;
+	std::mutex Logging;
 	bool Requests;
 	bool Terminal;
 
@@ -65,7 +66,7 @@ public:
 			ED_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
 			for (auto& Group : Site->Groups)
 			{
-				for (auto Entry : Group.Routes)
+				for (auto Entry : Group->Routes)
 				{
 					Entry->Callbacks.Headers = Runtime::OnHeaders;
 					if (Requests && !AccessLogs.empty())
@@ -127,7 +128,7 @@ public:
 			ED_CLEAR(Log);
 
 		ED_INFO("loading server config from ./config.xml");
-		std::string N = Socket::GetLocalAddress();
+		std::string N = Multiplexer::GetLocalAddress();
 		std::string D = Content->GetEnvironment();
 
 		Series::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
@@ -135,10 +136,8 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = new FileStream();
-			if (!Access->Open(Parser(&AccessLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				ED_CLEAR(Access);
-
+			auto File = RotateLog(Parser(&AccessLogs).Eval(N, D).R());
+			Access = OS::File::Open(File.first, File.second);
 			ED_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -147,10 +146,8 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = new FileStream();
-			if (!Error->Open(Parser(&ErrorLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				ED_CLEAR(Error);
-
+			auto File = RotateLog(Parser(&ErrorLogs).Eval(N, D).R());
+			Error = OS::File::Open(File.first, File.second);
 			ED_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -159,17 +156,15 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = new FileStream();
-			if (!Trace->Open(Parser(&TraceLogs).Eval(N, D).Get(), FileMode::Binary_Append_Only))
-				ED_CLEAR(Trace);
-
+			auto File = RotateLog(Parser(&TraceLogs).Eval(N, D).R());
+			Trace = OS::File::Open(File.first, File.second);
 			ED_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
 		Parser(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
-
+		
 		ED_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
 	void OnLogCallback(OS::Message& Data)
@@ -178,21 +173,47 @@ public:
 		if (Data.Level == 4)
 		{
 			if (Trace != nullptr && Trace->GetBuffer())
+			{
+				std::unique_lock<std::mutex> Unique(Logging);
 				Trace->Write(Text.c_str(), Text.size());
+			}
 		}
 		else if (Data.Level == 3)
 		{
 			if (Access != nullptr && Access->GetBuffer())
+			{
+				std::unique_lock<std::mutex> Unique(Logging);
 				Access->Write(Text.c_str(), Text.size());
+			}
 		}
 		else if (Data.Level == 1 || Data.Level == 2)
 		{
 			if (Error != nullptr && Error->GetBuffer())
+			{
+				std::unique_lock<std::mutex> Unique(Logging);
 				Error->Write(Text.c_str(), Text.size());
+			}
 		}
 	}
 
 public:
+	static std::pair<std::string, FileMode> RotateLog(const std::string& Path)
+	{
+		size_t CompressAt = Path.rfind(".gz");
+		if (CompressAt == std::string::npos)
+			return std::make_pair(Path, FileMode::Binary_Append_Only);
+
+		std::string First = Path.substr(0, CompressAt).append(1, '.');
+		std::string Second = ".gz";
+		std::string Filename = Path;
+		FileEntry Data;
+		size_t Nonce = 0;
+
+		while (OS::File::State(Filename, &Data) && Data.Size > 0)
+			Filename = First + std::to_string(++Nonce) + Second;
+
+		return std::make_pair(Filename, FileMode::Binary_Write_Only);
+	}
 	static bool CanTerminate()
 	{
 		static std::mutex Mutex;

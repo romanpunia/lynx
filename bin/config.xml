@@ -1,8 +1,8 @@
 <lynx>
 	<application>
-		<access-logs s="./var/access.log" />
-		<error-logs s="./var/error.log" />
-		<trace-logs s="./var/trace.log" />
+		<access-logs s="./var/access.log.gz" />
+		<error-logs s="./var/error.log.gz" />
+		<trace-logs s="./var/trace.log.gz" />
 		<show-terminal b="true" />
 		<log-requests b="true" />
 	</application>
