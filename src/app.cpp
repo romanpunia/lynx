@@ -136,8 +136,7 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			auto File = RotateLog(Parser(&AccessLogs).Eval(N, D).R());
-			Access = OS::File::Open(File.first, File.second);
+			Access = OS::File::OpenArchive(Parser(&AccessLogs).Eval(N, D).R());
 			ED_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -146,8 +145,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			auto File = RotateLog(Parser(&ErrorLogs).Eval(N, D).R());
-			Error = OS::File::Open(File.first, File.second);
+			Error = OS::File::OpenArchive(Parser(&ErrorLogs).Eval(N, D).R());
 			ED_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -156,8 +154,7 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			auto File = RotateLog(Parser(&TraceLogs).Eval(N, D).R());
-			Trace = OS::File::Open(File.first, File.second);
+			Trace = OS::File::OpenArchive(Parser(&TraceLogs).Eval(N, D).R());
 			ED_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
@@ -197,23 +194,6 @@ public:
 	}
 
 public:
-	static std::pair<std::string, FileMode> RotateLog(const std::string& Path)
-	{
-		size_t CompressAt = Path.rfind(".gz");
-		if (CompressAt == std::string::npos)
-			return std::make_pair(Path, FileMode::Binary_Append_Only);
-
-		std::string First = Path.substr(0, CompressAt).append(1, '.');
-		std::string Second = ".gz";
-		std::string Filename = Path;
-		FileEntry Data;
-		size_t Nonce = 0;
-
-		while (OS::File::State(Filename, &Data) && Data.Size > 0)
-			Filename = First + std::to_string(++Nonce) + Second;
-
-		return std::make_pair(Filename, FileMode::Binary_Write_Only);
-	}
 	static bool CanTerminate()
 	{
 		static std::mutex Mutex;
