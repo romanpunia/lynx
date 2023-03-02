@@ -27,16 +27,13 @@ class Runtime : public Application
 	bool Terminal;
 
 public:
-	explicit Runtime(Desc* Conf) : Application(Conf), Terminal(false)
+	explicit Runtime(Desc* Conf) : Application(Conf), Requests(true), Terminal(false)
 	{
-		OS::SetLogCallback([this](OS::Message& Data)
-		{
-			this->OnLogCallback(Data);
-		});
+		OS::SetLogCallback(std::bind(&Runtime::OnLogCallback, this, std::placeholders::_1));
 	}
 	~Runtime() override
 	{
-		delete Log;
+		ED_RELEASE(Log);
 	}
 	void Initialize() override
 	{
@@ -110,10 +107,10 @@ public:
 	void CloseEvent() override
 	{
 		OS::SetLogCallback(nullptr);
-		delete Server;
-		delete Access;
-		delete Error;
-		delete Trace;
+		ED_RELEASE(Server);
+		ED_RELEASE(Access);
+		ED_RELEASE(Error);
+		ED_RELEASE(Trace);
 	}
 	void OnLoadLibrary(Schema* Schema)
 	{
