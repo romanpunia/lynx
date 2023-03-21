@@ -164,7 +164,7 @@ public:
 	void OnLogCallback(OS::Message& Data)
 	{
 		auto& Text = Data.GetText();
-		if (Data.Level == 4)
+		if (Data.Level == 4 || Data.Level == 5)
 		{
 			if (Trace != nullptr && Trace->GetBuffer())
 			{
