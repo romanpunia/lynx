@@ -133,7 +133,7 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = OS::File::OpenArchive(Parser(&AccessLogs).Eval(N, D).R());
+			Access = OS::File::OpenArchive(String(&AccessLogs).Eval(N, D).R());
 			ED_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -142,7 +142,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = OS::File::OpenArchive(Parser(&ErrorLogs).Eval(N, D).R());
+			Error = OS::File::OpenArchive(String(&ErrorLogs).Eval(N, D).R());
 			ED_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -151,12 +151,12 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = OS::File::OpenArchive(Parser(&TraceLogs).Eval(N, D).R());
+			Trace = OS::File::OpenArchive(String(&TraceLogs).Eval(N, D).R());
 			ED_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
-		Parser(&RootDirectory).Eval(N, D);
+		String(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
 		
 		ED_INFO("tmp file directory root is %s", RootDirectory.c_str());
@@ -256,7 +256,7 @@ public:
 
 		return true;
 	}
-	static bool OnHeaders(HTTP::Connection* Base, Parser* Content)
+	static bool OnHeaders(HTTP::Connection* Base, String* Content)
 	{
 		if (Content != nullptr)
 			Content->Append("Server: lynx\r\n");
