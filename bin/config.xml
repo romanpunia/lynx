@@ -7,8 +7,8 @@
 		<log-requests b="true" />
 	</application>
 	<listen s="*">
-		<hostname s="127.0.0.1" />
-		<port i="8080" />
+		<hostname s="0.0.0.0" />
+		<port i="8223" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
