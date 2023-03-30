@@ -1,0 +1,6 @@
+{
+    "name": "lynx",
+    "description": "High performance HTTP web server",
+    "version": "1.0.0",
+    "dependencies": ["zlib", "openssl"]
+}

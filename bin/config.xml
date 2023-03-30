@@ -8,7 +8,7 @@
 	</application>
 	<listen s="*">
 		<hostname s="0.0.0.0" />
-		<port i="8223" />
+		<port i="25565" />
 	</listen>
 	<site s="*">
 		<resource-root s="./tmp/" />
