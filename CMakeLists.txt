@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 
 #Setup toolchain file if needed
 set(ED_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../edge CACHE STRING "Edge directory")
+set(ED_USE_BINDINGS OFF CACHE BOOL "Script bindings are not used")
+set(ED_USE_FAST_MEMORY ON CACHE BOOL "Fast memory is preferred for long running apps")
 set(ED_USE_ASSIMP OFF CACHE BOOL "Assimp is not used")
 set(ED_USE_FREETYPE OFF CACHE BOOL "FreeType is not used")
 set(ED_USE_GLEW OFF CACHE BOOL "GLEW is not used")

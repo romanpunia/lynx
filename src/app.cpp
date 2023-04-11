@@ -18,10 +18,10 @@ class Runtime : public Application
 	Stream* Trace = nullptr;
 	Schema* Reference = nullptr;
 	Console* Log = nullptr;
-	std::string AccessLogs;
-	std::string ErrorLogs;
-	std::string TraceLogs;
-	std::string RootDirectory;
+	String AccessLogs;
+	String ErrorLogs;
+	String TraceLogs;
+	String RootDirectory;
 	std::mutex Logging;
 	bool Requests;
 	bool Terminal;
@@ -125,15 +125,15 @@ public:
 			ED_CLEAR(Log);
 
 		ED_INFO("loading server config from ./config.xml");
-		std::string N = Multiplexer::GetLocalAddress();
-		std::string D = Content->GetEnvironment();
+		String N = Multiplexer::GetLocalAddress();
+		String D = Content->GetEnvironment();
 
 		Series::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
 
 		if (!AccessLogs.empty())
 		{
-			Access = OS::File::OpenArchive(String(&AccessLogs).Eval(N, D).R());
+			Access = OS::File::OpenArchive(Stringify(&AccessLogs).Eval(N, D).R());
 			ED_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -142,7 +142,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = OS::File::OpenArchive(String(&ErrorLogs).Eval(N, D).R());
+			Error = OS::File::OpenArchive(Stringify(&ErrorLogs).Eval(N, D).R());
 			ED_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -151,12 +151,12 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = OS::File::OpenArchive(String(&TraceLogs).Eval(N, D).R());
+			Trace = OS::File::OpenArchive(Stringify(&TraceLogs).Eval(N, D).R());
 			ED_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
-		String(&RootDirectory).Eval(N, D);
+		Stringify(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
 		
 		ED_INFO("tmp file directory root is %s", RootDirectory.c_str());
@@ -256,7 +256,7 @@ public:
 
 		return true;
 	}
-	static bool OnHeaders(HTTP::Connection* Base, String* Content)
+	static bool OnHeaders(HTTP::Connection* Base, Stringify* Content)
 	{
 		if (Content != nullptr)
 			Content->Append("Server: lynx\r\n");
