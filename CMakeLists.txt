@@ -41,6 +41,9 @@ target_compile_definitions(lynx PRIVATE -DED_EXPORT)
 
 #Inherit compiler options
 include(${ED_DIRECTORY}/lib/compiler.cmake)
+if (MSVC)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+endif()
 
 #Add Edge as dependency
 add_subdirectory(${ED_DIRECTORY} edge)
