@@ -34,7 +34,9 @@ endif()
 add_executable(lynx ${CMAKE_CURRENT_SOURCE_DIR}/src/app.cpp)
 set_target_properties(lynx PROPERTIES
 		OUTPUT_NAME "lynx"
-		CXX_STANDARD 17
+		CXX_STANDARD ${ED_CXX}
+        CXX_STANDARD_REQUIRED ON
+		CXX_EXTENSIONS OFF
 		VERSION ${PROJECT_VERSION}
 		SOVERSION ${PROJECT_VERSION})
 target_compile_definitions(lynx PRIVATE -DED_EXPORT)
