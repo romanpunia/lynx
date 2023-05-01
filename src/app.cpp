@@ -1,14 +1,14 @@
-#include <edge/edge.h>
-#include <edge/core/network.h>
-#include <edge/core/engine.h>
-#include <edge/network/http.h>
-#include <edge/engine/processors.h>
+#include <mavi/mavi.h>
+#include <mavi/core/network.h>
+#include <mavi/core/engine.h>
+#include <mavi/network/http.h>
+#include <mavi/engine/processors.h>
 #include <csignal>
 
-using namespace Edge::Core;
-using namespace Edge::Compute;
-using namespace Edge::Engine;
-using namespace Edge::Network;
+using namespace Mavi::Core;
+using namespace Mavi::Compute;
+using namespace Mavi::Engine;
+using namespace Mavi::Network;
 
 class Runtime : public Application
 {
@@ -33,7 +33,7 @@ public:
 	}
 	~Runtime() override
 	{
-		ED_RELEASE(Log);
+		VI_RELEASE(Log);
 	}
 	void Initialize() override
 	{
@@ -43,24 +43,24 @@ public:
 		Server = Content->Load<HTTP::Server>("config.xml");
 		if (!Server)
 		{
-			ED_ERR("an error occurred while loading config");
+			VI_ERR("an error occurred while loading config");
 			return Stop();
 		}
 
 		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
-			ED_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
+			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
-		ED_INFO("searching for sites");
+		VI_INFO("searching for sites");
 		for (auto& Hoster : Router->Sites)
 		{
 			auto* Site = Hoster.second;
-			ED_INFO("host \"%s\" info", Hoster.first.c_str());
+			VI_INFO("host \"%s\" info", Hoster.first.c_str());
 			Site->Base->Callbacks.Headers = Runtime::OnHeaders;
 			if (Requests && !AccessLogs.empty())
 				Site->Base->Callbacks.Access = Runtime::OnLogAccess;
 
-			ED_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
+			VI_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
 			for (auto& Group : Site->Groups)
 			{
 				for (auto Entry : Group->Routes)
@@ -69,7 +69,7 @@ public:
 					if (Requests && !AccessLogs.empty())
 						Entry->Callbacks.Access = Runtime::OnLogAccess;
 
-					ED_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
+					VI_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
 				}
 			}
 		}
@@ -79,7 +79,7 @@ public:
 			Series::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
             Series::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
             Series::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
-			ED_CLEAR(Reference);
+			VI_CLEAR(Reference);
 		}
 
 		if (!Control.Threads)
@@ -88,29 +88,29 @@ public:
 			Control.Threads = std::max<uint32_t>(2, Quantity.Logical) - 1;
 		}
 
-		ED_INFO("queue has %i threads", (int)Control.Threads);
+		VI_INFO("queue has %i threads", (int)Control.Threads);
 		Server->Listen();
 
-		ED_INFO("setting up signals");
+		VI_INFO("setting up signals");
 		signal(SIGABRT, OnAbort);
 		signal(SIGFPE, OnArithmeticError);
 		signal(SIGILL, OnIllegalOperation);
 		signal(SIGINT, OnCtrl);
 		signal(SIGSEGV, OnInvalidAccess);
 		signal(SIGTERM, OnTerminate);
-#ifdef ED_UNIX
+#ifdef VI_UNIX
 		signal(SIGPIPE, SIG_IGN);
 #endif
-		ED_INFO("ready to serve and protect");
+		VI_INFO("ready to serve and protect");
 		OS::SetLogDeferred(true);
 	}
 	void CloseEvent() override
 	{
 		OS::SetLogCallback(nullptr);
-		ED_RELEASE(Server);
-		ED_RELEASE(Access);
-		ED_RELEASE(Error);
-		ED_RELEASE(Trace);
+		VI_RELEASE(Server);
+		VI_RELEASE(Access);
+		VI_RELEASE(Error);
+		VI_RELEASE(Trace);
 	}
 	void OnLoadLibrary(Schema* Schema)
 	{
@@ -122,9 +122,9 @@ public:
 			Log->Show();
 		}
 		else
-			ED_CLEAR(Log);
+			VI_CLEAR(Log);
 
-		ED_INFO("loading server config from ./config.xml");
+		VI_INFO("loading server config from ./config.xml");
 		String N = Multiplexer::GetLocalAddress();
 		String D = Content->GetEnvironment();
 
@@ -134,7 +134,7 @@ public:
 		if (!AccessLogs.empty())
 		{
 			Access = OS::File::OpenArchive(Stringify(&AccessLogs).Eval(N, D).R());
-			ED_INFO("system log (access): %s", AccessLogs.c_str());
+			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
@@ -143,7 +143,7 @@ public:
 		if (!ErrorLogs.empty())
 		{
 			Error = OS::File::OpenArchive(Stringify(&ErrorLogs).Eval(N, D).R());
-			ED_INFO("system log (error): %s", ErrorLogs.c_str());
+			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
@@ -152,14 +152,14 @@ public:
 		if (!TraceLogs.empty())
 		{
 			Trace = OS::File::OpenArchive(Stringify(&TraceLogs).Eval(N, D).R());
-			ED_INFO("system log (trace): %s", TraceLogs.c_str());
+			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
 		Stringify(&RootDirectory).Eval(N, D);
 		Reference = Schema->Copy();
 		
-		ED_INFO("tmp file directory root is %s", RootDirectory.c_str());
+		VI_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
 	void OnLogCallback(OS::Message& Data)
 	{
@@ -244,7 +244,7 @@ public:
 		if (!Base)
 			return true;
         
-        ED_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
+        VI_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
             Base->Response.StatusCode,
             Base->Request.Method,
             Base->Request.Where.c_str(),
@@ -271,9 +271,9 @@ int main()
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
     Init.Daemon = true;
 
-    Edge::Initialize((uint64_t)Edge::Preset::App);
+    Mavi::Initialize((uint64_t)Mavi::Preset::App);
     int ExitCode = Application::StartApp<Runtime>(&Init);
-    Edge::Uninitialize();
+    Mavi::Uninitialize();
 
 	return ExitCode;
 }
