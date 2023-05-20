@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 
 #Setup toolchain file if needed
-set(VI_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../mavi CACHE STRING "Mavi directory")
+set(VI_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/deps/mavi CACHE STRING "Mavi directory")
 set(VI_USE_BINDINGS OFF CACHE BOOL "Script bindings are not used")
 set(VI_USE_FAST_MEMORY ON CACHE BOOL "Fast memory is preferred for long running apps")
 set(VI_USE_ASSIMP OFF CACHE BOOL "Assimp is not used")
