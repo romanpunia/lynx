@@ -30,6 +30,7 @@ public:
 	explicit Runtime(Desc* Conf) : Application(Conf), Requests(true), Terminal(false)
 	{
 		OS::SetLogCallback(std::bind(&Runtime::OnLogCallback, this, std::placeholders::_1));
+		OS::Directory::SetWorking(OS::Directory::GetModule().c_str());
 	}
 	~Runtime() override
 	{
