@@ -16,7 +16,7 @@ class Runtime : public Application
 	Stream* Access = nullptr;
 	Stream* Error = nullptr;
 	Stream* Trace = nullptr;
-	Schema* Reference = nullptr;
+	Schema* Config = nullptr;
 	Console* Log = nullptr;
 	String AccessLogs;
 	String ErrorLogs;
@@ -29,7 +29,8 @@ class Runtime : public Application
 public:
 	explicit Runtime(Desc* Conf) : Application(Conf), Requests(true), Terminal(false)
 	{
-		OS::SetLogCallback(std::bind(&Runtime::OnLogCallback, this, std::placeholders::_1));
+		OS::SetLogFlag(LogOption::Dated, true);
+		OS::SetLogCallback(std::bind(&Runtime::OnLog, this, std::placeholders::_1));
 		OS::Directory::SetWorking(OS::Directory::GetModule().c_str());
 	}
 	~Runtime() override
@@ -39,7 +40,7 @@ public:
 	void Initialize() override
 	{
 		auto* Processor = (Processors::ServerProcessor*)Content->GetProcessor<HTTP::Server>();
-		Processor->Callback = [this](void*, Schema* Doc) { OnLoadLibrary(Doc); };
+		Processor->Callback = std::bind(&Runtime::OnConfig, this, std::placeholders::_1, std::placeholders::_2);
 
 		Server = Content->Load<HTTP::Server>("config.xml");
 		if (!Server)
@@ -57,30 +58,30 @@ public:
 		{
 			auto* Site = Hoster.second;
 			VI_INFO("host \"%s\" info", Hoster.first.c_str());
-			Site->Base->Callbacks.Headers = Runtime::OnHeaders;
+			Site->Base->Callbacks.Headers = &Runtime::OnHeaders;
 			if (Requests && !AccessLogs.empty())
-				Site->Base->Callbacks.Access = Runtime::OnLogAccess;
+				Site->Base->Callbacks.Access = &Runtime::OnAccess;
 
 			VI_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
 			for (auto& Group : Site->Groups)
 			{
 				for (auto Entry : Group->Routes)
 				{
-					Entry->Callbacks.Headers = Runtime::OnHeaders;
+					Entry->Callbacks.Headers = &Runtime::OnHeaders;
 					if (Requests && !AccessLogs.empty())
-						Entry->Callbacks.Access = Runtime::OnLogAccess;
+						Entry->Callbacks.Access = &Runtime::OnAccess;
 
 					VI_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
 				}
 			}
 		}
 
-		if (Reference != nullptr)
+		if (Config != nullptr)
 		{
-			Series::Unpack(Reference->Fetch("application.threads"), &Control.Threads);
-            Series::Unpack(Reference->Fetch("application.coroutines"), &Control.Coroutines);
-            Series::Unpack(Reference->Fetch("application.stack"), &Control.Stack);
-			VI_CLEAR(Reference);
+			Series::Unpack(Config->Fetch("application.threads"), &Control.Threads);
+            Series::Unpack(Config->Fetch("application.coroutines"), &Control.Coroutines);
+            Series::Unpack(Config->Fetch("application.stack"), &Control.Stack);
+			VI_CLEAR(Config);
 		}
 
 		if (!Control.Threads)
@@ -93,17 +94,17 @@ public:
 		Server->Listen();
 
 		VI_INFO("setting up signals");
-		signal(SIGABRT, OnAbort);
-		signal(SIGFPE, OnArithmeticError);
-		signal(SIGILL, OnIllegalOperation);
-		signal(SIGINT, OnCtrl);
-		signal(SIGSEGV, OnInvalidAccess);
-		signal(SIGTERM, OnTerminate);
+		signal(SIGABRT, OnSignal);
+		signal(SIGFPE, OnSignal);
+		signal(SIGILL, OnSignal);
+		signal(SIGINT, OnSignal);
+		signal(SIGSEGV, OnSignal);
+		signal(SIGTERM, OnSignal);
 #ifdef VI_UNIX
 		signal(SIGPIPE, SIG_IGN);
 #endif
 		VI_INFO("ready to serve and protect");
-		OS::SetLogDeferred(true);
+		OS::SetLogFlag(LogOption::Async, true);
 	}
 	void CloseEvent() override
 	{
@@ -113,10 +114,11 @@ public:
 		VI_RELEASE(Error);
 		VI_RELEASE(Trace);
 	}
-	void OnLoadLibrary(Schema* Schema)
+	void OnConfig(void*, Schema* Source)
 	{
-		Series::Unpack(Schema->Fetch("application.log-requests"), &Requests);
-		Series::Unpack(Schema->Fetch("application.show-terminal"), &Terminal);
+		Config = Source->Copy();
+		Series::Unpack(Config->Fetch("application.log-requests"), &Requests);
+		Series::Unpack(Config->Fetch("application.show-terminal"), &Terminal);
 		if (Terminal)
 		{
 			Log = Console::Get();
@@ -129,7 +131,7 @@ public:
 		String N = Multiplexer::GetLocalAddress();
 		String D = Content->GetEnvironment();
 
-		Series::Unpack(Schema->Fetch("application.access-logs"), &AccessLogs);
+		Series::Unpack(Config->Fetch("application.access-logs"), &AccessLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
 
 		if (!AccessLogs.empty())
@@ -138,7 +140,7 @@ public:
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
-		Series::Unpack(Schema->Fetch("application.error-logs"), &ErrorLogs);
+		Series::Unpack(Config->Fetch("application.error-logs"), &ErrorLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(ErrorLogs.c_str()));
         
 		if (!ErrorLogs.empty())
@@ -147,7 +149,7 @@ public:
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
-		Series::Unpack(Schema->Fetch("application.trace-logs"), &TraceLogs);
+		Series::Unpack(Config->Fetch("application.trace-logs"), &TraceLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(TraceLogs.c_str()));
         
 		if (!TraceLogs.empty())
@@ -156,13 +158,12 @@ public:
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
-		Series::Unpack(Schema->Fetch("application.file-directory"), &RootDirectory);
+		Series::Unpack(Config->Fetch("application.file-directory"), &RootDirectory);
 		Stringify(&RootDirectory).Eval(N, D);
-		Reference = Schema->Copy();
 		
 		VI_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
-	void OnLogCallback(OS::Message& Data)
+	void OnLog(OS::Message& Data)
 	{
 		auto& Text = Data.GetText();
 		if (Data.Level == 4 || Data.Level == 5)
@@ -192,55 +193,11 @@ public:
 	}
 
 public:
-	static bool CanTerminate()
+	static void OnSignal(int Value)
 	{
-		static std::mutex Mutex;
-		static bool Termination = false;
-
-		Mutex.lock();
-		bool Value = !Termination;
-		Termination = true;
-		Mutex.unlock();
-
-		return Value;
+		Application::Get()->Stop();
 	}
-	static void OnAbort(int Value)
-	{
-		signal(SIGABRT, OnAbort);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static void OnArithmeticError(int Value)
-	{
-		signal(SIGFPE, OnArithmeticError);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static void OnIllegalOperation(int Value)
-	{
-		signal(SIGILL, OnIllegalOperation);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static void OnCtrl(int Value)
-	{
-		signal(SIGINT, OnCtrl);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static void OnInvalidAccess(int Value)
-	{
-		signal(SIGSEGV, OnInvalidAccess);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static void OnTerminate(int Value)
-	{
-		signal(SIGTERM, OnTerminate);
-		if (CanTerminate())
-			Application::Get()->Stop();
-	}
-	static bool OnLogAccess(HTTP::Connection* Base)
+	static bool OnAccess(HTTP::Connection* Base)
 	{
 		if (!Base)
 			return true;
@@ -257,11 +214,9 @@ public:
 
 		return true;
 	}
-	static bool OnHeaders(HTTP::Connection* Base, Stringify* Content)
+	static bool OnHeaders(HTTP::Connection* Base, String& Content)
 	{
-		if (Content != nullptr)
-			Content->Append("Server: lynx\r\n");
-
+		Content.append("Server: lynx\r\n");
 		return true;
 	}
 };
