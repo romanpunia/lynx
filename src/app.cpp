@@ -29,8 +29,8 @@ class Runtime : public Application
 public:
 	explicit Runtime(Desc* Conf) : Application(Conf), Requests(true), Terminal(false)
 	{
-		OS::SetLogFlag(LogOption::Dated, true);
-		OS::SetLogCallback(std::bind(&Runtime::OnLog, this, std::placeholders::_1));
+		ErrorHandling::SetFlag(LogOption::Dated, true);
+		ErrorHandling::SetCallback(std::bind(&Runtime::OnLog, this, std::placeholders::_1));
 		OS::Directory::SetWorking(OS::Directory::GetModule().c_str());
 	}
 	~Runtime() override
@@ -104,11 +104,11 @@ public:
 		signal(SIGPIPE, SIG_IGN);
 #endif
 		VI_INFO("ready to serve and protect");
-		OS::SetLogFlag(LogOption::Async, true);
+		ErrorHandling::SetFlag(LogOption::Async, true);
 	}
 	void CloseEvent() override
 	{
-		OS::SetLogCallback(nullptr);
+		ErrorHandling::SetCallback(nullptr);
 		VI_RELEASE(Server);
 		VI_RELEASE(Access);
 		VI_RELEASE(Error);
@@ -163,29 +163,31 @@ public:
 		
 		VI_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
-	void OnLog(OS::Message& Data)
+	void OnLog(ErrorHandling::Details& Data)
 	{
-		auto& Text = Data.GetText();
-		if (Data.Level == 4 || Data.Level == 5)
+		if (Data.Type.Level == LogLevel::Debug || Data.Type.Level == LogLevel::Trace)
 		{
 			if (Trace != nullptr && Trace->GetBuffer())
 			{
+				auto Text = ErrorHandling::GetMessageText(Data);
 				std::unique_lock<std::mutex> Unique(Logging);
 				Trace->Write(Text.c_str(), Text.size());
 			}
 		}
-		else if (Data.Level == 3)
+		else if (Data.Type.Level == LogLevel::Info)
 		{
 			if (Access != nullptr && Access->GetBuffer())
 			{
+				auto Text = ErrorHandling::GetMessageText(Data);
 				std::unique_lock<std::mutex> Unique(Logging);
 				Access->Write(Text.c_str(), Text.size());
 			}
 		}
-		else if (Data.Level == 1 || Data.Level == 2)
+		else if (Data.Type.Level == LogLevel::Error || Data.Type.Level == LogLevel::Warning)
 		{
 			if (Error != nullptr && Error->GetBuffer())
 			{
+				auto Text = ErrorHandling::GetMessageText(Data);
 				std::unique_lock<std::mutex> Unique(Logging);
 				Error->Write(Text.c_str(), Text.size());
 			}
