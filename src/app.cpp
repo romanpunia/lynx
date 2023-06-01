@@ -136,7 +136,7 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = OS::File::OpenArchive(Stringify(&AccessLogs).Eval(N, D).R());
+			Access = OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D));
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -145,7 +145,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = OS::File::OpenArchive(Stringify(&ErrorLogs).Eval(N, D).R());
+			Error = OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D));
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -154,12 +154,12 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = OS::File::OpenArchive(Stringify(&TraceLogs).Eval(N, D).R());
+			Trace = OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D));
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
 		Series::Unpack(Config->Fetch("application.file-directory"), &RootDirectory);
-		Stringify(&RootDirectory).Eval(N, D);
+		Stringify::EvalEnvs(RootDirectory, N, D);
 		
 		VI_INFO("tmp file directory root is %s", RootDirectory.c_str());
 	}
