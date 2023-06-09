@@ -128,7 +128,7 @@ public:
 			VI_CLEAR(Log);
 
 		VI_INFO("loading server config from ./config.xml");
-		String N = Multiplexer::GetLocalAddress();
+		String N = Utils::GetLocalAddress();
 		String D = Content->GetEnvironment();
 
 		Series::Unpack(Config->Fetch("application.access-logs"), &AccessLogs);
@@ -229,9 +229,6 @@ int main()
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
     Init.Daemon = true;
 
-    Mavi::Initialize((uint64_t)Mavi::Preset::App);
-    int ExitCode = Application::StartApp<Runtime>(&Init);
-    Mavi::Uninitialize();
-
-	return ExitCode;
+    Mavi::Runtime Scope((uint64_t)Mavi::Preset::App);
+	return Application::StartApp<Runtime>(&Init);
 }
