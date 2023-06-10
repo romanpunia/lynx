@@ -79,8 +79,8 @@ public:
 		if (Config != nullptr)
 		{
 			Series::Unpack(Config->Fetch("application.threads"), &Control.Threads);
-            Series::Unpack(Config->Fetch("application.coroutines"), &Control.Coroutines);
-            Series::Unpack(Config->Fetch("application.stack"), &Control.Stack);
+            Series::Unpack(Config->Fetch("application.coroutines"), &Control.Scheduler.MaxCoroutines);
+            Series::Unpack(Config->Fetch("application.stack"), &Control.Scheduler.StackSize);
 			VI_CLEAR(Config);
 		}
 
@@ -170,7 +170,7 @@ public:
 			if (Trace != nullptr && Trace->GetBuffer())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
-				std::unique_lock<std::mutex> Unique(Logging);
+				UMutex<std::mutex> Unique(Logging);
 				Trace->Write(Text.c_str(), Text.size());
 			}
 		}
@@ -179,7 +179,7 @@ public:
 			if (Access != nullptr && Access->GetBuffer())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
-				std::unique_lock<std::mutex> Unique(Logging);
+				UMutex<std::mutex> Unique(Logging);
 				Access->Write(Text.c_str(), Text.size());
 			}
 		}
@@ -188,7 +188,7 @@ public:
 			if (Error != nullptr && Error->GetBuffer())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
-				std::unique_lock<std::mutex> Unique(Logging);
+				UMutex<std::mutex> Unique(Logging);
 				Error->Write(Text.c_str(), Text.size());
 			}
 		}
