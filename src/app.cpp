@@ -31,7 +31,7 @@ public:
 	{
 		ErrorHandling::SetFlag(LogOption::Dated, true);
 		ErrorHandling::SetCallback(std::bind(&Runtime::OnLog, this, std::placeholders::_1));
-		OS::Directory::SetWorking(OS::Directory::GetModule().c_str());
+		OS::Directory::SetWorking(OS::Directory::GetModule()->c_str());
 	}
 	~Runtime() override
 	{
@@ -136,7 +136,7 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D));
+			Access = *OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D));
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -145,7 +145,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D));
+			Error = *OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D));
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -154,7 +154,7 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D));
+			Trace = *OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D));
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
@@ -167,7 +167,7 @@ public:
 	{
 		if (Data.Type.Level == LogLevel::Debug || Data.Type.Level == LogLevel::Trace)
 		{
-			if (Trace != nullptr && Trace->GetBuffer())
+			if (Trace != nullptr && Trace->GetResource())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
@@ -176,7 +176,7 @@ public:
 		}
 		else if (Data.Type.Level == LogLevel::Info)
 		{
-			if (Access != nullptr && Access->GetBuffer())
+			if (Access != nullptr && Access->GetResource())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
@@ -185,7 +185,7 @@ public:
 		}
 		else if (Data.Type.Level == LogLevel::Error || Data.Type.Level == LogLevel::Warning)
 		{
-			if (Error != nullptr && Error->GetBuffer())
+			if (Error != nullptr && Error->GetResource())
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
