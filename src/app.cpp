@@ -136,7 +136,7 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = *OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D));
+			Access = OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D)).Or(nullptr);
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -145,7 +145,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = *OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D));
+			Error = OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D)).Or(nullptr);
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -154,7 +154,7 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = *OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D));
+			Trace = OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D)).Or(nullptr);
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 
