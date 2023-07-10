@@ -14,8 +14,10 @@ set(VI_MONGOC OFF CACHE BOOL "MongoDB is not used")
 set(VI_SPIRV OFF CACHE BOOL "SPIR-V and Glslang are not used")
 set(VI_BULLET3 OFF CACHE BOOL "Bullet3 is not used")
 set(VI_RMLUI OFF CACHE BOOL "RmlUi is not used")
+set(VI_STB OFF CACHE BOOL "STB is not used")
+set(VI_TINYFILEDIALOGS OFF CACHE BOOL "Tiny file dialogs are not used")
 set(VI_SHADERS OFF CACHE BOOL "Shaders are not used")
-include(${VI_DIRECTORY}/lib/toolchain.cmake)
+include(${VI_DIRECTORY}/deps/toolchain.cmake)
 
 #Project's metadata
 project(lynx)

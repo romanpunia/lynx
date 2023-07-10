@@ -14,7 +14,7 @@
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./web" />
+				<document-root s="E:/" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>

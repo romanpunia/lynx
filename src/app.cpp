@@ -161,7 +161,7 @@ public:
 		Series::Unpack(Config->Fetch("application.file-directory"), &RootDirectory);
 		Stringify::EvalEnvs(RootDirectory, N, D);
 		
-		VI_INFO("tmp file directory root is %s", RootDirectory.c_str());
+		VI_INFO("tmp file directory root is %s", RootDirectory.empty() ? "<none>" : RootDirectory.c_str());
 	}
 	void OnLog(ErrorHandling::Details& Data)
 	{
