@@ -3,8 +3,8 @@
 		<access-logs s="./var/access.log" />
 		<error-logs s="./var/error.log" />
 		<trace-logs s="./var/trace.log" />
-		<show-terminal b="true" />
-		<log-requests b="true" />
+		<show-terminal b="false" />
+		<log-requests b="false" />
 	</application>
 	<listen s="*">
 		<hostname s="0.0.0.0" />
@@ -14,7 +14,7 @@
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="E:/" />
+				<document-root s="./web" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>
