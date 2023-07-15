@@ -3,8 +3,8 @@
 		<access-logs s="./var/access.log" />
 		<error-logs s="./var/error.log" />
 		<trace-logs s="./var/trace.log" />
-		<show-terminal b="false" />
-		<log-requests b="false" />
+		<show-terminal b="true" />
+		<log-requests b="true" />
 	</application>
 	<listen s="*">
 		<hostname s="0.0.0.0" />
