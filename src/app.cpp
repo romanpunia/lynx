@@ -21,7 +21,6 @@ class Runtime : public Application
 	String AccessLogs;
 	String ErrorLogs;
 	String TraceLogs;
-	String RootDirectory;
 	std::mutex Logging;
 	bool Requests;
 	bool Terminal;
@@ -157,11 +156,6 @@ public:
 			Trace = OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D)).Or(nullptr);
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
-
-		Series::Unpack(Config->Fetch("application.file-directory"), &RootDirectory);
-		Stringify::EvalEnvs(RootDirectory, N, D);
-		
-		VI_INFO("tmp file directory root is %s", RootDirectory.empty() ? "<none>" : RootDirectory.c_str());
 	}
 	void OnLog(ErrorHandling::Details& Data)
 	{
