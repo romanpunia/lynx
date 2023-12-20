@@ -34,7 +34,16 @@ public:
 	}
 	~Runtime() override
 	{
-		VI_RELEASE(Log);
+		VI_CLEAR(Log);
+	}
+	Promise<void> Shutdown() override
+	{
+		ErrorHandling::SetCallback(nullptr);
+		VI_CLEAR(Server);
+		VI_CLEAR(Access);
+		VI_CLEAR(Error);
+		VI_CLEAR(Trace);
+		return Promise<void>::Null();
 	}
 	void Initialize() override
 	{
@@ -104,14 +113,6 @@ public:
 #endif
 		VI_INFO("ready to serve and protect");
 		ErrorHandling::SetFlag(LogOption::Async, true);
-	}
-	void CloseEvent() override
-	{
-		ErrorHandling::SetCallback(nullptr);
-		VI_RELEASE(Server);
-		VI_RELEASE(Access);
-		VI_RELEASE(Error);
-		VI_RELEASE(Trace);
 	}
 	void OnConfig(void*, Schema* Source)
 	{
