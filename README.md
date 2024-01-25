@@ -2,10 +2,10 @@
 Lynx is a high performance async HTTP web server.
 
 ## Dependencies
-* [Mavi (submodule)](https://github.com/romanpunia/mavi)
+* [Vitex (submodule)](https://github.com/romanpunia/vitex)
 
 ## Building
-To build this project you have to clone Mavi, also you need to make sure that it can be build on your machine. CMake's **VI_DIRECTORY** is a path to Mavi source folder.
+To build this project you have to clone Vitex, also you need to make sure that it can be build on your machine. CMake's **VI_DIRECTORY** is a path to Vitex source folder.
 
 ## Benchmark
 There is a **/bin/web/favicon.ico** which is Google Chrome logo (32x32). To measure raw performance we will request this resource. Measurement will be done relative to Node.js with Express.js package.

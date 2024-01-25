@@ -1,14 +1,14 @@
-#include <mavi/mavi.h>
-#include <mavi/core/network.h>
-#include <mavi/core/engine.h>
-#include <mavi/network/http.h>
-#include <mavi/engine/processors.h>
+#include <vitex/vitex.h>
+#include <vitex/core/network.h>
+#include <vitex/core/engine.h>
+#include <vitex/network/http.h>
+#include <vitex/engine/processors.h>
 #include <csignal>
 
-using namespace Mavi::Core;
-using namespace Mavi::Compute;
-using namespace Mavi::Engine;
-using namespace Mavi::Network;
+using namespace Vitex::Core;
+using namespace Vitex::Compute;
+using namespace Vitex::Engine;
+using namespace Vitex::Network;
 
 class Runtime : public Application
 {
@@ -224,6 +224,6 @@ int main()
     Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
     Init.Daemon = true;
 
-    Mavi::Runtime Scope((uint64_t)Mavi::Preset::App);
+    Vitex::Runtime Scope((uint64_t)Vitex::Preset::App);
 	return Application::StartApp<Runtime>(&Init);
 }

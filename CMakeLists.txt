@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 
 #Setup toolchain file if needed
-set(VI_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/deps/mavi CACHE STRING "Mavi directory")
+set(VI_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/deps/vitex CACHE STRING "Vitex directory")
 set(VI_BINDINGS OFF CACHE BOOL "Script bindings are not used")
 set(VI_ASSIMP OFF CACHE BOOL "Assimp is not used")
 set(VI_FREETYPE OFF CACHE BOOL "FreeType is not used")
@@ -9,6 +9,7 @@ set(VI_GLEW OFF CACHE BOOL "GLEW is not used")
 set(VI_OPENAL OFF CACHE BOOL "OpenAL is not used")
 set(VI_OPENGL OFF CACHE BOOL "OpenGL is not used")
 set(VI_SDL2 OFF CACHE BOOL "SDL2 is not used")
+set(VI_SQLITE OFF CACHE BOOL "SQLite is not used")
 set(VI_POSTGRESQL OFF CACHE BOOL "PostgreSQL is not used")
 set(VI_MONGOC OFF CACHE BOOL "MongoDB is not used")
 set(VI_SPIRV OFF CACHE BOOL "SPIR-V and Glslang are not used")
@@ -47,8 +48,8 @@ if (MSVC)
     set(CMAKE_EXE_LINKER_FLAGS "/ENTRY:mainCRTStartup /SUBSYSTEM:CONSOLE")
 endif()
 
-#Add Mavi as dependency
-add_subdirectory(${VI_DIRECTORY} mavi)
+#Add Vitex as dependency
+add_subdirectory(${VI_DIRECTORY} vitex)
 link_directories(${VI_DIRECTORY})
 target_include_directories(lynx PRIVATE ${VI_DIRECTORY})
-target_link_libraries(lynx PRIVATE mavi)
+target_link_libraries(lynx PRIVATE vitex)
