@@ -50,13 +50,14 @@ public:
 		auto* Processor = (Processors::ServerProcessor*)Content->GetProcessor<HTTP::Server>();
 		Processor->Callback = std::bind(&Runtime::OnConfig, this, std::placeholders::_1, std::placeholders::_2);
 
-		Server = Content->Load<HTTP::Server>("config.xml");
-		if (!Server)
+		auto NewServer = Content->Load<HTTP::Server>("config.xml");
+		if (!NewServer)
 		{
-			VI_ERR("an error occurred while loading config");
+			VI_ERR("cannot load server configuration: %s", NewServer.Error().what());
 			return Stop();
 		}
 
+		Server = *NewServer;
 		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
 			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
@@ -136,7 +137,8 @@ public:
 
 		if (!AccessLogs.empty())
 		{
-			Access = OS::File::OpenArchive(Stringify::EvalEnvs(AccessLogs, N, D)).Or(nullptr);
+			Stringify::EvalEnvs(AccessLogs, N, D);
+			Access = OS::File::OpenArchive(AccessLogs).Or(nullptr);
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
 
@@ -145,7 +147,8 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Error = OS::File::OpenArchive(Stringify::EvalEnvs(ErrorLogs, N, D)).Or(nullptr);
+			Stringify::EvalEnvs(ErrorLogs, N, D);
+			Error = OS::File::OpenArchive(ErrorLogs).Or(nullptr);
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
 
@@ -154,7 +157,8 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Trace = OS::File::OpenArchive(Stringify::EvalEnvs(TraceLogs, N, D)).Or(nullptr);
+			Stringify::EvalEnvs(TraceLogs, N, D);
+			Trace = OS::File::OpenArchive(TraceLogs).Or(nullptr);
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
 	}
