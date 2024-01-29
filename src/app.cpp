@@ -58,6 +58,13 @@ public:
 		}
 
 		Server = *NewServer;
+		auto Status = Server->Configure(Server->GetRouter());
+		if (!Status)
+		{
+			VI_ERR("cannot configure server: %s", Status.Error().what());
+			return Stop();
+		}
+
 		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
 			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
