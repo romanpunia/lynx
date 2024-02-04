@@ -87,7 +87,7 @@ public:
 					if (Requests && !AccessLogs.empty())
 						Entry->Callbacks.Access = &Runtime::OnAccess;
 
-					VI_INFO("route %s is alias for %s", Entry->URI.GetRegex().c_str(), Entry->DocumentRoot.c_str());
+					VI_INFO("route %s is alias for %s", Entry->Location.GetRegex().c_str(), Entry->DocumentRoot.c_str());
 				}
 			}
 		}
@@ -173,7 +173,7 @@ public:
 	{
 		if (Data.Type.Level == LogLevel::Debug || Data.Type.Level == LogLevel::Trace)
 		{
-			if (Trace != nullptr && Trace->GetResource())
+			if (Trace != nullptr && Trace->GetWriteable() != nullptr)
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
@@ -182,7 +182,7 @@ public:
 		}
 		else if (Data.Type.Level == LogLevel::Info)
 		{
-			if (Access != nullptr && Access->GetResource())
+			if (Access != nullptr && Access->GetWriteable() != nullptr)
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
@@ -191,7 +191,7 @@ public:
 		}
 		else if (Data.Type.Level == LogLevel::Error || Data.Type.Level == LogLevel::Warning)
 		{
-			if (Error != nullptr && Error->GetResource())
+			if (Error != nullptr && Error->GetWriteable() != nullptr)
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
@@ -213,7 +213,7 @@ public:
         VI_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
             Base->Response.StatusCode,
             Base->Request.Method,
-            Base->Request.Where.c_str(),
+            Base->Request.Referrer.c_str(),
             Base->Request.Query.empty() ? "" : "?",
             Base->Request.Query.c_str(),
             Base->RemoteAddress,
