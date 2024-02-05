@@ -69,26 +69,20 @@ public:
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
 			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
 
-		VI_INFO("searching for sites");
-		for (auto& Hoster : Router->Sites)
+		Router->Base->Callbacks.Headers = &Runtime::OnHeaders;
+		if (Requests && !AccessLogs.empty())
+			Router->Base->Callbacks.Access = &Runtime::OnAccess;
+
+		VI_INFO("route / is alias for %s", Router->Base->FilesDirectory.c_str());
+		for (auto& Group : Router->Groups)
 		{
-			auto* Site = Hoster.second;
-			VI_INFO("host \"%s\" info", Hoster.first.c_str());
-			Site->Base->Callbacks.Headers = &Runtime::OnHeaders;
-			if (Requests && !AccessLogs.empty())
-				Site->Base->Callbacks.Access = &Runtime::OnAccess;
-
-			VI_INFO("route / is alias for %s", Site->Base->DocumentRoot.c_str());
-			for (auto& Group : Site->Groups)
+			for (auto Entry : Group->Routes)
 			{
-				for (auto Entry : Group->Routes)
-				{
-					Entry->Callbacks.Headers = &Runtime::OnHeaders;
-					if (Requests && !AccessLogs.empty())
-						Entry->Callbacks.Access = &Runtime::OnAccess;
+				Entry->Callbacks.Headers = &Runtime::OnHeaders;
+				if (Requests && !AccessLogs.empty())
+					Entry->Callbacks.Access = &Runtime::OnAccess;
 
-					VI_INFO("route %s is alias for %s", Entry->Location.GetRegex().c_str(), Entry->DocumentRoot.c_str());
-				}
+				VI_INFO("route %s is alias for %s", Entry->Location.GetRegex().c_str(), Entry->FilesDirectory.c_str());
 			}
 		}
 

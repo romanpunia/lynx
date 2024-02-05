@@ -10,13 +10,13 @@
 		<hostname s="0.0.0.0" />
 		<port i="8080" />
 	</listen>
-	<site s="*">
+	<network>
 		<resource-root s="./tmp/" />
 		<group name="static">
 			<route s="/">
-				<document-root s="./web" />
+				<files-directory s="./web" />
 				<allow-directory-listing b="true" />
 			</route>
 		</group>
-	</site>
+	</network>
 </lynx>
