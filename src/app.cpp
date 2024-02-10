@@ -1,9 +1,6 @@
 #include <vitex/vitex.h>
-#include <vitex/core/network.h>
-#include <vitex/core/engine.h>
 #include <vitex/network/http.h>
 #include <vitex/engine/processors.h>
-#include <csignal>
 
 using namespace Vitex::Core;
 using namespace Vitex::Compute;
@@ -34,15 +31,15 @@ public:
 	}
 	~Runtime() override
 	{
-		VI_CLEAR(Log);
+		Memory::Release(Log);
 	}
 	Promise<void> Shutdown() override
 	{
 		ErrorHandling::SetCallback(nullptr);
-		VI_CLEAR(Server);
-		VI_CLEAR(Access);
-		VI_CLEAR(Error);
-		VI_CLEAR(Trace);
+		Memory::Release(Server);
+		Memory::Release(Access);
+		Memory::Release(Error);
+		Memory::Release(Trace);
 		return Promise<void>::Null();
 	}
 	void Initialize() override
@@ -91,7 +88,7 @@ public:
 			Series::Unpack(Config->Fetch("application.threads"), &Control.Threads);
             Series::Unpack(Config->Fetch("application.coroutines"), &Control.Scheduler.MaxCoroutines);
             Series::Unpack(Config->Fetch("application.stack"), &Control.Scheduler.StackSize);
-			VI_CLEAR(Config);
+			Memory::Release(Config);
 		}
 
 		if (!Control.Threads)
@@ -104,15 +101,14 @@ public:
 		Server->Listen();
 
 		VI_INFO("setting up signals");
-		signal(SIGABRT, OnSignal);
-		signal(SIGFPE, OnSignal);
-		signal(SIGILL, OnSignal);
-		signal(SIGINT, OnSignal);
-		signal(SIGSEGV, OnSignal);
-		signal(SIGTERM, OnSignal);
-#ifdef VI_UNIX
-		signal(SIGPIPE, SIG_IGN);
-#endif
+		OS::Process::SetSignalCallback(Signal::SIG_ABRT, OnSignal);
+		OS::Process::SetSignalCallback(Signal::SIG_FPE, OnSignal);
+		OS::Process::SetSignalCallback(Signal::SIG_ILL, OnSignal);
+		OS::Process::SetSignalCallback(Signal::SIG_INT, OnSignal);
+		OS::Process::SetSignalCallback(Signal::SIG_SEGV, OnSignal);
+		OS::Process::SetSignalCallback(Signal::SIG_TERM, OnSignal);
+		OS::Process::SetSignalIgnore(Signal::SIG_PIPE);
+
 		VI_INFO("ready to serve and protect");
 		ErrorHandling::SetFlag(LogOption::Async, true);
 	}
@@ -127,7 +123,7 @@ public:
 			Log->Show();
 		}
 		else
-			VI_CLEAR(Log);
+			Memory::Release(Log);
 
 		VI_INFO("loading server config from ./config.xml");
 		String N = Utils::GetLocalAddress();
@@ -171,7 +167,7 @@ public:
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
-				Trace->Write(Text.c_str(), Text.size());
+				Trace->Write((uint8_t*)Text.c_str(), Text.size());
 			}
 		}
 		else if (Data.Type.Level == LogLevel::Info)
@@ -180,7 +176,7 @@ public:
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
-				Access->Write(Text.c_str(), Text.size());
+				Access->Write((uint8_t*)Text.c_str(), Text.size());
 			}
 		}
 		else if (Data.Type.Level == LogLevel::Error || Data.Type.Level == LogLevel::Warning)
@@ -189,7 +185,7 @@ public:
 			{
 				auto Text = ErrorHandling::GetMessageText(Data);
 				UMutex<std::mutex> Unique(Logging);
-				Error->Write(Text.c_str(), Text.size());
+				Error->Write((uint8_t*)Text.c_str(), Text.size());
 			}
 		}
 	}

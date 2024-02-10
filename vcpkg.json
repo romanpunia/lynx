@@ -2,5 +2,6 @@
     "name": "lynx",
     "description": "High performance HTTP web server",
     "version": "1.0.0",
-    "dependencies": ["zlib", "openssl"]
+    "dependencies": ["zlib", "openssl"],
+    "builtin-baseline": "e038ef04796ee67814f36af7c235ae50bbdf4303"
 }
