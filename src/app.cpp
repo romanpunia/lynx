@@ -64,7 +64,11 @@ public:
 
 		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
 		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
-			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), It->second.Hostname.c_str(), (int)It->second.Port, It->second.Secure ? " (ssl)" : "");
+		{
+			String Hostname = It->second.Address.GetHostname().Or(String());
+			uint16_t Port = It->second.Address.GetIpPort().Or(0);
+			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), Hostname.c_str(), (int)Port, It->second.IsSecure ? " (ssl)" : "");
+		}
 
 		Router->Base->Callbacks.Headers = &Runtime::OnHeaders;
 		if (Requests && !AccessLogs.empty())
@@ -126,15 +130,15 @@ public:
 			Memory::Release(Log);
 
 		VI_INFO("loading server config from ./config.xml");
-		String N = Utils::GetLocalAddress();
-		String D = Content->GetEnvironment();
+		Vector<String> Addresses = Utils::GetHostIpAddresses();
+		String Directory = Content->GetEnvironment();
 
 		Series::Unpack(Config->Fetch("application.access-logs"), &AccessLogs);
         OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
 
 		if (!AccessLogs.empty())
 		{
-			Stringify::EvalEnvs(AccessLogs, N, D);
+			Stringify::EvalEnvs(AccessLogs, Directory, Addresses);
 			Access = OS::File::OpenArchive(AccessLogs).Or(nullptr);
 			VI_INFO("system log (access): %s", AccessLogs.c_str());
 		}
@@ -144,7 +148,7 @@ public:
         
 		if (!ErrorLogs.empty())
 		{
-			Stringify::EvalEnvs(ErrorLogs, N, D);
+			Stringify::EvalEnvs(ErrorLogs, Directory, Addresses);
 			Error = OS::File::OpenArchive(ErrorLogs).Or(nullptr);
 			VI_INFO("system log (error): %s", ErrorLogs.c_str());
 		}
@@ -154,7 +158,7 @@ public:
         
 		if (!TraceLogs.empty())
 		{
-			Stringify::EvalEnvs(TraceLogs, N, D);
+			Stringify::EvalEnvs(TraceLogs, Directory, Addresses);
 			Trace = OS::File::OpenArchive(TraceLogs).Or(nullptr);
 			VI_INFO("system log (trace): %s", TraceLogs.c_str());
 		}
@@ -206,7 +210,7 @@ public:
             Base->Request.Referrer.c_str(),
             Base->Request.Query.empty() ? "" : "?",
             Base->Request.Query.c_str(),
-            Base->RemoteAddress,
+            Base->GetPeerIpAddress()->c_str(),
             Base->Stream->Outcome,
             Base->Info.Finish - Base->Info.Start);
 
