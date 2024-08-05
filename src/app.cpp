@@ -1,10 +1,10 @@
 #include <vitex/vitex.h>
 #include <vitex/network/http.h>
-#include <vitex/engine/processors.h>
+#include <vitex/layer/processors.h>
 
 using namespace Vitex::Core;
 using namespace Vitex::Compute;
-using namespace Vitex::Engine;
+using namespace Vitex::Layer;
 using namespace Vitex::Network;
 
 class Runtime : public Application
@@ -226,9 +226,9 @@ public:
 int main()
 {
     Application::Desc Init;
-    Init.Usage = (size_t)(ApplicationSet::ContentSet | ApplicationSet::NetworkSet);
+    Init.Usage = USE_PROCESSING | USE_NETWORKING;
     Init.Daemon = true;
 
-    Vitex::Runtime Scope((uint64_t)Vitex::Preset::App);
+    Vitex::Runtime Scope;
 	return Application::StartApp<Runtime>(&Init);
 }
