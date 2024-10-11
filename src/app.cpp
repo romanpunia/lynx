@@ -71,7 +71,7 @@ public:
 		}
 
 		Router->Base->Callbacks.Headers = &Runtime::OnHeaders;
-		if (Requests && !AccessLogs.empty())
+		if (Requests)
 			Router->Base->Callbacks.Access = &Runtime::OnAccess;
 
 		VI_INFO("route / is alias for %s", Router->Base->FilesDirectory.c_str());
@@ -105,13 +105,13 @@ public:
 		Server->Listen();
 
 		VI_INFO("setting up signals");
-		OS::Process::SetSignalCallback(Signal::SIG_ABRT, OnSignal);
-		OS::Process::SetSignalCallback(Signal::SIG_FPE, OnSignal);
-		OS::Process::SetSignalCallback(Signal::SIG_ILL, OnSignal);
-		OS::Process::SetSignalCallback(Signal::SIG_INT, OnSignal);
-		OS::Process::SetSignalCallback(Signal::SIG_SEGV, OnSignal);
-		OS::Process::SetSignalCallback(Signal::SIG_TERM, OnSignal);
-		OS::Process::SetSignalIgnore(Signal::SIG_PIPE);
+		OS::Process::BindSignal(Signal::SIG_ABRT, OnSignal);
+		OS::Process::BindSignal(Signal::SIG_FPE, OnSignal);
+		OS::Process::BindSignal(Signal::SIG_ILL, OnSignal);
+		OS::Process::BindSignal(Signal::SIG_INT, OnSignal);
+		OS::Process::BindSignal(Signal::SIG_SEGV, OnSignal);
+		OS::Process::BindSignal(Signal::SIG_TERM, OnSignal);
+		OS::Process::RebindSignal(Signal::SIG_PIPE);
 
 		VI_INFO("ready to serve and protect");
 		ErrorHandling::SetFlag(LogOption::Async, true);
