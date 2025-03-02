@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.10)
 
 #Setup toolchain file if needed
 set(VI_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/deps/vitex CACHE STRING "Vitex directory")
@@ -27,18 +27,16 @@ endif()
 #Project's compile options
 add_executable(lynx ${CMAKE_CURRENT_SOURCE_DIR}/src/app.cpp)
 set_target_properties(lynx PROPERTIES
-		OUTPUT_NAME "lynx"
-		CXX_STANDARD ${VI_CXX}
-        CXX_STANDARD_REQUIRED ON
-		CXX_EXTENSIONS OFF
-		VERSION ${PROJECT_VERSION}
-		SOVERSION ${PROJECT_VERSION})
+    OUTPUT_NAME "lynx"
+    CXX_STANDARD ${VI_CXX}
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+    VERSION ${PROJECT_VERSION}
+    SOVERSION ${PROJECT_VERSION})
 if (MSVC)
     set(CMAKE_EXE_LINKER_FLAGS "/ENTRY:mainCRTStartup /SUBSYSTEM:CONSOLE")
 endif()
 
 #Add Vitex as dependency
 add_subdirectory(${VI_DIRECTORY} vitex)
-link_directories(${VI_DIRECTORY})
-target_include_directories(lynx PRIVATE ${VI_DIRECTORY})
 target_link_libraries(lynx PRIVATE vitex)
