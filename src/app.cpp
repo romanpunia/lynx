@@ -2,233 +2,233 @@
 #include <vitex/network/http.h>
 #include <vitex/layer/processors.h>
 
-using namespace Vitex::Core;
-using namespace Vitex::Compute;
-using namespace Vitex::Layer;
-using namespace Vitex::Network;
+using namespace vitex::core;
+using namespace vitex::compute;
+using namespace vitex::layer;
+using namespace vitex::network;
 
-class Runtime : public Application
+class runtime : public application
 {
-	HTTP::Server* Server = nullptr;
-	Stream* Access = nullptr;
-	Stream* Error = nullptr;
-	Stream* Trace = nullptr;
-	Schema* Config = nullptr;
-	Console* Log = nullptr;
-	String AccessLogs;
-	String ErrorLogs;
-	String TraceLogs;
-	std::mutex Logging;
-	bool Requests;
-	bool Terminal;
+	http::server* server = nullptr;
+	stream* access = nullptr;
+	stream* error = nullptr;
+	stream* trace = nullptr;
+	schema* config = nullptr;
+	console* log = nullptr;
+	string access_logs;
+	string error_logs;
+	string trace_logs;
+	std::mutex logging;
+	bool requests;
+	bool terminal;
 
 public:
-	explicit Runtime(Desc* Conf) : Application(Conf), Requests(true), Terminal(false)
+	explicit runtime(desc* conf) : application(conf), requests(true), terminal(false)
 	{
-		ErrorHandling::SetFlag(LogOption::Dated, true);
-		ErrorHandling::SetCallback(std::bind(&Runtime::OnLog, this, std::placeholders::_1));
-		OS::Directory::SetWorking(OS::Directory::GetModule()->c_str());
+		error_handling::set_flag(log_option::dated, true);
+		error_handling::set_callback(std::bind(&runtime::on_log, this, std::placeholders::_1));
+		os::directory::set_working(os::directory::get_module()->c_str());
 	}
-	~Runtime() override
+	~runtime() override
 	{
-		Memory::Release(Log);
+		memory::release(log);
 	}
-	Promise<void> Shutdown() override
+	promise<void> shutdown() override
 	{
-		ErrorHandling::SetCallback(nullptr);
-		Memory::Release(Server);
-		Memory::Release(Access);
-		Memory::Release(Error);
-		Memory::Release(Trace);
-		return Promise<void>::Null();
+		error_handling::set_callback(nullptr);
+		memory::release(server);
+		memory::release(access);
+		memory::release(error);
+		memory::release(trace);
+		return promise<void>::null();
 	}
-	void Initialize() override
+	void initialize() override
 	{
-		auto* Processor = (Processors::ServerProcessor*)Content->GetProcessor<HTTP::Server>();
-		Processor->Callback = std::bind(&Runtime::OnConfig, this, std::placeholders::_1, std::placeholders::_2);
+		auto* processor = (processors::server_processor*)content->get_processor<http::server>();
+		processor->callback = std::bind(&runtime::on_config, this, std::placeholders::_1, std::placeholders::_2);
 
-		auto NewServer = Content->Load<HTTP::Server>("config.xml");
-		if (!NewServer)
+		auto new_server = content->load<http::server>("config.xml");
+		if (!new_server)
 		{
-			VI_ERR("cannot load server configuration: %s", NewServer.Error().what());
-			return Stop();
+			VI_ERR("cannot load server configuration: %s", new_server.error().what());
+			return stop();
 		}
 
-		Server = *NewServer;
-		auto Status = Server->Configure(Server->GetRouter());
-		if (!Status)
+		server = *new_server;
+		auto status = server->configure(server->get_router());
+		if (!status)
 		{
-			VI_ERR("cannot configure server: %s", Status.Error().what());
-			return Stop();
+			VI_ERR("cannot configure server: %s", status.error().what());
+			return stop();
 		}
 
-		auto* Router = (HTTP::MapRouter*)Server->GetRouter();
-		for (auto It = Router->Listeners.begin(); It != Router->Listeners.end(); It++)
+		auto* router = (http::map_router*)server->get_router();
+		for (auto it = router->listeners.begin(); it != router->listeners.end(); it++)
 		{
-			String Hostname = It->second.Address.GetHostname().Or(String());
-			uint16_t Port = It->second.Address.GetIpPort().Or(0);
-			VI_INFO("listening to \"%s\" %s:%i%s", It->first.c_str(), Hostname.c_str(), (int)Port, It->second.IsSecure ? " (ssl)" : "");
+			string hostname = it->second.address.get_hostname().otherwise(string());
+			uint16_t port = it->second.address.get_ip_port().otherwise(0);
+			VI_INFO("listening to \"%s\" %s:%i%s", it->first.c_str(), hostname.c_str(), (int)port, it->second.is_secure ? " (ssl)" : "");
 		}
 
-		Router->Base->Callbacks.Headers = &Runtime::OnHeaders;
-		if (Requests)
-			Router->Base->Callbacks.Access = &Runtime::OnAccess;
+		router->base->callbacks.headers = &runtime::on_headers;
+		if (requests)
+			router->base->callbacks.access = &runtime::on_access;
 
-		VI_INFO("route / is alias for %s", Router->Base->FilesDirectory.c_str());
-		for (auto& Group : Router->Groups)
+		VI_INFO("route / is alias for %s", router->base->files_directory.c_str());
+		for (auto& group : router->groups)
 		{
-			for (auto Entry : Group->Routes)
+			for (auto entry : group->routes)
 			{
-				Entry->Callbacks.Headers = &Runtime::OnHeaders;
-				if (Requests && !AccessLogs.empty())
-					Entry->Callbacks.Access = &Runtime::OnAccess;
+				entry->callbacks.headers = &runtime::on_headers;
+				if (requests && !access_logs.empty())
+					entry->callbacks.access = &runtime::on_access;
 
-				VI_INFO("route %s is alias for %s", Entry->Location.GetRegex().c_str(), Entry->FilesDirectory.c_str());
+				VI_INFO("route %s is alias for %s", entry->location.get_regex().c_str(), entry->files_directory.c_str());
 			}
 		}
 
-		if (Config != nullptr)
+		if (config != nullptr)
 		{
-			Series::Unpack(Config->Fetch("application.threads"), &Control.Threads);
-            Series::Unpack(Config->Fetch("application.coroutines"), &Control.Scheduler.MaxCoroutines);
-            Series::Unpack(Config->Fetch("application.stack"), &Control.Scheduler.StackSize);
-			Memory::Release(Config);
+			series::unpack(config->fetch("application.threads"), &control.threads);
+			series::unpack(config->fetch("application.coroutines"), &control.scheduler.max_coroutines);
+			series::unpack(config->fetch("application.stack"), &control.scheduler.stack_size);
+			memory::release(config);
 		}
 
-		if (!Control.Threads)
+		if (!control.threads)
 		{
-			auto Quantity = OS::CPU::GetQuantityInfo();
-			Control.Threads = std::max<uint32_t>(2, Quantity.Logical) - 1;
+			auto quantity = os::hw::get_quantity_info();
+			control.threads = std::max<uint32_t>(2, quantity.logical) - 1;
 		}
 
-		VI_INFO("queue has %i threads", (int)Control.Threads);
-		Server->Listen();
+		VI_INFO("queue has %i threads", (int)control.threads);
+		server->listen();
 
 		VI_INFO("setting up signals");
-		OS::Process::BindSignal(Signal::SIG_ABRT, OnSignal);
-		OS::Process::BindSignal(Signal::SIG_FPE, OnSignal);
-		OS::Process::BindSignal(Signal::SIG_ILL, OnSignal);
-		OS::Process::BindSignal(Signal::SIG_INT, OnSignal);
-		OS::Process::BindSignal(Signal::SIG_SEGV, OnSignal);
-		OS::Process::BindSignal(Signal::SIG_TERM, OnSignal);
-		OS::Process::RebindSignal(Signal::SIG_PIPE);
+		os::process::bind_signal(signal_code::SIG_ABRT, on_signal);
+		os::process::bind_signal(signal_code::SIG_FPE, on_signal);
+		os::process::bind_signal(signal_code::SIG_ILL, on_signal);
+		os::process::bind_signal(signal_code::SIG_INT, on_signal);
+		os::process::bind_signal(signal_code::SIG_SEGV, on_signal);
+		os::process::bind_signal(signal_code::SIG_TERM, on_signal);
+		os::process::rebind_signal(signal_code::SIG_PIPE);
 
 		VI_INFO("ready to serve and protect");
-		ErrorHandling::SetFlag(LogOption::Async, true);
+		error_handling::set_flag(log_option::async, true);
 	}
-	void OnConfig(void*, Schema* Source)
+	void on_config(void*, schema* source)
 	{
-		Config = Source->Copy();
-		Series::Unpack(Config->Fetch("application.log-requests"), &Requests);
-		Series::Unpack(Config->Fetch("application.show-terminal"), &Terminal);
-		if (Terminal)
+		config = source->copy();
+		series::unpack(config->fetch("application.log-requests"), &requests);
+		series::unpack(config->fetch("application.show-terminal"), &terminal);
+		if (terminal)
 		{
-			Log = Console::Get();
-			Log->Show();
+			log = console::get();
+			log->show();
 		}
 		else
-			Memory::Release(Log);
+			memory::release(log);
 
 		VI_INFO("loading server config from ./config.xml");
-		Vector<String> Addresses = Utils::GetHostIpAddresses();
-		String Directory = Content->GetEnvironment();
+		vector<string> addresses = utils::get_host_ip_addresses();
+		string directory = content->get_environment();
 
-		Series::Unpack(Config->Fetch("application.access-logs"), &AccessLogs);
-        OS::Directory::Patch(OS::Path::GetDirectory(AccessLogs.c_str()));
+		series::unpack(config->fetch("application.access-logs"), &access_logs);
+		os::directory::patch(os::path::get_directory(access_logs.c_str()));
 
-		if (!AccessLogs.empty())
+		if (!access_logs.empty())
 		{
-			Stringify::EvalEnvs(AccessLogs, Directory, Addresses);
-			Access = OS::File::OpenArchive(AccessLogs).Or(nullptr);
-			VI_INFO("system log (access): %s", AccessLogs.c_str());
+			stringify::eval_envs(access_logs, directory, addresses);
+			access = os::file::open_archive(access_logs).otherwise(nullptr);
+			VI_INFO("system log (access): %s", access_logs.c_str());
 		}
 
-		Series::Unpack(Config->Fetch("application.error-logs"), &ErrorLogs);
-        OS::Directory::Patch(OS::Path::GetDirectory(ErrorLogs.c_str()));
-        
-		if (!ErrorLogs.empty())
+		series::unpack(config->fetch("application.error-logs"), &error_logs);
+		os::directory::patch(os::path::get_directory(error_logs.c_str()));
+
+		if (!error_logs.empty())
 		{
-			Stringify::EvalEnvs(ErrorLogs, Directory, Addresses);
-			Error = OS::File::OpenArchive(ErrorLogs).Or(nullptr);
-			VI_INFO("system log (error): %s", ErrorLogs.c_str());
+			stringify::eval_envs(error_logs, directory, addresses);
+			error = os::file::open_archive(error_logs).otherwise(nullptr);
+			VI_INFO("system log (error): %s", error_logs.c_str());
 		}
 
-		Series::Unpack(Config->Fetch("application.trace-logs"), &TraceLogs);
-        OS::Directory::Patch(OS::Path::GetDirectory(TraceLogs.c_str()));
-        
-		if (!TraceLogs.empty())
+		series::unpack(config->fetch("application.trace-logs"), &trace_logs);
+		os::directory::patch(os::path::get_directory(trace_logs.c_str()));
+
+		if (!trace_logs.empty())
 		{
-			Stringify::EvalEnvs(TraceLogs, Directory, Addresses);
-			Trace = OS::File::OpenArchive(TraceLogs).Or(nullptr);
-			VI_INFO("system log (trace): %s", TraceLogs.c_str());
+			stringify::eval_envs(trace_logs, directory, addresses);
+			trace = os::file::open_archive(trace_logs).otherwise(nullptr);
+			VI_INFO("system log (trace): %s", trace_logs.c_str());
 		}
 	}
-	void OnLog(ErrorHandling::Details& Data)
+	void on_log(error_handling::details& data)
 	{
-		if (Data.Type.Level == LogLevel::Debug || Data.Type.Level == LogLevel::Trace)
+		if (data.type.level == log_level::debug || data.type.level == log_level::trace)
 		{
-			if (Trace != nullptr && Trace->GetWriteable() != nullptr)
+			if (trace != nullptr && trace->get_writeable() != nullptr)
 			{
-				auto Text = ErrorHandling::GetMessageText(Data);
-				UMutex<std::mutex> Unique(Logging);
-				Trace->Write((uint8_t*)Text.c_str(), Text.size());
+				auto text = error_handling::get_message_text(data);
+				umutex<std::mutex> unique(logging);
+				trace->write((uint8_t*)text.c_str(), text.size());
 			}
 		}
-		else if (Data.Type.Level == LogLevel::Info)
+		else if (data.type.level == log_level::info)
 		{
-			if (Access != nullptr && Access->GetWriteable() != nullptr)
+			if (access != nullptr && access->get_writeable() != nullptr)
 			{
-				auto Text = ErrorHandling::GetMessageText(Data);
-				UMutex<std::mutex> Unique(Logging);
-				Access->Write((uint8_t*)Text.c_str(), Text.size());
+				auto text = error_handling::get_message_text(data);
+				umutex<std::mutex> unique(logging);
+				access->write((uint8_t*)text.c_str(), text.size());
 			}
 		}
-		else if (Data.Type.Level == LogLevel::Error || Data.Type.Level == LogLevel::Warning)
+		else if (data.type.level == log_level::error || data.type.level == log_level::warning)
 		{
-			if (Error != nullptr && Error->GetWriteable() != nullptr)
+			if (error != nullptr && error->get_writeable() != nullptr)
 			{
-				auto Text = ErrorHandling::GetMessageText(Data);
-				UMutex<std::mutex> Unique(Logging);
-				Error->Write((uint8_t*)Text.c_str(), Text.size());
+				auto text = error_handling::get_message_text(data);
+				umutex<std::mutex> unique(logging);
+				error->write((uint8_t*)text.c_str(), text.size());
 			}
 		}
 	}
 
 public:
-	static void OnSignal(int Value)
+	static void on_signal(int value)
 	{
-		Application::Get()->Stop();
+		application::get()->stop();
 	}
-	static bool OnAccess(HTTP::Connection* Base)
+	static bool on_access(http::connection* base)
 	{
-		if (!Base)
+		if (!base)
 			return true;
-        
-        VI_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
-            Base->Response.StatusCode,
-            Base->Request.Method,
-            Base->Request.Referrer.c_str(),
-            Base->Request.Query.empty() ? "" : "?",
-            Base->Request.Query.c_str(),
-            Base->GetPeerIpAddress()->c_str(),
-            Base->Stream->Outcome,
-            Base->Info.Finish - Base->Info.Start);
+
+		VI_INFO("%i %s \"%s%s%s\" -> %s / %llub (%llu ms)",
+			base->response.status_code,
+			base->request.method,
+			base->request.referrer.c_str(),
+			base->request.query.empty() ? "" : "?",
+			base->request.query.c_str(),
+			base->get_peer_ip_address()->c_str(),
+			base->stream->outcome,
+			base->info.finish - base->info.start);
 
 		return true;
 	}
-	static bool OnHeaders(HTTP::Connection* Base, String& Content)
+	static bool on_headers(http::connection* base, string& content)
 	{
-		Content.append("Server: lynx\r\n");
+		content.append("Server: lynx\r\n");
 		return true;
 	}
 };
 
 int main()
 {
-    Application::Desc Init;
-    Init.Usage = USE_PROCESSING | USE_NETWORKING;
-    Init.Daemon = true;
+	application::desc init;
+	init.usage = USE_PROCESSING | USE_NETWORKING;
+	init.daemon = true;
 
-    Vitex::Runtime Scope;
-	return Application::StartApp<Runtime>(&Init);
+	vitex::runtime scope;
+	return application::start_app<runtime>(&init);
 }
