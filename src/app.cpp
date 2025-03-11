@@ -65,8 +65,8 @@ public:
 		auto* router = (http::map_router*)server->get_router();
 		for (auto it = router->listeners.begin(); it != router->listeners.end(); it++)
 		{
-			string hostname = it->second.address.get_hostname().otherwise(string());
-			uint16_t port = it->second.address.get_ip_port().otherwise(0);
+			string hostname = it->second.address.get_hostname().or_else(string());
+			uint16_t port = it->second.address.get_ip_port().or_else(0);
 			VI_INFO("listening to \"%s\" %s:%i%s", it->first.c_str(), hostname.c_str(), (int)port, it->second.is_secure ? " (ssl)" : "");
 		}
 
@@ -139,7 +139,7 @@ public:
 		if (!access_logs.empty())
 		{
 			stringify::eval_envs(access_logs, directory, addresses);
-			access = os::file::open_archive(access_logs).otherwise(nullptr);
+			access = os::file::open_archive(access_logs).or_else(nullptr);
 			VI_INFO("system log (access): %s", access_logs.c_str());
 		}
 
@@ -149,7 +149,7 @@ public:
 		if (!error_logs.empty())
 		{
 			stringify::eval_envs(error_logs, directory, addresses);
-			error = os::file::open_archive(error_logs).otherwise(nullptr);
+			error = os::file::open_archive(error_logs).or_else(nullptr);
 			VI_INFO("system log (error): %s", error_logs.c_str());
 		}
 
@@ -159,7 +159,7 @@ public:
 		if (!trace_logs.empty())
 		{
 			stringify::eval_envs(trace_logs, directory, addresses);
-			trace = os::file::open_archive(trace_logs).otherwise(nullptr);
+			trace = os::file::open_archive(trace_logs).or_else(nullptr);
 			VI_INFO("system log (trace): %s", trace_logs.c_str());
 		}
 	}
